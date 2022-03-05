@@ -5,7 +5,7 @@ public class TileBound : MonoBehaviour
 {
     
     [SerializeField] private Tilemap _groundTiles;
-    private Vector3Int _gridPosition;
+    public Vector3Int _gridPosition;
     private void Start(){
         _gridPosition = _groundTiles.WorldToCell(transform.position);
         if(!_groundTiles.HasTile(_gridPosition)){
