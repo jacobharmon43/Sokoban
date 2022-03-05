@@ -5,6 +5,8 @@ public class TileBound : MonoBehaviour
 {
     
     [SerializeField] private Tilemap _groundTiles;
+    protected float _delay = 0.1f;
+    protected float _timer = 0.0f;
     public Vector3Int _gridPosition;
     private void Start(){
         _gridPosition = _groundTiles.WorldToCell(transform.position);
