@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BlockPuzzle{
@@ -22,6 +20,7 @@ namespace BlockPuzzle{
                     slidingDir = Vector3Int.zero;
                 }
             }
+            _timer = _delay;
         }
     }
 }

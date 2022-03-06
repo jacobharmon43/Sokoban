@@ -5,14 +5,8 @@ namespace BlockPuzzle.Player
     [RequireComponent(typeof(PlayerInputReader))]
     public class PlayerController : TileBound
     {
-        private PlayerInputReader _input;
-
-        private float _delay = 0.1f;
-        private float _timer = 0.0f;
-
         [SerializeField] private LayerMask _pushableLayer;
-    
-
+        private PlayerInputReader _input;
         private void Awake(){
             _input = GetComponent<PlayerInputReader>();
             _pushableLayer = LayerMask.GetMask("Pushable");
