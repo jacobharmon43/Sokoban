@@ -5,7 +5,7 @@ namespace BlockPuzzle.Player
     [RequireComponent(typeof(PlayerInputReader))]
     public class PlayerController : TileBound
     {
-        [SerializeField] private LayerMask _pushableLayer;
+        private LayerMask _pushableLayer;
         private PlayerInputReader _input;
         private void Awake(){
             _input = GetComponent<PlayerInputReader>();
@@ -40,9 +40,6 @@ namespace BlockPuzzle.Player
             if(hit){
                 Slidable s = hit.transform.GetComponent<Slidable>();
                 s.Move(input);
-                if(s._gridPosition == _gridPosition + input){
-                    return;
-                }
             }
             base.Move(input);
         }
