@@ -30,7 +30,7 @@ namespace BlockPuzzle.Player
             foreach(Collider2D c in col){
                 Debug.Log(c.transform.name);
                 Slidable s = c.GetComponent<Slidable>();
-                s.Kick(_gridPosition - s._gridPosition);
+                s.Kick(GridPosition - s.GridPosition);
             }
         }
 
