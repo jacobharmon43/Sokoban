@@ -22,6 +22,7 @@ namespace BlockPuzzle.Player
             if(_input.Kick){
                 Kick();
             }
+            Debug.Log(_input.Rotation);
         }
 
         private void Kick(){

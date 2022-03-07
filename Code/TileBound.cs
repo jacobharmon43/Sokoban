@@ -6,7 +6,7 @@ namespace BlockPuzzle{
     {
         [SerializeField] private Tilemap _groundTiles;
         protected LayerMask _pushableLayer;
-        protected float _delay = 0.1f;
+        protected float _delay = 0.15f;
         protected float _timer = 0.0f;
         public Vector3Int GridPosition;
 
@@ -20,21 +20,21 @@ namespace BlockPuzzle{
             
         public virtual bool Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input; // Calculate next gridposition
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(input.x, input.y), 1, _pushableLayer);
-            if(hit){
-                Slidable s = hit.transform.GetComponent<Slidable>();
-                s.Move(input);
+
+            /* Check if there is a valid position on the next tile */            
+            if(!_groundTiles.HasTile(nextPos)) return false;
+
+            /* Section for checking if there exists an object on the next tile
+            *  This allows for the pushing to be translated through many many objects
+            *  If the next object cannot move, then this one will not move either.
+            */
+            Slidable[] allSlides = GameObject.FindObjectsOfType<Slidable>();
+            foreach(Slidable s in allSlides){
+                if(s.GridPosition == nextPos && !s.Move(input)) return false;
             }
-            if(!_groundTiles.HasTile(nextPos)){
-                return false;
-            }
+
+            /* Movement calculations considering valid tiles */
             Vector3 goTo = _groundTiles.CellToWorld(nextPos);
-            TileBound[] set = GameObject.FindObjectsOfType<Slidable>();
-            foreach(TileBound obj in set){
-                if(obj.GridPosition == nextPos){
-                    return false;
-                }
-            }
             GridPosition = nextPos;
             transform.position = goTo;
             return true;
