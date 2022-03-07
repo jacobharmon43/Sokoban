@@ -22,13 +22,11 @@ namespace BlockPuzzle.Player
             if(_input.Kick){
                 Kick();
             }
-            Debug.Log(_input.Rotation);
         }
 
         private void Kick(){
             Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, transform.localScale * 2, 0, _pushableLayer);
             foreach(Collider2D c in col){
-                Debug.Log(c.transform.name);
                 Slidable s = c.GetComponent<Slidable>();
                 s.Kick(GridPosition - s.GridPosition);
             }

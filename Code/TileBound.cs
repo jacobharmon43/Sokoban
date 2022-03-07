@@ -39,5 +39,27 @@ namespace BlockPuzzle{
             transform.position = goTo;
             return true;
         }
+
+        public virtual bool MoveNoPush(Vector3Int input){
+            Vector3Int nextPos = GridPosition + input; // Calculate next gridposition
+
+            /* Check if there is a valid position on the next tile */            
+            if(!_groundTiles.HasTile(nextPos)) return false;
+
+            /* Section for checking if there exists an object on the next tile
+            *  This allows for the pushing to be translated through many many objects
+            *  If the next object cannot move, then this one will not move either.
+            */
+            Slidable[] allSlides = GameObject.FindObjectsOfType<Slidable>();
+            foreach(Slidable s in allSlides){
+                if(s.GridPosition == nextPos) return false;
+            }
+
+            /* Movement calculations considering valid tiles */
+            Vector3 goTo = _groundTiles.CellToWorld(nextPos);
+            GridPosition = nextPos;
+            transform.position = goTo;
+            return true;
+        }
     }
 }

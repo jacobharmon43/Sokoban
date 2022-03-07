@@ -14,12 +14,7 @@ namespace BlockPuzzle{
 
         private void Update(){
             if(state == slidingStates.Sliding){
-                Vector3Int originalPos = GridPosition;
-                Move(slidingDir);
-                if(GridPosition == originalPos){
-                    state = slidingStates.Normal;
-                    slidingDir = Vector3Int.zero;
-                }
+                if(!MoveNoPush(slidingDir)) state = slidingStates.Normal;
             }
             _timer = _delay;
         }
