@@ -19,8 +19,7 @@ namespace BlockPuzzle{
         }
 
         protected Physical NextTileObject(Vector3Int tile){
-            Physical[] allTiles = GameObject.FindObjectsOfType<Physical>();
-            foreach(Physical p in allTiles){
+            foreach(Physical p in ListParser<Physical>.OfTypeInList(ObjectStore.AllTiles)){
                 if(p.GridPosition == tile) return p;
             }
             return null;

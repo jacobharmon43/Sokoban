@@ -18,8 +18,7 @@ namespace BlockPuzzle
         }
 
         private bool ObjectOnSwitch(){
-            Pushable[] possibleObjects = GameObject.FindObjectsOfType<Pushable>();
-            foreach(Pushable p in possibleObjects){
+            foreach(Pushable p in ListParser<Pushable>.OfTypeInList(ObjectStore.AllTiles)){
                 if(p.GridPosition == GridPosition){
                     return true;
                 }

@@ -20,5 +20,20 @@ namespace BlockPuzzle{
         }
 
         protected bool ValidTile(Vector3Int tile) => GroundTiles.HasTile(tile);
+
+        private void OnEnable(){
+            if(!ObjectStore.AllTiles.Contains(this))
+                ObjectStore.AllTiles.Add(this);
+        }
+
+        private void OnDisable(){
+            if(ObjectStore.AllTiles.Contains(this))
+                ObjectStore.AllTiles.Remove(this);
+        }
+
+        private void OnDestroy(){
+            if(ObjectStore.AllTiles.Contains(this))
+                ObjectStore.AllTiles.Remove(this);
+        }
     }
 }

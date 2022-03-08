@@ -8,9 +8,9 @@ namespace BlockPuzzle
         {
             bool moved = base.Move(input);
             if(!moved){
-                TileBound t = NextTileObject(GridPosition + input);
-                if(t && t.GetComponent<Door>()){
-                    t.GetComponent<Door>().Unlock();
+                Physical p = NextTileObject(GridPosition + input);
+                if(p && p.GetComponent<Door>()){
+                    p.GetComponent<Door>().Unlock();
                     Destroy(gameObject);
                     return true;
                 }
