@@ -1,7 +1,7 @@
 namespace BlockPuzzle
 {
-    public interface IChecker
+    public interface IUpdate
     {
-        public abstract void Check();
+        public abstract void UpdateAction();
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BlockPuzzle
 {
-    public class Switch : TileBound, IChecker
+    public class Switch : TileBound, IUpdate
     {
         public UnityEvent OnSwitchDown;
         public UnityEvent OnSwitchUp;
@@ -14,7 +14,7 @@ namespace BlockPuzzle
         }
 
         private void Update(){
-            Check();
+            UpdateAction();
         }
 
         private bool ObjectOnSwitch(){
@@ -27,7 +27,7 @@ namespace BlockPuzzle
             return false;
         }
 
-        public void Check(){
+        public void UpdateAction(){
             if(_activated && !ObjectOnSwitch()){
                 OnSwitchUp.Invoke();
                 _activated = false;
