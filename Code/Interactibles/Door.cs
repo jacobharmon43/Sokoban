@@ -1,6 +1,6 @@
 namespace BlockPuzzle
 {
-    public class Door : TileBound
+    public class Door : Physical
     {
         public void Unlock(){
             Destroy(gameObject);
