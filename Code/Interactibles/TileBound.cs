@@ -11,35 +11,12 @@ namespace BlockPuzzle{
         public Vector3Int GridPosition;
 
         private void Start(){
+            if(!GroundTiles) GroundTiles = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
             _pushableLayer = LayerMask.GetMask("Pushable");
             GridPosition = GroundTiles.WorldToCell(transform.position);
             if(!GroundTiles.HasTile(GridPosition))
                 throw new System.Exception($"Tilebound object: {transform.name} starting location is off the grid");
             transform.position = GroundTiles.CellToWorld(GridPosition);
-        }
-            
-        public virtual bool Move(Vector3Int input){
-            Vector3Int nextPos = GridPosition + input;         
-            if(!ValidTile(nextPos)) return false;
-            TileBound t = NextTileObject(nextPos);
-            if(t){
-                if(!t.GetComponent<Slidable>()) return false;
-                else if(!t.GetComponent<Slidable>().Move(input)) return false;
-            }
-            Vector3 goTo = GoTo(nextPos);
-            GridPosition = nextPos;
-            transform.position = goTo;
-            return true;
-        }
-
-        public virtual bool MoveNoPush(Vector3Int input){
-            Vector3Int nextPos = GridPosition + input;   
-            if(!ValidTile(nextPos)) return false;
-            if(NextTileObject(nextPos)) return false;
-            Vector3 goTo = GroundTiles.CellToWorld(nextPos);
-            GridPosition = nextPos;
-            transform.position = goTo;
-            return true;
         }
 
         protected TileBound NextTileObject(Vector3Int tile){

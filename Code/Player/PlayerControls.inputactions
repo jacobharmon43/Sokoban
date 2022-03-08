@@ -11,17 +11,15 @@
                     "id": "6322afa9-67a7-40b5-abe3-7d38d5f57f8a",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": ""
                 },
                 {
-                    "name": "Kick",
+                    "name": "Action",
                     "type": "Button",
                     "id": "4fedc5d4-0e9c-4a6d-aeee-d89e636b1941",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": ""
                 },
                 {
                     "name": "Rotation",
@@ -29,8 +27,7 @@
                     "id": "b6c7b7c1-b8a9-447a-ab5d-c727706622bb",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -96,7 +93,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Kick",
+                    "action": "Action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -7,18 +7,18 @@ namespace BlockPuzzle.Player{
     {
         private InputActionMap _map;
         private InputAction _movement;
-        private InputAction _kick;
+        private InputAction _action;
         private InputAction _rotation;
 
         private void Awake(){
             _map = GetComponent<PlayerInput>().currentActionMap;
             _movement = _map.FindAction("Movement");
-            _kick = _map.FindAction("Kick");
+            _action = _map.FindAction("Action");
             _rotation = _map.FindAction("Rotation");
         }
 
         public Vector2 Input => _movement.ReadValue<Vector2>();
         public Vector2 Rotation => _rotation.ReadValue<Vector2>();
-        public bool Kick => _kick.ReadValue<float>() != 0;
+        public bool Action => _action.ReadValue<float>() != 0;
     }
 }
