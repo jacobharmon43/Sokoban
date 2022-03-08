@@ -6,24 +6,27 @@ namespace BlockPuzzle
     {
         public override bool Move(Vector3Int input)
         {
-            Vector3Int nextPos = GridPosition + input;
-            if(!ValidTile(nextPos)) return false;
-            
-            Slidable[] allSlides = GameObject.FindObjectsOfType<Slidable>();
-            foreach(Slidable s in allSlides){
-                if(s.GridPosition == nextPos){
-                    if(s.GetType() == typeof(Door)){
-                        s.GetComponent<Door>().Unlock();
-                        Destroy(gameObject);
-                    }
-                    else if(!s.Move(input)) return false;
+            bool moved = base.Move(input);
+            if(!moved){
+                TileBound t = NextTileObject(GridPosition + input);
+                if(t && t.GetComponent<Door>()){
+                    t.GetComponent<Door>().Unlock();
+                    Destroy(gameObject);
                 }
             }
+            return moved;
+        }
 
-            Vector3 goTo = GoTo(nextPos);
-            GridPosition = nextPos;
-            transform.position = goTo;
-            return true;
+        public override bool MoveNoPush(Vector3Int input){
+            bool moved = base.MoveNoPush(input);
+            if(!moved){
+                TileBound t = NextTileObject(GridPosition + input);
+                if(t && t.GetComponent<Door>()){
+                    t.GetComponent<Door>().Unlock();
+                    Destroy(gameObject);
+                }
+            }
+            return moved;
         }
     }
 }

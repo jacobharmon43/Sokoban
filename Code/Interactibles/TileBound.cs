@@ -19,23 +19,13 @@ namespace BlockPuzzle{
         }
             
         public virtual bool Move(Vector3Int input){
-            Vector3Int nextPos = GridPosition + input; // Calculate next gridposition
-
-            /* Check if there is a valid position on the next tile */            
+            Vector3Int nextPos = GridPosition + input;         
             if(!ValidTile(nextPos)) return false;
-
-            /* Section for checking if there exists an object on the next tile
-            *  This allows for the pushing to be translated through many many objects
-            *  If the next object cannot move, then this one will not move either.
-            */
-            TileBound[] allSlides = GameObject.FindObjectsOfType<TileBound>();
-            foreach(TileBound t in allSlides){
-                Slidable s = t.GetComponent<Slidable>();
-                if(t.GridPosition == nextPos && !s) return false;
-                if(s && !s.Move(input)) return false;
+            TileBound t = NextTileObject(nextPos);
+            if(t){
+                if(!t.GetComponent<Slidable>()) return false;
+                else if(!t.GetComponent<Slidable>().Move(input)) return false;
             }
-
-            /* Movement calculations considering valid tiles */
             Vector3 goTo = GoTo(nextPos);
             GridPosition = nextPos;
             transform.position = goTo;
@@ -43,27 +33,22 @@ namespace BlockPuzzle{
         }
 
         public virtual bool MoveNoPush(Vector3Int input){
-            Vector3Int nextPos = GridPosition + input; // Calculate next gridposition
-
-            /* Check if there is a valid position on the next tile */            
-            if(!GroundTiles.HasTile(nextPos)) return false;
-
-            /* Section for checking if there exists an object on the next tile
-            *  This allows for the pushing to be translated through many many objects
-            *  If the next object cannot move, then this one will not move either.
-            */
-            Slidable[] allSlides = GameObject.FindObjectsOfType<Slidable>();
-            foreach(Slidable s in allSlides){
-                if(s.GridPosition == nextPos) return false;
-            }
-
-            /* Movement calculations considering valid tiles */
+            Vector3Int nextPos = GridPosition + input;   
+            if(!ValidTile(nextPos)) return false;
+            if(NextTileObject(nextPos)) return false;
             Vector3 goTo = GroundTiles.CellToWorld(nextPos);
             GridPosition = nextPos;
             transform.position = goTo;
             return true;
         }
 
+        protected TileBound NextTileObject(Vector3Int tile){
+            TileBound[] allTiles = GameObject.FindObjectsOfType<TileBound>();
+            foreach(TileBound t in allTiles){
+                if(t.GridPosition == tile) return t;
+            }
+            return null;
+        }
         protected bool ValidTile(Vector3Int tile) => GroundTiles.HasTile(tile);
         protected Vector3 GoTo(Vector3Int tile) => GroundTiles.CellToWorld(tile);
     }
