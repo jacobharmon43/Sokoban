@@ -12,13 +12,9 @@ namespace BlockPuzzle
         private void Awake(){
             _activated = ObjectOnSwitch();
         }
-
-        private void Update(){
-            UpdateAction();
-        }
-
+        
         private bool ObjectOnSwitch(){
-            foreach(Pushable p in ListParser<Pushable>.OfTypeInList(ObjectStore.AllTiles)){
+            foreach(Pushable p in ObjectStore.OfTypeInList<Pushable>()){
                 if(p.GridPosition == GridPosition){
                     return true;
                 }
@@ -28,11 +24,11 @@ namespace BlockPuzzle
 
         public void UpdateAction(){
             if(_activated && !ObjectOnSwitch()){
-                OnSwitchUp.Invoke();
+                OnSwitchUp?.Invoke();
                 _activated = false;
             }
             else if(!_activated && ObjectOnSwitch()){
-                OnSwitchDown.Invoke();
+                OnSwitchDown?.Invoke();
                 _activated = true;
             }
         }

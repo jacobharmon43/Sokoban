@@ -10,7 +10,7 @@ namespace BlockPuzzle{
             if(p){
                 Pushable push = p.GetComponent<Pushable>();
                 if(!push) return false;
-                else if(!push.Move(input)) return false;
+                else if(!push.Move(input)) return false;     
             }
             Vector3 goTo = GoTo(nextPos);
             GridPosition = nextPos;
@@ -19,7 +19,7 @@ namespace BlockPuzzle{
         }
 
         protected Physical NextTileObject(Vector3Int tile){
-            foreach(Physical p in ListParser<Physical>.OfTypeInList(ObjectStore.AllTiles)){
+            foreach(Physical p in (ObjectStore.OfTypeInList<Physical>())){
                 if(p.GridPosition == tile) return p;
             }
             return null;

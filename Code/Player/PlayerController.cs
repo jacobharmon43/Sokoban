@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BlockPuzzle.Player
+namespace BlockPuzzle
 {
     [RequireComponent(typeof(PlayerInputReader))]
     public class PlayerController : Pushable
@@ -25,18 +25,18 @@ namespace BlockPuzzle.Player
             if(movement.x != 0) movement *= Vector2.right; //Prioritize X movement.
             movement = movement.normalized;
 
-            Move(movement);
+            Movement(movement);
             if(_input.Action){
                 PlayerAction();
             }
             RotatePlayer(movement, rotation);
         }
 
-        private void Move(Vector2 movement){
+        private void Movement(Vector2 movement){
             if(movement != Vector2.zero){
                 Move(new Vector3Int((int)movement.x, (int)movement.y, 0));
                 _timer = _delay;
-
+                GameManager.Instance.RunChecks();
             }
         }
 
@@ -45,26 +45,20 @@ namespace BlockPuzzle.Player
         }
 
         private void RotatePlayer(Vector2 movement, Vector2 rotational){
-            Quaternion curr = transform.rotation;
+           
             if(movement != Vector2.zero)
             {
-                float angle = 0;
-                if(movement.x != 0)
-                    angle = movement.x > 0 ? 0 : 180;
-                else if(movement.y != 0)
-                    angle = movement.y > 0 ? 90 : 270;
-                transform.rotation = Quaternion.Euler(curr.x, curr.y, angle);
-                direction = movement;
+                SetRotation(movement);
             } 
             else if(rotational != Vector2.zero){
-                float angle = 0;
-                if(rotational.x != 0)
-                    angle = rotational.x > 0 ? 0 : 180;
-                else if(rotational.y != 0)
-                    angle = rotational.y > 0 ? 90 : 270;
-                transform.rotation = Quaternion.Euler(curr.x, curr.y, angle);
-                direction = rotational;
+                SetRotation(rotational);
             }
+        }
+
+        private void SetRotation(Vector2 read){
+            Quaternion curr = transform.rotation;
+            transform.rotation = Quaternion.Euler(curr.x, curr.y, read.x * 90 + read.y * 180);
+            direction = read;
         }
     }
 }

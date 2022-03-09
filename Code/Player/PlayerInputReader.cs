@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace BlockPuzzle.Player{
+namespace BlockPuzzle
+{
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerInputReader : MonoBehaviour
     {
@@ -20,5 +22,10 @@ namespace BlockPuzzle.Player{
         public Vector2 Input => _movement.ReadValue<Vector2>();
         public Vector2 Rotation => _rotation.ReadValue<Vector2>();
         public bool Action => _action.ReadValue<float>() != 0;
+
+        private string GetDebuggerDisplay()
+        {
+            return ToString();
+        }
     }
 }

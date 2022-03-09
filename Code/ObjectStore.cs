@@ -6,10 +6,8 @@ namespace BlockPuzzle
     public static class ObjectStore
     {
         public static List<TileBound> AllTiles = new List<TileBound>();
-    }
 
-    public static class ListParser<T>{
-        public static List<T> OfTypeInList(List<TileBound> AllTiles){
+        public static List<T> OfTypeInList<T>(){
             List<T> l = new List<T>();
             foreach(TileBound t in AllTiles){
                 T push = t.GetComponent<T>();
@@ -18,5 +16,9 @@ namespace BlockPuzzle
             }
             return l;
         }
+    }
+
+    public static class ListParser<T>{
+        
     }
 }
