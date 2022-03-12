@@ -12,9 +12,8 @@ namespace BlockPuzzle{
                 if(!push) return false;
                 else if(!push.Move(input)) return false;     
             }
-            Vector3 goTo = GoTo(nextPos);
             GridPosition = nextPos;
-            transform.position = goTo;
+            transform.position = SetPos(nextPos);
             return true;
         }
 
@@ -24,6 +23,5 @@ namespace BlockPuzzle{
             }
             return null;
         }
-        protected Vector3 GoTo(Vector3Int tile) => GroundTiles.CellToWorld(tile);
     }
 }
