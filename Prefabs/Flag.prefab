@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: -3001449038190906842, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c44167ceabc9f21a30b7f780f8b0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTiles: {fileID: 0}
   GridPosition: {x: 6, y: 2, z: 0}
+  GroundTiles: {fileID: 0}
   contactEvent:
     m_PersistentCalls:
       m_Calls:
