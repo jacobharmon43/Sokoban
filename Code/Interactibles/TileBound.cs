@@ -2,13 +2,14 @@ using UnityEngine.Tilemaps;
 using UnityEngine;
 
 namespace BlockPuzzle{
+    [System.Serializable]
     public class TileBound : MonoBehaviour
     {
+        public Vector3Int GridPosition;
         public Tilemap GroundTiles;
         protected LayerMask _pushableLayer;
         protected float _delay = 0.15f;
         protected float _timer = 0.0f;
-        public Vector3Int GridPosition;
 
         private void Start(){
             _pushableLayer = LayerMask.GetMask("Pushable");

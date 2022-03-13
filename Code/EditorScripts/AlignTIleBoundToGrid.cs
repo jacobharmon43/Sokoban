@@ -4,20 +4,22 @@ using UnityEditor;
 
 namespace BlockPuzzle
 {
-    public class AlignTIleBoundToGrid
+    public class AlignTileBoundToGrid
     {
-
         [MenuItem("Tools/Align TileBound Objects to Grid")]
-        private static void Align(){
+        public static void Align(){
             Tilemap _groundTiles = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
-            foreach(TileBound t in GameObject.FindObjectsOfType<TileBound>()){
+            TileBound[] allTiles = GameObject.FindObjectsOfType<TileBound>();
+            foreach(TileBound t in allTiles){
                 Vector2 pos = t.transform.position;
-                Vector3Int gridPosition = _groundTiles.WorldToCell(new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y)));
+                Vector3Int gridPosition = _groundTiles.WorldToCell(new Vector2(Mathf.CeilToInt(pos.x), Mathf.CeilToInt(pos.y)));
                 if(!_groundTiles.HasTile(gridPosition))
                     throw new System.Exception($"Tilebound object: {t.transform.name} starting location is off the grid");
                 t.transform.position = _groundTiles.CellToWorld(gridPosition);
-                t.GridPosition = gridPosition;
-                t.GroundTiles = _groundTiles;
+                SerializedObject obj = new SerializedObject(t);
+                obj.FindProperty("GridPosition").vector3IntValue = gridPosition;
+                obj.FindProperty("GroundTiles").objectReferenceValue = _groundTiles;
+                obj.ApplyModifiedProperties();
             }
         }
     }
