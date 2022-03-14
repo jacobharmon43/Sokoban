@@ -36,5 +36,19 @@ namespace BlockPuzzle
                 GameManager.Instance.RunChecks();
             }
         }
+
+        public override bool Move(Vector3Int input){
+            Vector3Int nextPos = GridPosition + input;         
+            if(!ValidTile(nextPos)) return false;
+            Physical p = NextTileObject(nextPos);
+            if(p && p.active){
+                Pushable push = p.GetComponent<Pushable>();
+                if(push && !push.Move(input))
+                    return false;  
+            }
+            GridPosition = nextPos;
+            transform.position = SetPos(nextPos);
+            return true;
+        }
     }
 }
