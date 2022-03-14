@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: 0, y: 0, z: 0}
-  GroundTiles: {fileID: 0}
   active: 1
   rotationChar: 60
+  b: {fileID: 5573231146207059379, guid: b2d93193cab74a6cd817aa90a22402d2, type: 3}
