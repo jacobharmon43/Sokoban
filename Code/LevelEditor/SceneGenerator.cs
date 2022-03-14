@@ -30,7 +30,7 @@ namespace BlockPuzzle
             for(int y = 4; y >= -5; y--){
                 for(int x = -11; x <= 10; x++){
                     Vector3Int pos = new Vector3Int(x,y,0);
-                    while(levelLayout[counter] == ' ' || levelLayout[counter] == '\n'){
+                    while(levelLayout[counter] == ' ' || levelLayout[counter] == '\n' || levelLayout[counter] == '\t' || levelLayout[counter] == '\v' || levelLayout[counter] == '\r'){
                         counter++;
                     }
                     if(ground.HasTile(pos)){
@@ -70,9 +70,9 @@ namespace BlockPuzzle
                     }
                     counter++;
                 }
-                AlignTileBoundToGrid.Align();
-                AlignTileBoundToGrid.TieSwitchesToSwitchables(switches, switchables);
             }
+            AlignTileBoundToGrid.Align();
+            AlignTileBoundToGrid.TieSwitchesToSwitchables(switches, switchables);
         }
 
         public static GameObject GenerateObject(GameObject obj, Vector3 pos){

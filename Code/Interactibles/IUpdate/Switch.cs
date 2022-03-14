@@ -5,16 +5,11 @@ namespace BlockPuzzle
 {
     public class Switch : TileBound, IUpdate
     {
-        public GameObject toSwitch;
-        private ISwitchable s;
-        [SerializeField] private bool _activated;
+        public ISwitchable toSwitch;
+        private bool _activated = false;
 
         private void Awake(){
             _activated = ObjectOnSwitch();
-            s = toSwitch.GetComponent<ISwitchable>();
-            if(s == null){
-                throw new System.Exception("toSwitch not of type ISwitchable");
-            }
         }
         
         private bool ObjectOnSwitch(){
@@ -28,11 +23,11 @@ namespace BlockPuzzle
 
         public void UpdateAction(){
             if(_activated && !ObjectOnSwitch()){
-                s.SwitchUp();
+                toSwitch.SwitchUp();
                 _activated = false;
             }
             else if(!_activated && ObjectOnSwitch()){
-                s.SwitchDown();
+                toSwitch.SwitchDown();
                 _activated = true;
             }
         }
