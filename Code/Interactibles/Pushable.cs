@@ -8,9 +8,7 @@ namespace BlockPuzzle{
             if(!ValidTile(nextPos)) return false;
             Physical p = NextTileObject(nextPos);
             if(p && p.active){
-                Pushable push = p.GetComponent<Pushable>();
-                if(!push) return false;
-                else if(!push.Move(input)) return false;     
+                return false;  
             }
             GridPosition = nextPos;
             transform.position = SetPos(nextPos);

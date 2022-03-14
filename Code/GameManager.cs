@@ -7,7 +7,6 @@ namespace BlockPuzzle
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance {get; private set;}
-        public string LevelCode;
 
         private void Awake(){
             if(Instance == null){
@@ -27,8 +26,8 @@ namespace BlockPuzzle
             }
         }
 
-        public void SetCode(InputField i){
-            LevelCode = i.text;
+        public void ResetScene(){
+            LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

@@ -12,6 +12,9 @@ namespace BlockPuzzle
         }
 
         private void Update(){
+            if(_input.Reset){
+                GameManager.Instance.ResetScene();
+            }
             if(_timer > 0){
                 _timer -= Time.deltaTime;
                 return;
