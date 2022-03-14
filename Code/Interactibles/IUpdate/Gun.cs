@@ -19,16 +19,16 @@ namespace BlockPuzzle
                     dir = new Vector3Int(-1,0,0);
                     break;
                 case '>':
-                    transform.rotation = Quaternion.identity;
+                    transform.rotation = Quaternion.Euler(0,0,180);
                     dir = new Vector3Int(1,0,0);
                     break;
                 case '^':
-                    transform.rotation = Quaternion.Euler(0,0,90);
-                    dir = new Vector3Int(0,-1,0);
+                    transform.rotation = Quaternion.Euler(0,0,-90);
+                    dir = new Vector3Int(0,1,0);
                     break;
                 case 'v':
                     transform.rotation = Quaternion.Euler(0,0,90);
-                    dir = new Vector3Int(0,1,0);
+                    dir = new Vector3Int(0,-1,0);
                     break;
                 default:
                     transform.rotation = Quaternion.identity;
