@@ -14,6 +14,7 @@ namespace BlockPuzzle
         [SerializeField] private static GameObject K;
         [SerializeField] private static GameObject S;
         [SerializeField] private static GameObject B;
+        [SerializeField] private static GameObject G;
 
         public static void GenerateLevelFromCode(string levelLayout){
             Tilemap ground = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
@@ -68,8 +69,8 @@ namespace BlockPuzzle
             }
         }
 
-        private static void GenerateObject(GameObject obj, Vector3 pos){
-            MonoBehaviour.Instantiate<GameObject>(obj, pos, Quaternion.identity);
+        private static GameObject GenerateObject(GameObject obj, Vector3 pos){
+            return MonoBehaviour.Instantiate<GameObject>(obj, pos, Quaternion.identity);
         }
     }
 }
