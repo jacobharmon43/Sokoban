@@ -4,14 +4,13 @@ namespace BlockPuzzle
 {
     public class LevelGenerator : MonoBehaviour
     {
-        public string code;
-
-        private void Awake(){
-            code = GameManager.Instance.LevelCode;
-        }
-
         private void Start(){
-            SceneGenerator.GenerateLevelFromCode(code);
+            Debug.Log(GameManager.Instance.LevelCode);
+            SceneGenerator.GenerateLevelFromCode(GameManager.Instance.LevelCode);
+            Flag[] flags = ObjectStore.OfTypeInList<Flag>().ToArray();
+            foreach(Flag f in flags){
+                f.contactEvent.AddListener(delegate {GameManager.Instance.LoadScene(0);});
+            }
         }
     }
 }

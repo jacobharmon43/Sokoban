@@ -10,8 +10,10 @@ namespace BlockPuzzle
         public string LevelCode;
 
         private void Awake(){
-            if(Instance == null)
+            if(Instance == null){
                 Instance = this;
+                DontDestroyOnLoad(this);
+            }
             else
                 Destroy(gameObject);
         }
@@ -26,8 +28,8 @@ namespace BlockPuzzle
             }
         }
 
-        public void SetCode(InputField i){
-            LevelCode = i.text;
+        public void SetCode(Text c){
+            LevelCode = c.text;
         }
     }
 }

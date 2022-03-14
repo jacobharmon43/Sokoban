@@ -9,6 +9,10 @@ namespace BlockPuzzle
     {
         public static SceneGenerator Instance {get; private set;}
 
+        private void Awake(){
+            Instance = this;
+        }
+        
         public TileBase groundTile;
         public GameObject P;
         public GameObject F;
@@ -26,7 +30,7 @@ namespace BlockPuzzle
             for(int y = 4; y >= -5; y--){
                 for(int x = -11; x <= 10; x++){
                     Vector3Int pos = new Vector3Int(x,y,0);
-                    while(levelLayout[counter] == ' '){
+                    while(levelLayout[counter] == ' ' || levelLayout[counter] == '\n'){
                         counter++;
                     }
                     if(ground.HasTile(pos)){
