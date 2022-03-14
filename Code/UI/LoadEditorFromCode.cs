@@ -8,7 +8,7 @@ namespace BlockPuzzle
     {
         [SerializeField] private InputField i;
         [SerializeField] private GameObject buttonHolder;
-        private List<char> possibleChars = new List<char>{'1','0','P','B','D','K','S','G','F'};
+        private List<char> possibleChars = new List<char>{'1','0','P','B','D','K','S','G','F', 'E'};
 
         private void Start(){
             GetComponent<Button>().onClick.AddListener(() => GenerateLevelEditor());
@@ -20,7 +20,7 @@ namespace BlockPuzzle
             foreach(LevelGenButton b in buttonHolder.GetComponentsInChildren<LevelGenButton>()){
                 b.state = possibleChars.IndexOf(code[counter]);
                 b.SwitchState(0);
-                if(code[counter] == 'S' || code[counter] == 'G'){
+                if(code[counter] == 'S' || code[counter] == 'G' || code[counter] == '2'){
                     counter++;
                     b.GetComponentInChildren<SecondaryCharButton>().GetComponentInChildren<Text>().text = code[counter].ToString();
                 }

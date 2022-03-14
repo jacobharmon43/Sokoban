@@ -21,6 +21,8 @@ namespace BlockPuzzle
         public GameObject S;
         public GameObject B;
         public GameObject G;
+        public GameObject E;
+        public GameObject Gun;
 
         public static void GenerateLevelFromCode(string levelLayout){
             Tilemap ground = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
@@ -63,6 +65,14 @@ namespace BlockPuzzle
                                 counter++;
                                 char q = levelLayout[counter];
                                 switchables.Add(q,GenerateObject(SceneGenerator.Instance.G, ground.CellToWorld(pos)));
+                                break;
+                            case 'E':
+                                GenerateObject(SceneGenerator.Instance.E, ground.CellToWorld(pos));
+                                break;
+                            case '2':
+                                counter++;
+                                q = levelLayout[counter];
+                                GenerateObject(SceneGenerator.Instance.Gun, ground.CellToWorld(pos)).GetComponent<Gun>().rotationChar = q;
                                 break;
                             default:
                                 break;

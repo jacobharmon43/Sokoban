@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61327dda52f0584428d77dfaf808958f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  list: 3000310032003300340035003600370038003900410042004300440045004600
+  loc: 0
 --- !u!1 &1109603318791376905
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab50de2b8b64d14a9dbc972b0022120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   img: {fileID: 1434801922871125194}
   secondary: {fileID: 552378314158035933}
   images:
@@ -331,6 +334,8 @@ MonoBehaviour:
   - {fileID: -7067808830664889489, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
   - {fileID: -2746839580606631015, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
   - {fileID: -3001449038190906842, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
+  - {fileID: -7024825922371979101, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
+  - {fileID: -4894898745955426128, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
 --- !u!1 &1579293637353842717
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +414,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: a
+  m_Text: 0
 --- !u!1 &2067673082670151106
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,13 +8,14 @@ namespace BlockPuzzle
     public class LevelGenButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     {
         public int state = 0;
-        char[] possibleChars = {'1','0','P','B','D','K','S','G','F'};
+        char[] possibleChars = {'1','0','P','B','D','K','S','G','F','E','2'};
         [SerializeField] Image img;
         [SerializeField] Button secondary;
         [SerializeField] Sprite[] images;
 
         public void SwitchState(int swap){
             state += swap;
+            img.sprite = images[state];
             img.color = Color.white;
             secondary.gameObject.SetActive(false);
             if(state >= possibleChars.Length){
@@ -39,16 +40,23 @@ namespace BlockPuzzle
                     break;
                 case 'S':
                     secondary.gameObject.SetActive(true);
+                    secondary.GetComponent<SecondaryCharButton>().list = new char[]{'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
                     break;
                 case 'G':
                     secondary.gameObject.SetActive(true);
+                    secondary.GetComponent<SecondaryCharButton>().list = new char[]{'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
                     break;
                 case 'F':
+                    break;
+                case '2':
+                    secondary.gameObject.SetActive(true);
+                    secondary.GetComponent<SecondaryCharButton>().list = new char[]{'<','>','v', '^'};
+                    secondary.GetComponentInChildren<Text>().text = '<'.ToString();
+                    secondary.GetComponent<SecondaryCharButton>().loc = 0;
                     break;
                 default:
                     break;
             }
-            img.sprite = images[state];
             GetComponentInChildren<Text>().text = $"{possibleChars[state]}";
         }
 

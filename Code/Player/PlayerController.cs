@@ -42,7 +42,10 @@ namespace BlockPuzzle
             if(!ValidTile(nextPos)) return false;
             Physical p = NextTileObject(nextPos);
             if(p && p.active){
+                if(p.GetComponent<Spike>())
+                    GameManager.Instance.ResetScene();
                 Pushable push = p.GetComponent<Pushable>();
+                if(!push) return false;
                 if(push && !push.Move(input))
                     return false;  
             }
