@@ -122,5 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002b78d9cbe3302118d95d2c9d6aca04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTiles: {fileID: 0}
   GridPosition: {x: 8, y: 1, z: 0}
+  GroundTiles: {fileID: 0}
+  active: 1

@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec81ad9ec9b923ee38d57246a9a35a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundTiles: {fileID: 0}
   GridPosition: {x: -4, y: -2, z: 0}
+  GroundTiles: {fileID: 0}
+  active: 1
 --- !u!61 &9182711442047637423
 BoxCollider2D:
   m_ObjectHideFlags: 0

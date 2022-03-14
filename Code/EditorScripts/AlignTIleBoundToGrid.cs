@@ -1,6 +1,7 @@
 using UnityEngine.Tilemaps;
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace BlockPuzzle
 {
@@ -19,6 +20,14 @@ namespace BlockPuzzle
                 SerializedObject obj = new SerializedObject(t);
                 obj.FindProperty("GridPosition").vector3IntValue = gridPosition;
                 obj.FindProperty("GroundTiles").objectReferenceValue = _groundTiles;
+                obj.ApplyModifiedProperties();
+            }
+        }
+
+        public static void TieSwitchesToSwitchables(Dictionary<char, Switch> d, Dictionary<char, GameObject> f){
+            foreach(var s in d){
+                SerializedObject obj = new SerializedObject(s.Value);
+                obj.FindProperty("toSwitch").objectReferenceValue = f[s.Key];
                 obj.ApplyModifiedProperties();
             }
         }
