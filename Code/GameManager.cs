@@ -6,6 +6,7 @@ namespace BlockPuzzle
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance {get; private set;}
+        public string LevelCode;
 
         private void Awake(){
             if(Instance == null)

@@ -4,34 +4,18 @@ using UnityEngine.Tilemaps;
 
 namespace BlockPuzzle
 {
-    public class SceneGenerator : EditorWindow
+    public static class SceneGenerator
     {
-        string levelLayout;
-        Tilemap ground;
-        [SerializeField] private TileBase groundTile;
-        [SerializeField] private GameObject P;
-        [SerializeField] private GameObject F;
-        [SerializeField] private GameObject D;
-        [SerializeField] private GameObject K;
-        [SerializeField] private GameObject S;
-        [SerializeField] private GameObject B;
-        Texture tex;
+        [SerializeField] private static TileBase groundTile;
+        [SerializeField] private static GameObject P;
+        [SerializeField] private static GameObject F;
+        [SerializeField] private static GameObject D;
+        [SerializeField] private static GameObject K;
+        [SerializeField] private static GameObject S;
+        [SerializeField] private static GameObject B;
 
-        [MenuItem("Window/LevelGenerator")]
-        static void Init(){
-            SceneGenerator window = (SceneGenerator)EditorWindow.GetWindow(typeof(SceneGenerator));
-        }
-
-        private void OnGUI(){
-            GUILayout.Label("GroundCode", EditorStyles.boldLabel);
-            levelLayout = EditorGUILayout.TextField("LevelString", levelLayout);
-            if(GUILayout.Button(tex)){
-                GenerateLevelFromCode();
-            }
-        }
-
-        private void GenerateLevelFromCode(){
-            ground = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
+        public static void GenerateLevelFromCode(string levelLayout){
+            Tilemap ground = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
             int counter = 0;
             Debug.Log("Start");
             for(int y = 4; y >= -5; y--){
@@ -71,8 +55,8 @@ namespace BlockPuzzle
             }
         }
 
-        private void GenerateObject(GameObject obj, Vector3 pos){
-            Instantiate<GameObject>(obj, pos, Quaternion.identity);
+        private static void GenerateObject(GameObject obj, Vector3 pos){
+            MonoBehaviour.Instantiate<GameObject>(obj, pos, Quaternion.identity);
         }
     }
 }
