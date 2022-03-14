@@ -6,10 +6,10 @@ namespace BlockPuzzle
     public class Switch : TileBound, IUpdate
     {
         public ISwitchable toSwitch;
-        private bool _activated = false;
+        public bool Activated = false;
 
         private void Awake(){
-            _activated = ObjectOnSwitch();
+            Activated = ObjectOnSwitch();
         }
         
         private bool ObjectOnSwitch(){
@@ -22,13 +22,13 @@ namespace BlockPuzzle
         }
 
         public void UpdateAction(){
-            if(_activated && !ObjectOnSwitch()){
+            if(Activated && !ObjectOnSwitch()){
                 toSwitch.SwitchUp();
-                _activated = false;
+                Activated = false;
             }
-            else if(!_activated && ObjectOnSwitch()){
+            else if(!Activated && ObjectOnSwitch()){
                 toSwitch.SwitchDown();
-                _activated = true;
+                Activated = true;
             }
         }
     }

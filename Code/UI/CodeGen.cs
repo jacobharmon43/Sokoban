@@ -21,6 +21,7 @@ namespace BlockPuzzle
                 }
             }
             displayText.text = s;
+            GUIUtility.systemCopyBuffer = s;
         }
     }
 }
