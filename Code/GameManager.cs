@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BlockPuzzle
 {
@@ -25,6 +26,8 @@ namespace BlockPuzzle
             }
         }
 
-        
+        public void SetCode(InputField i){
+            LevelCode = i.text;
+        }
     }
 }

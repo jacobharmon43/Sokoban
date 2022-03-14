@@ -5,16 +5,18 @@ using System.Collections.Generic;
 
 namespace BlockPuzzle
 {
-    public static class SceneGenerator
+    public class SceneGenerator : MonoBehaviour
     {
-        [SerializeField] private static TileBase groundTile;
-        [SerializeField] private static GameObject P;
-        [SerializeField] private static GameObject F;
-        [SerializeField] private static GameObject D;
-        [SerializeField] private static GameObject K;
-        [SerializeField] private static GameObject S;
-        [SerializeField] private static GameObject B;
-        [SerializeField] private static GameObject G;
+        public static SceneGenerator Instance {get; private set;}
+
+        public TileBase groundTile;
+        public GameObject P;
+        public GameObject F;
+        public GameObject D;
+        public GameObject K;
+        public GameObject S;
+        public GameObject B;
+        public GameObject G;
 
         public static void GenerateLevelFromCode(string levelLayout){
             Tilemap ground = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
@@ -31,32 +33,32 @@ namespace BlockPuzzle
                         ground.SetTile(pos, null);
                     }
                     if(levelLayout[counter] != '1'){
-                        ground.SetTile(pos, groundTile);
+                        ground.SetTile(pos, SceneGenerator.Instance.groundTile);
                         switch (levelLayout[counter]){
                             case 'P':
-                                GenerateObject(P, ground.CellToWorld(pos));
+                                GenerateObject(SceneGenerator.Instance.P, ground.CellToWorld(pos));
                                 break;
                             case 'F':
-                                GenerateObject(F, ground.CellToWorld(pos));
+                                GenerateObject(SceneGenerator.Instance.F, ground.CellToWorld(pos));
                                 break;
                             case 'D':
-                                GenerateObject(D, ground.CellToWorld(pos));
+                                GenerateObject(SceneGenerator.Instance.D, ground.CellToWorld(pos));
                                 break;
                             case 'K':
-                                GenerateObject(K, ground.CellToWorld(pos));
+                                GenerateObject(SceneGenerator.Instance.K, ground.CellToWorld(pos));
                                 break;
                             case 'S':
                                 counter++;
                                 char p = levelLayout[counter];
-                                switches.Add(p,GenerateObject(S, ground.CellToWorld(pos)).GetComponent<Switch>());
+                                switches.Add(p,GenerateObject(SceneGenerator.Instance.S, ground.CellToWorld(pos)).GetComponent<Switch>());
                                 break;
                             case 'B':
-                                GenerateObject(B, ground.CellToWorld(pos));
+                                GenerateObject(SceneGenerator.Instance.B, ground.CellToWorld(pos));
                                 break;
                             case 'G':
                                 counter++;
                                 char q = levelLayout[counter];
-                                switchables.Add(q,GenerateObject(G, ground.CellToWorld(pos)));
+                                switchables.Add(q,GenerateObject(SceneGenerator.Instance.G, ground.CellToWorld(pos)));
                                 break;
                             default:
                                 break;
@@ -69,7 +71,7 @@ namespace BlockPuzzle
             }
         }
 
-        private static GameObject GenerateObject(GameObject obj, Vector3 pos){
+        public static GameObject GenerateObject(GameObject obj, Vector3 pos){
             return MonoBehaviour.Instantiate<GameObject>(obj, pos, Quaternion.identity);
         }
     }
