@@ -8,7 +8,7 @@ namespace BlockPuzzle
         {
             bool moved = base.Move(input);
             if(!moved){
-                Physical p = NextTileObject(GridPosition + input);
+                Physical p = NextPhysicalTileObject(GridPosition + input);
                 if(p && p.GetComponent<Door>()){
                     p.GetComponent<Door>().Unlock();
                     Destroy(gameObject);

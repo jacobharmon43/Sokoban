@@ -6,7 +6,7 @@ namespace BlockPuzzle{
     public class TileBound : MonoBehaviour
     {
         public Vector3Int GridPosition;
-        private Tilemap _groundTiles;
+        protected Tilemap _groundTiles;
         protected LayerMask _pushableLayer;
         protected float _delay = 0.15f;
         protected float _timer = 0.0f;
