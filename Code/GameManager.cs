@@ -21,7 +21,11 @@ namespace BlockPuzzle
         }
 
         public void RunChecks(){
+            foreach(Gun g in ObjectStore.OfTypeInList<Gun>()){
+                g.GetComponent<IUpdate>().UpdateAction();
+            }
             foreach(IUpdate u in ObjectStore.OfTypeInList<IUpdate>()){
+                if(u.GetType() == typeof(Gun)) continue;
                 u.UpdateAction();
             }
         }

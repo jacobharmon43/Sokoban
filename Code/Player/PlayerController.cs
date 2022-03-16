@@ -6,6 +6,8 @@ namespace BlockPuzzle
     public class PlayerController : Pushable
     {
         private PlayerInputReader _input;
+        [SerializeField] private float _delay = 0.15f;
+        private float _timer = 0.0f;
 
         private void Awake(){
             _input = GetComponent<PlayerInputReader>();
@@ -21,11 +23,9 @@ namespace BlockPuzzle
             }
 
             /* Input prodding */
-
             Vector2 movement = _input.Input;
             if(movement.x != 0) movement *= Vector2.right; //Prioritize X movement.
             movement = movement.normalized;
-
             Movement(movement);
         }
 
@@ -40,7 +40,7 @@ namespace BlockPuzzle
         public override bool Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
             if(!ValidTile(nextPos)) return false;
-            Physical p = NextTileObject(nextPos);
+            Physical p = NextPhysicalTileObject(nextPos);
             if(p && p.active){
                 if(p.GetComponent<Spike>())
                     GameManager.Instance.ResetScene();

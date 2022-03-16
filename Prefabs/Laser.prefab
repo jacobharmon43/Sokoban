@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5573231146207059380}
   - component: {fileID: 5573231146207059382}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: 734368628706365288, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
+  m_Sprite: {fileID: 8661651960862297898, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,5 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD:Prefabs/Bullet.prefab
   active: 1
   direction: {x: -1, y: 0, z: 0}
+=======
+>>>>>>> 266c47b3a2a0e4aabe8f98f641395f8a7b7f3597:Prefabs/Laser.prefab
