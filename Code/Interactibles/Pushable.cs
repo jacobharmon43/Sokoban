@@ -22,7 +22,6 @@ namespace BlockPuzzle{
             return null;
         }
 
-<<<<<<< HEAD
         public TileMaterial NextTileMaterial(Vector3Int tile){
             foreach(TileMaterial tm in ObjectStore.OfTypeInList<TileMaterial>()){
                 if(tm.GridPosition == tile){
@@ -31,15 +30,11 @@ namespace BlockPuzzle{
             }
             return null;
         }
-=======
         protected TileBound NextTileObject(Vector3Int tile){
             foreach(TileBound p in (ObjectStore.AllTiles)){
                 if(p.GridPosition == tile) return p;
             }
             return null;
         }
-
-
->>>>>>> 266c47b3a2a0e4aabe8f98f641395f8a7b7f3597
     }
 }

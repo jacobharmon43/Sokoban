@@ -6,14 +6,9 @@ namespace BlockPuzzle{
     public class TileBound : MonoBehaviour
     {
         public Vector3Int GridPosition;
-<<<<<<< HEAD
-        private Tilemap _groundTiles;
         protected float _delay = 0.15f;
         protected float _timer = 0.0f;
-=======
         protected Tilemap _groundTiles;
-        protected LayerMask _pushableLayer;
->>>>>>> 266c47b3a2a0e4aabe8f98f641395f8a7b7f3597
 
         private void Start(){
             _groundTiles = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
