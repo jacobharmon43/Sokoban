@@ -9,7 +9,7 @@ namespace BlockPuzzle
         [SerializeField] private GameObject laser;
 
         private Vector3Int dir;
-        private List<Laser> lasers = new List<Laser>();
+        private List<GameObject> lasers = new List<GameObject>();
 
         private void Awake(){
             switch (rotationChar){
@@ -37,28 +37,27 @@ namespace BlockPuzzle
 
         public void UpdateAction()
         {
-            foreach(Laser l in lasers){
-                Destroy(l.gameObject);
+            foreach(GameObject l in lasers){
+                Destroy(l);
             }
-            lasers.Clear();
-            Physical[] blockingObjects = ObjectStore.OfTypeInList<Physical>().ToArray();
+            lasers.Clear();    
             Vector3Int nextPos = GridPosition + dir;
-            while(!BlockerOnNextPos(blockingObjects,nextPos)){
+            while(_groundTiles.HasTile(nextPos)){
                 Laser tmp = Instantiate<GameObject>(laser, SetPos(nextPos), transform.rotation).GetComponent<Laser>();
+                tmp.GridPosition = nextPos;
                 nextPos += dir;
-                lasers.Add(tmp);
-            }
-        }
-
-        private bool BlockerOnNextPos(Physical[] p, Vector3Int nextPos){
-            if(!_groundTiles.HasTile(nextPos)) return true;
-            foreach(Physical blocker in p){
-                if(blocker.GridPosition == nextPos && blocker.active){
-                    if(blocker.GetComponent<PlayerController>()) GameManager.Instance.ResetScene();
-                    return true;
+                lasers.Add(tmp.gameObject);
+                Physical blocker = tmp.BlockerOnTile();
+                if(blocker && blocker.active){
+                    if(blocker.GetComponent<PlayerController>())
+                        GameManager.Instance.ResetScene();
+                    else{
+                        lasers.Remove(tmp.gameObject);
+                        Destroy(tmp.gameObject);
+                        break;
+                    }
                 }
             }
-            return false;
         }
     }
 }

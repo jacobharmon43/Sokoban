@@ -6,6 +6,8 @@ namespace BlockPuzzle
     public class PlayerController : Pushable
     {
         private PlayerInputReader _input;
+        [SerializeField] private float _delay = 0.15f;
+        private float _timer = 0.0f;
 
         private void Awake(){
             _input = GetComponent<PlayerInputReader>();

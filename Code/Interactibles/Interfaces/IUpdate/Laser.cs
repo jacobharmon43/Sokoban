@@ -1,23 +1,20 @@
-using UnityEngine;
-
 namespace BlockPuzzle
 {
     public class Laser : TileBound, IUpdate
     {
-        public void UpdateAction()
-        {
-            if(PlayerOnTileOrNextTile()){
-                GameManager.Instance.ResetScene();
+        public Physical BlockerOnTile(){
+            foreach(Physical p in ObjectStore.OfTypeInList<Physical>()){
+                if(p.GridPosition == GridPosition) return p;
             }
+            return null;
         }
 
-        private bool PlayerOnTileOrNextTile(){
-            foreach(PlayerController p in ObjectStore.OfTypeInList<PlayerController>()){
-                if(p.GridPosition == GridPosition){
-                    return true;
-                }
+        public void UpdateAction()
+        {
+            foreach(PlayerController pc in ObjectStore.OfTypeInList<PlayerController>()){
+                if(pc.GridPosition == GridPosition)
+                    GameManager.Instance.ResetScene();
             }
-            return false;
         }
     }
 }
