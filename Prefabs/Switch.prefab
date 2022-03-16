@@ -96,4 +96,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: -3, y: 2, z: 0}
-  GroundTiles: {fileID: 0}
+  Activated: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3329813843123295293}
   - component: {fileID: 3329813843123295294}
   - component: {fileID: 3329813843123295295}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,5 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: 8, y: 1, z: 0}
-  GroundTiles: {fileID: 0}
   active: 1

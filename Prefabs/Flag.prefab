@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: 6, y: 2, z: 0}
-  GroundTiles: {fileID: 0}
   contactEvent:
     m_PersistentCalls:
       m_Calls: []

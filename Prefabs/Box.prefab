@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9182711442047637416}
   - component: {fileID: 9182711442047637422}
   - component: {fileID: 9182711442047637423}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: -4, y: -2, z: 0}
-  GroundTiles: {fileID: 0}
   active: 1
 --- !u!61 &9182711442047637423
 BoxCollider2D:

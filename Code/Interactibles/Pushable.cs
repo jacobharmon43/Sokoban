@@ -21,5 +21,14 @@ namespace BlockPuzzle{
             }
             return null;
         }
+
+        public TileMaterial NextTileMaterial(Vector3Int tile){
+            foreach(TileMaterial tm in ObjectStore.OfTypeInList<TileMaterial>()){
+                if(tm.GridPosition == tile){
+                    return tm;
+                }
+            }
+            return null;
+        }
     }
 }

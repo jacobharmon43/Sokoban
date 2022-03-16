@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: 0, y: 0, z: 0}
+  active: 1
   direction: {x: -1, y: 0, z: 0}
