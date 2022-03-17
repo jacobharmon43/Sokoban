@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8821330116146784346}
   - component: {fileID: 8821330116146784347}
-  - component: {fileID: 8821330116146784345}
+  - component: {fileID: 1600063386531733134}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8821330116146784345
+--- !u!114 &1600063386531733134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8821330116146785188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b675ef62f228e864abeb17c73d64430b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b643b5e40afa6f4986074f5f8596bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: 0, y: 0, z: 0}
-  active: 1
+  blocking: 1

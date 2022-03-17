@@ -6,7 +6,7 @@ namespace BlockPuzzle{
         public virtual void Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
             if(!ValidTile(nextPos)) return;
-            TileObject to = NextTileObject(nextPos);
+            TileObject to = ObjectOnTile(nextPos);
             if(to){
                 if(to && to.blocking){
                     return;
@@ -14,13 +14,6 @@ namespace BlockPuzzle{
             }
             GridPosition = nextPos;
             transform.position = SetPos(nextPos);
-        }
-
-        protected TileObject NextTileObject(Vector3Int tile){
-            foreach(TileObject to in (ObjectStore.OfTypeInList<TileObject>())){
-                if(to.GridPosition == tile) return to;
-            }
-            return null;
         }
 
         public override void ContactEvent(TileBound caller, Vector3Int contactDirection)

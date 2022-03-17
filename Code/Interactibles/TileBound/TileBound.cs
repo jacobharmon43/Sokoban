@@ -2,7 +2,6 @@ using UnityEngine.Tilemaps;
 using UnityEngine;
 
 namespace BlockPuzzle{
-    [System.Serializable]
     public class TileBound : MonoBehaviour
     {
         public Vector3Int GridPosition;
@@ -20,6 +19,13 @@ namespace BlockPuzzle{
 
         protected bool ValidTile(Vector3Int tile) => _groundTiles.HasTile(tile);
         protected Vector3 SetPos(Vector3Int tile) => _groundTiles.CellToWorld(tile);
+        protected TileObject ObjectOnTile(Vector3Int tile){
+            foreach(TileObject to in (ObjectStore.OfTypeInList<TileObject>())){
+                if(to == this) continue;
+                if(to.GridPosition == tile) return to;
+            }
+            return null;
+        }
 
 
         private void OnEnable(){

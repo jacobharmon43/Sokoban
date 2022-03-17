@@ -1,31 +1,25 @@
 using UnityEngine;
+using UnityEditor;
 
 namespace BlockPuzzle
 {
     public class Switch : TileMaterial, IUpdate
     {
-        public ISwitchable toSwitch;
+        public GameObject switchedObject;
+        private ISwitchable toSwitch;
         public bool Activated = false;
 
         private void Awake(){
-            Activated = ObjectOnSwitch();
-        }
-        
-        private bool ObjectOnSwitch(){
-            foreach(Pushable p in ObjectStore.OfTypeInList<Pushable>()){
-                if(p.GridPosition == GridPosition){
-                    return true;
-                }
-            }
-            return false;
+            toSwitch = switchedObject.GetComponent<ISwitchable>();
+            Activated = ObjectOnTile(GridPosition);
         }
 
         public void UpdateAction(){
-            if(Activated && !ObjectOnSwitch()){
+            if(Activated && !ObjectOnTile(GridPosition)){
                 toSwitch.SwitchUp();
                 Activated = false;
             }
-            else if(!Activated && ObjectOnSwitch()){
+            else if(!Activated && ObjectOnTile(GridPosition)){
                 toSwitch.SwitchDown();
                 Activated = true;
             }

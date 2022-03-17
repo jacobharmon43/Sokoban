@@ -40,7 +40,7 @@ namespace BlockPuzzle
         public override void Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
             if(!ValidTile(nextPos)) return;
-            TileObject to = NextTileObject(nextPos);
+            TileObject to = ObjectOnTile(nextPos);
             if(to){
                 to.ContactEvent(this, input);
                 if(to.blocking && to.GridPosition == nextPos){
