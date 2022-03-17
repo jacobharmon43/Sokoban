@@ -7,7 +7,8 @@ namespace BlockPuzzle
     {
         private SpriteRenderer _sr;
 
-        private void Awake(){
+        protected override void Awake(){
+            base.Awake();
             _sr = GetComponent<SpriteRenderer>();
         }
 

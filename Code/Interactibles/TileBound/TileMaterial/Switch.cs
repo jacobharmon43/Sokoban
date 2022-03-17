@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 namespace BlockPuzzle
 {
@@ -9,7 +8,8 @@ namespace BlockPuzzle
         private ISwitchable toSwitch;
         public bool Activated = false;
 
-        private void Awake(){
+        protected override void Awake(){
+            base.Awake();
             toSwitch = switchedObject.GetComponent<ISwitchable>();
             Activated = ObjectOnTile(GridPosition);
         }
@@ -27,7 +27,7 @@ namespace BlockPuzzle
 
         public override void OnTopEvent(TileBound caller, Vector3Int entranceDirection)
         {
-            //Will put something here eventually, just can't really decide if this structure is better or worse.
+            //Will put something here eventually, just can't really figure out how to figure out ExitTopEvents
         }
     }
 }

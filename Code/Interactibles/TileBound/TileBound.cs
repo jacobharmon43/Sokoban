@@ -7,7 +7,7 @@ namespace BlockPuzzle{
         public Vector3Int GridPosition;
         protected Tilemap _groundTiles;
 
-        private void Start(){
+        protected virtual void Awake(){
             _groundTiles = GameObject.Find("GroundTiles").GetComponent<Tilemap>();
             Vector2 pos = transform.position;
             Vector3Int gridPosition = _groundTiles.WorldToCell(new Vector2(Mathf.CeilToInt(pos.x), Mathf.CeilToInt(pos.y)));
@@ -23,6 +23,13 @@ namespace BlockPuzzle{
             foreach(TileObject to in (ObjectStore.OfTypeInList<TileObject>())){
                 if(to == this) continue;
                 if(to.GridPosition == tile) return to;
+            }
+            return null;
+        }
+        protected TileMaterial MaterialOfTIle(Vector3Int tile){
+            foreach(TileMaterial tm in (ObjectStore.OfTypeInList<TileMaterial>())){
+                if(tm == this) continue;
+                if(tm.GridPosition == tile) return tm;
             }
             return null;
         }

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 namespace BlockPuzzle
 {
-    public class Gun : TileObject, IUpdate
+    public class Gun : TileObject, IUpdate, ISwitchable
     {
         [SerializeField] private char rotationChar = '<';
         [SerializeField] private GameObject laser;
 
         private Vector3Int dir;
         private List<GameObject> lasers = new List<GameObject>();
+        private bool firing = true;
 
-        private void Awake(){
+        protected override void Awake(){
+            base.Awake();
             switch (rotationChar){
                 case '<':
                     transform.rotation = Quaternion.identity;
@@ -37,10 +39,8 @@ namespace BlockPuzzle
 
         public void UpdateAction()
         {
-            foreach(GameObject l in lasers){
-                Destroy(l);
-            }
-            lasers.Clear();    
+            if(!firing) return;
+            ClearLasers();
             Vector3Int nextPos = GridPosition + dir;
             while(_groundTiles.HasTile(nextPos)){
                 Laser tmp = Instantiate<GameObject>(laser, SetPos(nextPos), transform.rotation).GetComponent<Laser>();
@@ -63,6 +63,24 @@ namespace BlockPuzzle
         public override void ContactEvent(TileBound caller, Vector3Int contactDirection)
         {
             if(caller.GetType() == typeof(PlayerController)) GameManager.Instance.ResetScene();
+        }
+
+        private void ClearLasers(){
+            foreach(GameObject l in lasers){
+                Destroy(l);
+            }
+            lasers.Clear();    
+        }
+
+        public void SwitchUp()
+        {
+            firing = true;
+        }
+
+        public void SwitchDown()
+        {
+            ClearLasers();
+            firing = false;
         }
     }
 }

@@ -3,17 +3,20 @@ using UnityEngine;
 namespace BlockPuzzle{
     public class Pushable : TileObject
     {  
-        public virtual void Move(Vector3Int input){
+        public virtual bool Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
-            if(!ValidTile(nextPos)) return;
+            if(!ValidTile(nextPos)) return false;
             TileObject to = ObjectOnTile(nextPos);
-            if(to){
-                if(to && to.blocking){
-                    return;
+            if(!to || (to && !to.blocking)){
+                GridPosition = nextPos;
+                transform.position = SetPos(nextPos);   
+                TileMaterial tm = MaterialOfTIle(nextPos);
+                if(tm){
+                    tm.OnTopEvent(this, input);
                 }
+                return true;
             }
-            GridPosition = nextPos;
-            transform.position = SetPos(nextPos);
+            return false;
         }
 
         public override void ContactEvent(TileBound caller, Vector3Int contactDirection)

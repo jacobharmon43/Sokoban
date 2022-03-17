@@ -6,7 +6,9 @@ namespace BlockPuzzle
     {
         public override void OnTopEvent(TileBound caller, Vector3Int entranceDirection)
         {
-            //Some slide shit here.
+            if(caller.GetType() == typeof(PlayerController)) return;
+            Pushable p = caller.GetComponent<Pushable>();
+            p.Move(entranceDirection);
         }
     }
 }

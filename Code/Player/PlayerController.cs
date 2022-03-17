@@ -9,7 +9,8 @@ namespace BlockPuzzle
         [SerializeField] private float _delay = 0.15f;
         private float _timer = 0.0f;
 
-        private void Awake(){
+        protected override void Awake(){
+            base.Awake();
             _input = GetComponent<PlayerInputReader>();
         }
 
@@ -37,19 +38,23 @@ namespace BlockPuzzle
             }
         }
 
-        public override void Move(Vector3Int input){
+        public override bool Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
-            if(!ValidTile(nextPos)) return;
+            if(!ValidTile(nextPos)) return false;
             TileObject to = ObjectOnTile(nextPos);
             if(to){
                 to.ContactEvent(this, input);
                 if(to.blocking && to.GridPosition == nextPos){
-                    return;
+                    return false;
                 }
-                
+            }
+            TileMaterial tm = MaterialOfTIle(nextPos);
+            if(tm){
+                tm.OnTopEvent(this, input);
             }
             GridPosition = nextPos;
             transform.position = SetPos(nextPos);
+            return true;
         }
     }
 }

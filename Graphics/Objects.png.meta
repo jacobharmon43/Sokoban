@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: 8661651960862297898
     second: Laser
+  - first:
+      213: 2710443080846324409
+    second: IceTile
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -414,7 +417,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -422,6 +425,27 @@ TextureImporter:
       bones: []
       spriteID: a2f4347219e543870800000000000000
       internalID: 8661651960862297898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceTile
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2b2c91f9d6d9520800000000000000
+      internalID: 2710443080846324409
       vertices: []
       indices: 
       edges: []

@@ -6,7 +6,7 @@ namespace BlockPuzzle
     {
         public override void OnTopEvent(TileBound caller, Vector3Int entranceDirection)
         {
-            GameManager.Instance.LoadScene(0);
+            if(caller.GetType() == typeof(PlayerController)) GameManager.Instance.LoadScene(0);
         }
     }
 }
