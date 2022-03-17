@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace BlockPuzzle
 {
-    public class Ice : TileMaterial
+    public class Flag : TileMaterial
     {
         public override void OnTopEvent(TileBound caller, Vector3Int entranceDirection)
         {
-            //Some slide shit here.
+            GameManager.Instance.LoadScene(0);
         }
     }
 }

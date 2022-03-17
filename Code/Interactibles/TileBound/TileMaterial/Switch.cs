@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace BlockPuzzle
 {
-    public class Switch : TileBound, IUpdate
+    public class Switch : TileMaterial, IUpdate
     {
         public ISwitchable toSwitch;
         public bool Activated = false;
@@ -27,6 +29,11 @@ namespace BlockPuzzle
                 toSwitch.SwitchDown();
                 Activated = true;
             }
+        }
+
+        public override void OnTopEvent(TileBound caller, Vector3Int entranceDirection)
+        {
+            //Will put something here eventually, just can't really decide if this structure is better or worse.
         }
     }
 }

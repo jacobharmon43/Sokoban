@@ -1,22 +1,19 @@
 using UnityEngine;
 
 namespace BlockPuzzle{
-    public class Pushable : Physical
+    public class Pushable : TileObject
     {  
-        public virtual bool Move(Vector3Int input){
+        public virtual void Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
-            if(!ValidTile(nextPos)) return false;
+            if(!ValidTile(nextPos)) return;
             TileObject to = NextTileObject(nextPos);
             if(to){
-                to.ContactEvent(this);
-                Physical p = to.GetComponent<Physical>();
-                if(p && p.active){
-                    return false;
+                if(to && to.blocking){
+                    return;
                 }
             }
             GridPosition = nextPos;
             transform.position = SetPos(nextPos);
-            return true;
         }
 
         protected TileObject NextTileObject(Vector3Int tile){
@@ -26,9 +23,11 @@ namespace BlockPuzzle{
             return null;
         }
 
-        public override void ContactEvent(TileBound caller)
+        public override void ContactEvent(TileBound caller, Vector3Int contactDirection)
         {
-            //Nothing
+            if(caller.GetType() == typeof(PlayerController)){
+                Move(contactDirection);
+            }
         }
     }
 }

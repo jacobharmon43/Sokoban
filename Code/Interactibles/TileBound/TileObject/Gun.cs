@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BlockPuzzle
 {
-    public class Gun : Physical, IUpdate
+    public class Gun : TileObject, IUpdate
     {
         [SerializeField] private char rotationChar = '<';
         [SerializeField] private GameObject laser;
@@ -47,8 +47,8 @@ namespace BlockPuzzle
                 tmp.GridPosition = nextPos;
                 nextPos += dir;
                 lasers.Add(tmp.gameObject);
-                Physical blocker = tmp.BlockerOnTile();
-                if(blocker && blocker.active){
+                TileObject blocker = tmp.BlockerOnTile();
+                if(blocker && blocker.blocking){
                     if(blocker.GetComponent<PlayerController>())
                         GameManager.Instance.ResetScene();
                     else{
@@ -60,7 +60,7 @@ namespace BlockPuzzle
             }
         }
 
-        public override void ContactEvent(TileBound caller)
+        public override void ContactEvent(TileBound caller, Vector3Int contactDirection)
         {
             if(caller.GetType() == typeof(PlayerController)) GameManager.Instance.ResetScene();
         }

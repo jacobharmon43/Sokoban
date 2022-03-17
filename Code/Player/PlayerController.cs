@@ -37,24 +37,19 @@ namespace BlockPuzzle
             }
         }
 
-        public override bool Move(Vector3Int input){
+        public override void Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
-            if(!ValidTile(nextPos)) return false;
+            if(!ValidTile(nextPos)) return;
             TileObject to = NextTileObject(nextPos);
             if(to){
-                to.ContactEvent(this);
-                Physical p = GetComponent<Physical>();
-                if(p && p.active){
-                    Pushable push = p.GetComponent<Pushable>();
-                    if(!push) return false;
-                    if(push && !push.Move(input))
-                        return false;  
+                to.ContactEvent(this, input);
+                if(to.blocking && to.GridPosition == nextPos){
+                    return;
                 }
                 
             }
             GridPosition = nextPos;
             transform.position = SetPos(nextPos);
-            return true;
         }
     }
 }

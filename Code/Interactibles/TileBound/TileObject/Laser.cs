@@ -2,9 +2,9 @@ namespace BlockPuzzle
 {
     public class Laser : TileObject, IUpdate
     {
-        public Physical BlockerOnTile(){
-            foreach(Physical p in ObjectStore.OfTypeInList<Physical>()){
-                if(p.GridPosition == GridPosition) return p;
+        public TileObject BlockerOnTile(){
+            foreach(TileObject to in ObjectStore.OfTypeInList<TileObject>()){
+                if(to.GridPosition == GridPosition) return to;
             }
             return null;
         }
