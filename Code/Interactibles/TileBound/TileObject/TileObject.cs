@@ -1,21 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace BlockPuzzle
 {
-    public class TileObject : MonoBehaviour
+    public abstract class TileObject : TileBound
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public virtual void ContactEvent(TileBound caller){}
     }
 }

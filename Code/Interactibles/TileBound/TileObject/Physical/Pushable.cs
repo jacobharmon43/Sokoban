@@ -6,35 +6,29 @@ namespace BlockPuzzle{
         public virtual bool Move(Vector3Int input){
             Vector3Int nextPos = GridPosition + input;         
             if(!ValidTile(nextPos)) return false;
-            Physical p = NextPhysicalTileObject(nextPos);
-            if(p && p.active){
-                return false;  
+            TileObject to = NextTileObject(nextPos);
+            if(to){
+                to.ContactEvent(this);
+                Physical p = to.GetComponent<Physical>();
+                if(p && p.active){
+                    return false;
+                }
             }
             GridPosition = nextPos;
             transform.position = SetPos(nextPos);
             return true;
         }
 
-        protected Physical NextPhysicalTileObject(Vector3Int tile){
-            foreach(Physical p in (ObjectStore.OfTypeInList<Physical>())){
-                if(p.GridPosition == tile) return p;
+        protected TileObject NextTileObject(Vector3Int tile){
+            foreach(TileObject to in (ObjectStore.OfTypeInList<TileObject>())){
+                if(to.GridPosition == tile) return to;
             }
             return null;
         }
 
-        public TileMaterial NextTileMaterial(Vector3Int tile){
-            foreach(TileMaterial tm in ObjectStore.OfTypeInList<TileMaterial>()){
-                if(tm.GridPosition == tile){
-                    return tm;
-                }
-            }
-            return null;
-        }
-        protected TileBound NextTileObject(Vector3Int tile){
-            foreach(TileBound p in (ObjectStore.AllTiles)){
-                if(p.GridPosition == tile) return p;
-            }
-            return null;
+        public override void ContactEvent(TileBound caller)
+        {
+            //Nothing
         }
     }
 }

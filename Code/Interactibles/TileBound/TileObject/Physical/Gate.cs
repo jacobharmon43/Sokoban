@@ -29,5 +29,10 @@ namespace BlockPuzzle
             active = true;
             sp.color = sp.color + new Color32(0,0,0,100);
         }
+
+        public override void ContactEvent(TileBound caller)
+        {
+            //Nothing
+        }
     }
 }

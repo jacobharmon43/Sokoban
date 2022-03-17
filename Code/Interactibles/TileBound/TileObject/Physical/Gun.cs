@@ -59,5 +59,10 @@ namespace BlockPuzzle
                 }
             }
         }
+
+        public override void ContactEvent(TileBound caller)
+        {
+            if(caller.GetType() == typeof(PlayerController)) GameManager.Instance.ResetScene();
+        }
     }
 }

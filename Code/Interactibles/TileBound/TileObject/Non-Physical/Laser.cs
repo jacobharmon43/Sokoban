@@ -1,6 +1,6 @@
 namespace BlockPuzzle
 {
-    public class Laser : TileBound, IUpdate
+    public class Laser : TileObject, IUpdate
     {
         public Physical BlockerOnTile(){
             foreach(Physical p in ObjectStore.OfTypeInList<Physical>()){

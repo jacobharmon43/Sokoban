@@ -1,6 +1,3 @@
-using UnityEngine.Events;
-using UnityEngine;
-
 namespace BlockPuzzle
 {
     public class Switch : TileBound, IUpdate
