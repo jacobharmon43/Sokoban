@@ -22,8 +22,6 @@ namespace BlockPuzzle
                 _timer -= Time.deltaTime;
                 return;
             }
-
-            /* Input prodding */
             Vector2 movement = _input.Input;
             if(movement.x != 0) movement *= Vector2.right; //Prioritize X movement.
             movement = movement.normalized;

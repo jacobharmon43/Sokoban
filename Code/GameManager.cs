@@ -9,8 +9,6 @@ namespace BlockPuzzle
     {
         public static GameManager Instance {get; private set;}
 
-        public List<Action[]> actionBuffer;
-
         private void Awake(){
             if(Instance == null){
                 Instance = this;
