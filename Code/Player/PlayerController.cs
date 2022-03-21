@@ -46,7 +46,7 @@ namespace BlockPuzzle
                     return false;
                 }
             }
-            TileMaterial tm = MaterialOfTIle(nextPos);
+            TileMaterial tm = MaterialOfTile(nextPos);
             if(tm){
                 tm.OnTopEvent(this, input);
             }

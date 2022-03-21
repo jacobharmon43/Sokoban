@@ -18,7 +18,9 @@ namespace BlockPuzzle{
         }
 
         protected bool ValidTile(Vector3Int tile) => _groundTiles.HasTile(tile);
+
         protected Vector3 SetPos(Vector3Int tile) => _groundTiles.CellToWorld(tile);
+
         protected TileObject ObjectOnTile(Vector3Int tile){
             foreach(TileObject to in (ObjectStore.OfTypeInList<TileObject>())){
                 if(to == this) continue;
@@ -26,7 +28,8 @@ namespace BlockPuzzle{
             }
             return null;
         }
-        protected TileMaterial MaterialOfTIle(Vector3Int tile){
+
+        protected TileMaterial MaterialOfTile(Vector3Int tile){
             foreach(TileMaterial tm in (ObjectStore.OfTypeInList<TileMaterial>())){
                 if(tm == this) continue;
                 if(tm.GridPosition == tile) return tm;

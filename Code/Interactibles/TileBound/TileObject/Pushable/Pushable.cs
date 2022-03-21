@@ -10,7 +10,7 @@ namespace BlockPuzzle{
             if(!to || (to && !to.blocking)){
                 GridPosition = nextPos;
                 transform.position = SetPos(nextPos);   
-                TileMaterial tm = MaterialOfTIle(nextPos);
+                TileMaterial tm = MaterialOfTile(nextPos);
                 if(tm){
                     tm.OnTopEvent(this, input);
                 }
@@ -21,7 +21,7 @@ namespace BlockPuzzle{
 
         public override void ContactEvent(TileBound caller, Vector3Int contactDirection)
         {
-            if(caller.GetType() == typeof(PlayerController)){
+            if(caller.GetType() == typeof(PlayerController) && this.blocking){
                 Move(contactDirection);
             }
         }
