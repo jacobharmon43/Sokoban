@@ -24,7 +24,7 @@ namespace BlockPuzzle{
         protected TileObject ObjectOnTile(Vector3Int tile){
             foreach(TileObject to in (ObjectStore.OfTypeInList<TileObject>())){
                 if(to == this) continue;
-                if(to.GridPosition == tile) return to;
+                if(to.GridPosition == tile && to.blocking) return to;
             }
             return null;
         }
