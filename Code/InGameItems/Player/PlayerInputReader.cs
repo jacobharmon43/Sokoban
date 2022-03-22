@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,10 +22,10 @@ namespace BlockPuzzle
             _reset = _map.FindAction("Reset");
         }
 
-        public bool Up => _Up.phase == InputActionPhase.Started;
-        public bool Down => _Down.phase == InputActionPhase.Started;
-        public bool Left => _Left.phase == InputActionPhase.Started;
-        public bool Right => _Right.phase == InputActionPhase.Started;
+        public bool Up => _Up.triggered;
+        public bool Down => _Down.triggered;
+        public bool Left => _Left.triggered;
+        public bool Right => _Right.triggered;
         public bool Reset => _reset.ReadValue<float>() == 1;
     }
 }

@@ -6,7 +6,7 @@ namespace BlockPuzzle
     public class CameraScalar : MonoBehaviour 
         {
         const float NORMAL_ASPECT = 16/10f;
-        const float CAMERA_SIZE = 8;
+        const float CAMERA_SIZE = 7;
         private Camera cam;
 
         private void Awake(){

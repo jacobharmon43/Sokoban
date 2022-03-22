@@ -7,9 +7,6 @@ namespace BlockPuzzle
     {
         private PlayerInputReader _input;
 
-        private float _delay = 0.15f;
-        private float _timer = 0;
-
         protected override void Awake(){
             base.Awake();
             _input = GetComponent<PlayerInputReader>();
@@ -19,11 +16,6 @@ namespace BlockPuzzle
             if(_input.Reset){
                 GameManager.Instance.ResetScene();
             }
-            if(_timer > 0){
-                _timer -= Time.deltaTime;
-                return;
-            }
-            _timer = _delay;
             if(_input.Left)
                 Movement(new Vector2(-1,0));
             if(_input.Right)

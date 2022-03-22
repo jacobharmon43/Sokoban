@@ -5,7 +5,7 @@ namespace BlockPuzzle
 {
     public class Gun : TileObject, IUpdate, ISwitchable
     {
-        [SerializeField] private char rotationChar = '<';
+        public char rotationChar = '<';
         [SerializeField] private GameObject laser;
 
         private Vector3Int dir;
