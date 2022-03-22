@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a841e775dfd8c504b9bb00215e9492c5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - groundTile: {fileID: 11400000, guid: 0d486be0c39b42eec86cecae8a79cf9b, type: 2}
+  - Player: {fileID: 7833576607277860897, guid: 25ac4b47c3b43d74bb14101efc6aa3a0, type: 3}
+  - Flag: {fileID: 2787259534740790595, guid: ccb508ddddc2b2be5889c8da91586367, type: 3}
+  - Door: {fileID: 3329813843123295296, guid: 606366fab8ef4004ba02b42dc01023a0, type: 3}
+  - Key: {fileID: 8007857182649302371, guid: f456c3a403b6cfd48bba4ac107bb66b0, type: 3}
+  - Switch: {fileID: 8383693368296406263, guid: 5f66b1d4a446c9c49a1ec764510b38b6, type: 3}
+  - Box: {fileID: 9182711442047637419, guid: 54f4eb4980fc08d4da62261814b87e7f, type: 3}
+  - Gate: {fileID: 8821330116146785188, guid: 6331cf68c79d53d4e85d68d7d8f7fdb8, type: 3}
+  - Spike: {fileID: 5185615201427493223, guid: 057a4ecb32b0e5142ae6709295f4ca3d, type: 3}
+  - Ice: {fileID: 232299011659673525, guid: 5610f69819bee9346a85e6e3ab610390, type: 3}
+  - Gun: {fileID: 5426036248815089892, guid: c136fa4265b0b9847afd9b5007312f80, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
