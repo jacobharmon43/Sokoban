@@ -37,7 +37,6 @@ namespace BlockPuzzle{
             return null;
         }
 
-
         private void OnEnable(){
             if(!ObjectStore.AllTiles.Contains(this))
                 ObjectStore.AllTiles.Add(this);
