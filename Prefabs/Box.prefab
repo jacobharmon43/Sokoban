@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridPosition: {x: -4, y: -2, z: 0}
-  active: 1
+  blocking: 1
 --- !u!61 &9182711442047637423
 BoxCollider2D:
   m_ObjectHideFlags: 0
