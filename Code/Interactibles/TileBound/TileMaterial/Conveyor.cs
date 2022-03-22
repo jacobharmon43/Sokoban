@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BlockPuzzle
@@ -8,6 +6,7 @@ namespace BlockPuzzle
     {
         [SerializeField] private char rotationChar = '<';
         private Vector3Int _dir;
+
         protected override void Awake()
         {
             base.Awake();
@@ -35,17 +34,19 @@ namespace BlockPuzzle
         }
         public override void OnTopEvent(TileBound caller, Vector3Int entranceDirection)
         {
-            //Nothing
+            if(caller.GetType() == typeof(PlayerController)) return;
+            Pushable p = caller.GetComponent<Pushable>();
+            if(!p) return;
+            p.Move(_dir);
         }
 
         public void UpdateAction()
         {
             TileObject to = ObjectOnTile(GridPosition);
-            if(to && to.GetType() != typeof(PlayerController)){
-                Pushable p = GetComponent<Pushable>();
-                if(p)
-                    p.Move(_dir);
-            }
+            if(!to || to.GetType() == typeof(PlayerController)) return;
+            Pushable p = to.GetComponent<Pushable>();
+            if(!p) return;
+            p.Move(_dir);
         }
     }
 }
