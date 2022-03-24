@@ -6,8 +6,8 @@ namespace Sokoban.Grid
     {
         public Tile[,] Grid;
 
-        [SerializeField] private int gridHeight;
-        [SerializeField] private int gridWidth;
+        [SerializeField] private int gridHeight = 10;
+        [SerializeField] private int gridWidth = 10;
 
         private Vector2 cellSize = Vector2.one;
         private Vector2 generationStartPos;
@@ -16,8 +16,26 @@ namespace Sokoban.Grid
         [SerializeField] private TileObject[] allObjects;
         [SerializeField] private TileCover[] covers;
 
-        [SerializeField, TextArea] private string testTileCode;
-        [SerializeField, TextArea] private string testObjectCode;
+        [SerializeField, TextArea] private string testTileCode =  @"##########
+                                                                    ###...####
+                                                                    #.....####
+                                                                    ###...####
+                                                                    #.##..####
+                                                                    #.#...####
+                                                                    #......###
+                                                                    #......###
+                                                                    ##########
+                                                                    ##########";
+        [SerializeField, TextArea] private string testObjectCode = @"..........
+                                                                     ..........
+                                                                     .HPB......
+                                                                     ....BH....
+                                                                     .H..B.....
+                                                                     ....H.....
+                                                                     .B.H(B)BBH...
+                                                                     ....H.....
+                                                                     ..........
+                                                                     ..........";
 
 
         private void Awake(){
@@ -51,33 +69,12 @@ namespace Sokoban.Grid
         }
 
         public void GenerateObjectsFromCode(string code){
+            int counter = 0;
             code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' '}));
             for(int y = 0; y < gridHeight; y++){
                 for(int x = 0; x < gridWidth; x++){
-                    char currentChar = code[y* gridWidth + x];
-                    int selection;
-                    bool isObject = true;
-                    switch (currentChar){
-                        case 'P':
-                            selection = 0;
-                            break;
-                        case 'B':
-                            selection = 1;
-                            break;
-                        case 'W':
-                            selection = 2;
-                            break;
-                        case 'S':
-                            isObject = false;
-                            selection = 0;
-                            break;
-                        default:
-                            continue;
-                    }
-                    if(isObject)
-                        Grid[x,y].AddTileObject(Instantiate<TileObject>(allObjects[selection], Grid[x,y].transform.position, Quaternion.identity));
-                    else
-                        Grid[x,y].AddCover(Instantiate<TileCover>(covers[selection], Grid[x,y].transform.position, Quaternion.identity));
+                    ParseInstantiateObject(ref counter, code, x, y);
+                    counter++;
                 }
             }
         }
@@ -91,6 +88,41 @@ namespace Sokoban.Grid
             Vector2 topLeft = new Vector2(-gridWidth/2, gridHeight/2);
             Vector2 dist = new Vector2(Mathf.Abs(pos.x - topLeft.x), Mathf.Abs(pos.y - topLeft.y));
             return new Vector2Int(Mathf.FloorToInt(dist.x), Mathf.FloorToInt(dist.y));
+        }
+
+        private void ParseInstantiateObject(ref int counter, string code, int x, int y){
+            int selection;
+            bool isObject = true;
+            switch (code[counter]){
+                case 'P':
+                    selection = 0;
+                    break;
+                case 'B':
+                    selection = 1;
+                    break;
+                case 'W':
+                    selection = 2;
+                    break;
+                case 'S':
+                    isObject = false;
+                    selection = 0;
+                    break;
+                case 'H':
+                    isObject = false;
+                    selection = 1;
+                    if(code[++counter] == '('){
+                        while(code[++counter] != ')'){
+                            ParseInstantiateObject(ref counter, code, x, y);
+                        }
+                    }
+                    break;
+                default:
+                    return;
+            }
+            if(isObject)
+                Grid[x,y].AddTileObject(Instantiate<TileObject>(allObjects[selection], Grid[x,y].transform.position, Quaternion.identity));
+            else
+                Grid[x,y].AddCover(Instantiate<TileCover>(covers[selection], Grid[x,y].transform.position, Quaternion.identity));
         }
     }
 }

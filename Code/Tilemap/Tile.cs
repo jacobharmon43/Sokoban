@@ -10,14 +10,14 @@ namespace Sokoban.Grid
 
         public void AddTileObject(TileObject to){
             if(Cover){
-                Cover.StepOnEvent();
+                Cover.StepOnEvent(to);
             }
             Object = to;
         }
 
         public void RemoveTileObject(TileObject to){
             if(Cover){
-                Cover.StepOffEvent();
+                Cover.StepOffEvent(to);
             }
             Object = null;
         }
@@ -25,7 +25,7 @@ namespace Sokoban.Grid
         public void AddCover(TileCover tc){
             Cover = tc;
             if(Object){
-                Cover.StepOnEvent();
+                Cover.StepOnEvent(Object);
             }
         }
     }
