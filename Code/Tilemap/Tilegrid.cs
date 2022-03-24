@@ -75,9 +75,9 @@ namespace Sokoban.Grid
                             continue;
                     }
                     if(isObject)
-                        Grid[x,y].Object = Instantiate<TileObject>(allObjects[selection], Grid[x,y].transform.position, Quaternion.identity);
+                        Grid[x,y].AddTileObject(Instantiate<TileObject>(allObjects[selection], Grid[x,y].transform.position, Quaternion.identity));
                     else
-                        Grid[x,y].Cover = Instantiate<TileCover>(covers[selection], Grid[x,y].transform.position, Quaternion.identity);
+                        Grid[x,y].AddCover(Instantiate<TileCover>(covers[selection], Grid[x,y].transform.position, Quaternion.identity));
                 }
             }
         }

@@ -7,9 +7,6 @@ namespace Sokoban
     {
         public virtual bool Move(Vector2Int input){
             Tile t = _tiles.GetTile(GridPosition + input);
-            TileCover c = t.Cover;
-            if(c)
-                c.StepOnEvent();
             if(t && t.ground && t.Object == null){
                 SetToPos(input, t, _tiles);
                 return true;
@@ -19,9 +16,9 @@ namespace Sokoban
 
         protected void SetToPos(Vector2Int input, Tile t, Tilegrid tiles){
             transform.position = t.transform.position;
-            _tiles.GetTile(GridPosition).Object = null;
+            _tiles.GetTile(GridPosition).RemoveTileObject(this);
             GridPosition += input;
-            _tiles.GetTile(GridPosition).Object = this;
+            _tiles.GetTile(GridPosition).AddTileObject(this);
         }
     }
 }

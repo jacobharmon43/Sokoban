@@ -30,9 +30,6 @@ namespace Sokoban{
             Tile t = _tiles.GetTile(GridPosition + input);
             TileObject to = t.Object;
             Dynamic d = to ? to.GetComponent<Dynamic>() : null;
-            TileCover c = t.Cover;
-            if(c)
-                c.StepOnEvent();
             if(t && t.ground && (!to || (d && d.Move(input)))){
                 SetToPos(input, t, _tiles);
                 return true;
