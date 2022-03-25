@@ -11,7 +11,7 @@ namespace Sokoban
         private Highlight[] _desiredSquares;
         public Level current;
         public int MoveCount;
-        private int index = 0;
+        private int index = 3;
 
         private void Awake(){
             if(Instance == null){
@@ -29,7 +29,7 @@ namespace Sokoban
             }
             if(won){
                 MoveCount = 0;
-                if(index < levels.Length - 1)
+                if(index < levels.Length)
                     current = levels[++index];
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             } 

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Sokoban
 {
     public class Gate : TileObject, ICheck
@@ -11,6 +13,7 @@ namespace Sokoban
                 allDown &= s.Active;
             }
             blocking = !allDown;
+            transform.GetComponent<SpriteRenderer>().color = allDown ? new Color(1,1,1,0.5f) : Color.white;
         }
     }
 }

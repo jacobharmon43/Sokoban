@@ -33,7 +33,7 @@ namespace Sokoban{
             Tile t = _tiles.GetTile(GridPosition + input);
             TileObject to = t.Object;
             Dynamic d = to ? to.GetComponent<Dynamic>() : null;
-            if(t && t.ground && (!to || (d && d.Move(input))) || !to.blocking){
+            if(t && t.ground && (!to || (d && d.Move(input))) || (to && !to.blocking)){
                 SetToPos(input, t, _tiles);
                 GameManager.Instance.MoveCount++;
                 GameManager.Instance.Check();
