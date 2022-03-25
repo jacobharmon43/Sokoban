@@ -11,8 +11,7 @@ namespace Sokoban
         private Highlight[] _desiredSquares;
         public Level current;
         public int MoveCount;
-        private int index = 3;
-        private bool checkOnce = false;
+        private int index = 0;
 
         private void Awake(){
             if(Instance == null){
@@ -20,14 +19,11 @@ namespace Sokoban
                 DontDestroyOnLoad(this);
             }
             else Destroy(this);
-            current = levels[3];
+            current = levels[0];
         }
 
         private void Update(){
-            if(!checkOnce){
-                Check();
-                checkOnce = true;
-            }
+            Check();
             bool won = true;
             foreach(Highlight h in GameObject.FindObjectsOfType<Highlight>()){
                 won &= h.BoxOn;
@@ -37,7 +33,6 @@ namespace Sokoban
                 if(index < levels.Length - 1)
                     current = levels[++index];
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                checkOnce = false;
             } 
         }
 
