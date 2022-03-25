@@ -20,7 +20,6 @@ namespace Sokoban.Grid
         [SerializeField] private Dict<char, TileCover>[] allCovers;
 
         public string testTileCode;
-        public string testObjectCode;
 
         private Dictionary<char, List<Switch>> _switches = new Dictionary<char, List<Switch>>();
         private Dictionary<char, List<Switchable>> _switchables = new Dictionary<char, List<Switchable>>();
@@ -30,32 +29,28 @@ namespace Sokoban.Grid
             transform.localScale = new Vector2(gridWidth, gridHeight);
             Grid = new Tile[gridWidth, gridHeight];
             generationStartPos = new Vector3((cellSize.x-gridWidth)/2, (gridHeight - cellSize.y)/2);
-            GenerateGridFromCode(GameManager.Instance.current.TileCode);
-            GenerateObjectsFromCode(GameManager.Instance.current.ObjectCode);
+            GenerateGridFromCode(GameManager.Instance.current.LevelCode);
             foreach(var g in _switchables){
                 foreach(Switchable s in g.Value){
                     s.Switches = _switches[g.Key].ToArray();
                 }
-                
             }
         }
 
         public void GenerateGridFromCode(string code){
-            code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' ', (char)13}));
-            for(int y = 0; y < gridHeight; y++){
-                for(int x = 0; x < gridWidth; x++){
-                    char currentChar = code[y* gridWidth + x];
-                    Grid[x,y] = Instantiate<Tile>(DictSearch<char, Tile>(allTiles, currentChar), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
-                }
-            }
-        }
-
-        public void GenerateObjectsFromCode(string code){
             int counter = 0;
             code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' ', (char)13}));
             for(int y = 0; y < gridHeight; y++){
                 for(int x = 0; x < gridWidth; x++){
-                    counter = ParseInstantiateObject(counter, code, x, y);
+                    char currentChar = code[counter];
+                    if(counter == code.Length-1)
+                        Grid[x,y] = Instantiate<Tile>(DictSearch<char,Tile>(allTiles, '#'), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
+                    Grid[x,y] = Instantiate<Tile>(DictSearch<char, Tile>(allTiles, currentChar), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
+                    if(counter < code.Length -1 && code[counter + 1] == '('){
+                        counter+=2;
+                        counter = ParseInstantiateObject(counter, code, x,y);
+                    }
+                    counter++;
                 }
             }
         }
