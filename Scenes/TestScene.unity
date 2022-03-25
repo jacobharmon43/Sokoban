@@ -295,16 +295,24 @@ MonoBehaviour:
   gridHeight: 10
   gridWidth: 10
   allTiles:
-  - {fileID: 3745863636824739212, guid: 43723b95301d2ef43986f33423f0cbba, type: 3}
-  - {fileID: 6591489799229442780, guid: b58f78376cd281b4685f6774c3ff645e, type: 3}
-  - {fileID: -2782349145820906067, guid: 2addf1434d0b86a478fb05f0e4c89f21, type: 3}
+  - rep: 35
+    obj: {fileID: -2782349145820906067, guid: 2addf1434d0b86a478fb05f0e4c89f21, type: 3}
+  - rep: 46
+    obj: {fileID: 3745863636824739212, guid: 43723b95301d2ef43986f33423f0cbba, type: 3}
+  - rep: 73
+    obj: {fileID: 6591489799229442780, guid: b58f78376cd281b4685f6774c3ff645e, type: 3}
   allObjects:
-  - {fileID: 8257096679653096155, guid: dcbdbd04b5c44024ea452ac9391b4b89, type: 3}
-  - {fileID: 6725078820358618391, guid: bd6503b079d024b4cb6a6e9c74d7c76e, type: 3}
-  - {fileID: 407930825937538653, guid: f030ce0b71ef3db4f853f8c3f6799dba, type: 3}
-  covers:
-  - {fileID: 5379072748646017453, guid: 8704cbedae1eeae42b89c1d01d260960, type: 3}
-  - {fileID: 1177028435959852848, guid: 6bf960b94e4104047aaa96a8133cdeb0, type: 3}
+  - rep: 87
+    obj: {fileID: 407930825937538653, guid: f030ce0b71ef3db4f853f8c3f6799dba, type: 3}
+  - rep: 66
+    obj: {fileID: 6725078820358618391, guid: bd6503b079d024b4cb6a6e9c74d7c76e, type: 3}
+  - rep: 80
+    obj: {fileID: 8257096679653096155, guid: dcbdbd04b5c44024ea452ac9391b4b89, type: 3}
+  allCovers:
+  - rep: 72
+    obj: {fileID: 1177028435959852848, guid: 6bf960b94e4104047aaa96a8133cdeb0, type: 3}
+  - rep: 83
+    obj: {fileID: 5379072748646017453, guid: 8704cbedae1eeae42b89c1d01d260960, type: 3}
   testTileCode: "##########\n                                                                   
     ###...####\n                                                                   
     #.....####\n                                                                   
@@ -315,13 +323,13 @@ MonoBehaviour:
     #......###\n                                                                   
     ##########\n                                                                   
     ##########"
-  testObjectCode: "..........\n                                                                    
-    ..........\n                                                                    
-    .HPB......\n                                                                    
-    ....BH....\n                                                                    
-    .H..B.....\n                                                                    
-    ....H.....\n                                                                    
-    .B.BBBH...\n                                                                    
-    ....H.....\n                                                                    
-    ..........\n                                                                    
+  testObjectCode: "..........\r\n                                                                    
+    ..........\r\n                                                                    
+    .HPB......\r\n                                                                    
+    ....BH....\r\n                                                                    
+    .H..B.....\r\n                                                                    
+    ....H.....\r\n                                                                    
+    .B.H(B)BBH...\r\n                                                                    
+    ....H.....\r\n                                                                    
+    ..........\r\n                                                                    
     .........."

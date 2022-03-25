@@ -1,4 +1,6 @@
 using UnityEngine;
+using Sokoban.Dict;
+using static Sokoban.Dict.DictHelp;
 
 namespace Sokoban.Grid
 {
@@ -12,30 +14,30 @@ namespace Sokoban.Grid
         private Vector2 cellSize = Vector2.one;
         private Vector2 generationStartPos;
 
-        [SerializeField] private Tile[] allTiles;
-        [SerializeField] private TileObject[] allObjects;
-        [SerializeField] private TileCover[] covers;
+        [SerializeField] private Dict<char, Tile>[] allTiles;
+        [SerializeField] private Dict<char, TileObject>[] allObjects;
+        [SerializeField] private Dict<char, TileCover>[] allCovers;
 
-        [SerializeField, TextArea] private string testTileCode =  @"##########
-                                                                    ###...####
-                                                                    #.....####
-                                                                    ###...####
-                                                                    #.##..####
-                                                                    #.#...####
-                                                                    #......###
-                                                                    #......###
-                                                                    ##########
-                                                                    ##########";
-        [SerializeField, TextArea] private string testObjectCode = @"..........
-                                                                     ..........
-                                                                     .HPB......
-                                                                     ....BH....
-                                                                     .H..B.....
-                                                                     ....H.....
-                                                                     .B.H(B)BBH...
-                                                                     ....H.....
-                                                                     ..........
-                                                                     ..........";
+        [SerializeField, TextArea] private string testTileCode =    @"##########
+                                                                      ###...####
+                                                                      #.....####
+                                                                      ###...####
+                                                                      #.##..####
+                                                                      #.#...####
+                                                                      #......###
+                                                                      #......###
+                                                                      ##########
+                                                                      ##########";
+        [SerializeField, TextArea] private string testObjectCode =  @"..........
+                                                                      ..........
+                                                                      .HPB......
+                                                                      ....BH....
+                                                                      .H..B.....
+                                                                      ....H.....
+                                                                      .B.H(B)BBH...
+                                                                      ....H.....
+                                                                      ..........
+                                                                      ..........";
 
 
         private void Awake(){
@@ -47,34 +49,21 @@ namespace Sokoban.Grid
         }
 
         public void GenerateGridFromCode(string code){
-            code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' '}));
+            code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' ', (char)13}));
             for(int y = 0; y < gridHeight; y++){
                 for(int x = 0; x < gridWidth; x++){
                     char currentChar = code[y* gridWidth + x];
-                    int selection;
-                    switch (currentChar){
-                        case '.':
-                            selection = 0;
-                            break;
-                        case 'I':
-                            selection = 1;
-                            break;
-                        default:
-                            selection = 2;
-                            break;
-                    }
-                    Grid[x,y] = Instantiate<Tile>(allTiles[selection], generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
+                    Grid[x,y] = Instantiate<Tile>(DictSearch<char, Tile>(allTiles, currentChar), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
                 }
             }
         }
 
         public void GenerateObjectsFromCode(string code){
             int counter = 0;
-            code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' '}));
+            code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' ', (char)13}));
             for(int y = 0; y < gridHeight; y++){
                 for(int x = 0; x < gridWidth; x++){
-                    ParseInstantiateObject(ref counter, code, x, y);
-                    counter++;
+                    counter = ParseInstantiateObject(counter, code, x, y);
                 }
             }
         }
@@ -90,39 +79,26 @@ namespace Sokoban.Grid
             return new Vector2Int(Mathf.FloorToInt(dist.x), Mathf.FloorToInt(dist.y));
         }
 
-        private void ParseInstantiateObject(ref int counter, string code, int x, int y){
-            int selection;
-            bool isObject = true;
-            switch (code[counter]){
-                case 'P':
-                    selection = 0;
-                    break;
-                case 'B':
-                    selection = 1;
-                    break;
-                case 'W':
-                    selection = 2;
-                    break;
-                case 'S':
-                    isObject = false;
-                    selection = 0;
-                    break;
-                case 'H':
-                    isObject = false;
-                    selection = 1;
-                    if(code[++counter] == '('){
-                        while(code[++counter] != ')'){
-                            ParseInstantiateObject(ref counter, code, x, y);
-                        }
+        private int ParseInstantiateObject(int counter, string code, int x, int y){
+            TileObject t = DictSearch<char, TileObject>(allObjects, code[counter]);
+            TileCover c = DictSearch<char, TileCover>(allCovers, code[counter]);
+            if(t)
+                Grid[x,y].AddTileObject(Instantiate<TileObject>(t, Grid[x,y].transform.position, Quaternion.identity));
+            else if(c)
+                Grid[x,y].AddCover(Instantiate<TileCover>(c, Grid[x,y].transform.position, Quaternion.identity));
+
+            //Special cases:
+            //Highlight tile case, because you can spawn objects already on a highlight tile.
+            if(code[counter] == 'H'){
+                if(counter < code.Length && code[counter + 1] == '('){
+                    counter+=2;
+                    while(code[counter] != ')'){
+                        counter = ParseInstantiateObject(counter, code, x, y);
                     }
-                    break;
-                default:
-                    return;
+                }
             }
-            if(isObject)
-                Grid[x,y].AddTileObject(Instantiate<TileObject>(allObjects[selection], Grid[x,y].transform.position, Quaternion.identity));
-            else
-                Grid[x,y].AddCover(Instantiate<TileCover>(covers[selection], Grid[x,y].transform.position, Quaternion.identity));
+            counter++;
+            return counter;
         }
     }
 }
