@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: 8575179032478902733
     second: Highlight
+  - first:
+      213: -4060402318970035109
+    second: Glass
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -494,6 +497,27 @@ TextureImporter:
       bones: []
       spriteID: dc9684495e7210770800000000000000
       internalID: 8575179032478902733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glass
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b546e949a9d86a7c0800000000000000
+      internalID: -4060402318970035109
       vertices: []
       indices: 
       edges: []

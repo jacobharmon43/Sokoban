@@ -35,7 +35,6 @@ namespace Sokoban
 
         public override void CheckFunc(){
             base.CheckFunc();
-            Debug.Log(_spawned.Count);
             if(_spawned.Count > 0)
                 ClearList();
             if(_firing)
@@ -49,7 +48,7 @@ namespace Sokoban
                 GameManager.Instance.ReloadScene();
             while(t && t.ground){
                 TileObject to = t.Object;
-                if(to && to.blocking) break;
+                if(to && to.blocking && !to.glass) break;
                 _spawned.Add(Instantiate<TileObject>(_laserPrefab, t.transform.position, transform.rotation));
                 p += dir;
                 t = _tiles.GetTile(p);

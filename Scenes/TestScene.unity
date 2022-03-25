@@ -257,6 +257,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: allObjects.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: allObjects.Array.data[4].obj
+      value: 
+      objectReference: {fileID: 5350108525656751929, guid: 8d58ca52bda3db5499d786823db47419, type: 3}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: allObjects.Array.data[4].rep
+      value: 79
+      objectReference: {fileID: 0}
     - target: {fileID: 578960510737998838, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: m_Name
       value: Tilegrid

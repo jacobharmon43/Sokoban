@@ -119,8 +119,8 @@ namespace Sokoban.Grid
                             _switchables[code[counter]].Add(Grid[x,y].Object.GetComponent<Switchable>());
                         else
                             _switchables.Add(code[counter], new List<Switchable>{Grid[x,y].Object.GetComponent<Switchable>()});
-                        counter++;
                     }
+                    counter++;
                 }
             }
             counter++;

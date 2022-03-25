@@ -10,7 +10,7 @@ namespace Sokoban
         }
 
         public virtual void CheckFunc(){
-            if(Switches.Length <= 0) SwitchesUp();
+            if(Switches.Length <= 0) return;
             bool allDown = true;
             foreach(Switch s in Switches){
                 allDown &= s.Active;
