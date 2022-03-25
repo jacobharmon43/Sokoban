@@ -7,7 +7,7 @@ namespace Sokoban
     {
         public virtual bool Move(Vector2Int input){
             Tile t = _tiles.GetTile(GridPosition + input);
-            if(t && t.ground && t.Object == null){
+            if(t && t.ground && t.Object == null || !t.Object.blocking){
                 SetToPos(input, t, _tiles);
                 return true;
             }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Sokoban.Dict;
 using static Sokoban.Dict.DictHelp;
 
@@ -21,6 +22,9 @@ namespace Sokoban.Grid
         public string testTileCode;
         public string testObjectCode;
 
+        private Dictionary<char, List<Switch>> _switches = new Dictionary<char, List<Switch>>();
+        private Dictionary<char, Gate> _gates = new Dictionary<char, Gate>();
+
 
         private void Start(){
             transform.localScale = new Vector2(gridWidth, gridHeight);
@@ -28,6 +32,9 @@ namespace Sokoban.Grid
             generationStartPos = new Vector3((cellSize.x-gridWidth)/2, (gridHeight - cellSize.y)/2);
             GenerateGridFromCode(GameManager.Instance.current.TileCode);
             GenerateObjectsFromCode(GameManager.Instance.current.ObjectCode);
+            foreach(var g in _gates){
+                g.Value.Switches = _switches[g.Key].ToArray();
+            }
         }
 
         public void GenerateGridFromCode(string code){
@@ -79,8 +86,20 @@ namespace Sokoban.Grid
                     }
                 }
             }
+            else if(code[counter] == 'G'){
+                counter++;
+                _gates.Add(code[counter], Grid[x,y].Object.GetComponent<Gate>());
+            }
+            else if(code[counter] == 'S'){
+                counter++;
+                if(_switches.ContainsKey(code[counter]))
+                    _switches[code[counter]].Add(Grid[x,y].Cover.GetComponent<Switch>());
+                else
+                    _switches.Add(code[counter], new List<Switch>{Grid[x,y].Cover.GetComponent<Switch>()});
+            }
             counter++;
             return counter;
         }
     }
 }
+

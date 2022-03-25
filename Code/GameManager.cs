@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 using static Sokoban.Levels;
 
 namespace Sokoban
@@ -18,7 +19,7 @@ namespace Sokoban
                 DontDestroyOnLoad(this);
             }
             else Destroy(this);
-            current = levels[0];
+            current = levels[3];
         }
 
         private void Update(){
@@ -31,8 +32,18 @@ namespace Sokoban
                 if(index < levels.Length - 1)
                     current = levels[++index];
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            } 
+        }
+
+        public void Check(){
+            var all = FindObjectsOfType<MonoBehaviour>().OfType<ICheck>();
+            foreach(ICheck i in all){
+                i.Check();
             }
-                
+        }
+
+        public void ReloadScene(){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

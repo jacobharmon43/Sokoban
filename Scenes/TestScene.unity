@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109964f66fd62d1c2a882635ddc6420d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveCount: 0
 --- !u!1 &1301392494
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,8 +303,8 @@ MonoBehaviour:
   - rep: 73
     obj: {fileID: 6591489799229442780, guid: b58f78376cd281b4685f6774c3ff645e, type: 3}
   allObjects:
-  - rep: 87
-    obj: {fileID: 407930825937538653, guid: f030ce0b71ef3db4f853f8c3f6799dba, type: 3}
+  - rep: 71
+    obj: {fileID: -6360128054853382910, guid: f030ce0b71ef3db4f853f8c3f6799dba, type: 3}
   - rep: 66
     obj: {fileID: 6725078820358618391, guid: bd6503b079d024b4cb6a6e9c74d7c76e, type: 3}
   - rep: 80
