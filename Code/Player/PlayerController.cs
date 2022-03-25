@@ -12,8 +12,8 @@ namespace Sokoban{
         private InputAction _right;
         private InputAction _reset;
 
-        // Start is called before the first frame update
-        private void Awake(){
+        protected override void Awake(){
+            base.Awake();
             _map = GetComponent<PlayerInput>().currentActionMap;
             _up = _map.FindAction("Up");
             _left = _map.FindAction("Left");
@@ -33,7 +33,9 @@ namespace Sokoban{
             Tile t = _tiles.GetTile(GridPosition + input);
             TileObject to = t.Object;
             Dynamic d = to ? to.GetComponent<Dynamic>() : null;
-            if(t && t.ground && (!to || (!to.blocking || (!d || d.Move(input))))){
+            if(t && t.ground){
+                if(to && to.blocking && !d) return false;
+                if(d && !d.Move(input)) return false;
                 SetToPos(input, t, _tiles);
                 GameManager.Instance.MoveCount++;
                 GameManager.Instance.Check();

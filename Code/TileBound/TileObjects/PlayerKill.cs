@@ -1,16 +1,21 @@
+using Sokoban.Grid;
+
 namespace Sokoban
 {
     public class PlayerKill : TileObject, ICheck
     {
-        public void Check()
-        {
-            if(_tiles.GetTile(GridPosition).Object.GetType() == typeof(PlayerController))
-                GameManager.Instance.ReloadScene();
+        protected override void Start(){
+            base.Start();
+            blocking = false;
         }
 
-        protected override void Start(){
-            blocking = false;
-            base.Start();
+        public void Check()
+        {
+            Tile t = _tiles.GetTile(GridPosition);
+            if(!t) return;
+            TileObject to = t.Object;
+            if(!to || to.GetType() != typeof(PlayerController)) return;
+            GameManager.Instance.ReloadScene();
         }
     }
 }

@@ -110,10 +110,21 @@ namespace Sokoban.Grid
                 }
             }
             else if(code[counter] == 'L'){
-                counter++;
-                Grid[x,y].Object.GetComponent<Gun>().dirChar = code[counter];
+                if(counter < code.Length && code[counter + 1] == '('){
+                    counter+=2;
+                    Grid[x,y].Object.GetComponent<Gun>().dirChar = code[counter];
+                    if(code[counter+1] != ')'){
+                        counter++;
+                        if(_switchables.ContainsKey(code[counter]))
+                            _switchables[code[counter]].Add(Grid[x,y].Object.GetComponent<Switchable>());
+                        else
+                            _switchables.Add(code[counter], new List<Switchable>{Grid[x,y].Object.GetComponent<Switchable>()});
+                        counter++;
+                    }
+                }
             }
             counter++;
+            
             return counter;
         }
     }

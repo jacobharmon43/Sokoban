@@ -44,6 +44,11 @@ namespace Sokoban
         public void Check(){
             var all = FindObjectsOfType<MonoBehaviour>().OfType<ICheck>();
             foreach(ICheck i in all){
+                if(i.GetType() == typeof(Gun)) continue;
+                i.Check();
+            }
+            foreach(ICheck i in all){
+                if(i.GetType() != typeof(Gun)) continue;
                 i.Check();
             }
         }
