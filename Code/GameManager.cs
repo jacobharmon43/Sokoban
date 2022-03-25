@@ -12,6 +12,7 @@ namespace Sokoban
         public Level current;
         public int MoveCount;
         private int index = 3;
+        private bool checkOnce = false;
 
         private void Awake(){
             if(Instance == null){
@@ -23,15 +24,20 @@ namespace Sokoban
         }
 
         private void Update(){
+            if(!checkOnce){
+                Check();
+                checkOnce = true;
+            }
             bool won = true;
             foreach(Highlight h in GameObject.FindObjectsOfType<Highlight>()){
                 won &= h.BoxOn;
             }
             if(won){
                 MoveCount = 0;
-                if(index < levels.Length)
+                if(index < levels.Length - 1)
                     current = levels[++index];
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                checkOnce = false;
             } 
         }
 

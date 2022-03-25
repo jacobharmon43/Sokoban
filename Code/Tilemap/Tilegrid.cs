@@ -23,7 +23,7 @@ namespace Sokoban.Grid
         public string testObjectCode;
 
         private Dictionary<char, List<Switch>> _switches = new Dictionary<char, List<Switch>>();
-        private Dictionary<char, Gate> _gates = new Dictionary<char, Gate>();
+        private Dictionary<char, List<Switchable>> _switchables = new Dictionary<char, List<Switchable>>();
 
 
         private void Start(){
@@ -32,8 +32,11 @@ namespace Sokoban.Grid
             generationStartPos = new Vector3((cellSize.x-gridWidth)/2, (gridHeight - cellSize.y)/2);
             GenerateGridFromCode(GameManager.Instance.current.TileCode);
             GenerateObjectsFromCode(GameManager.Instance.current.ObjectCode);
-            foreach(var g in _gates){
-                g.Value.Switches = _switches[g.Key].ToArray();
+            foreach(var g in _switchables){
+                foreach(Switchable s in g.Value){
+                    s.Switches = _switches[g.Key].ToArray();
+                }
+                
             }
         }
 
@@ -88,7 +91,10 @@ namespace Sokoban.Grid
             }
             else if(code[counter] == 'G'){
                 counter++;
-                _gates.Add(code[counter], Grid[x,y].Object.GetComponent<Gate>());
+                if(_switchables.ContainsKey(code[counter]))
+                    _switchables[code[counter]].Add(Grid[x,y].Cover.GetComponent<Switchable>());
+                else
+                    _switchables.Add(code[counter], new List<Switchable>{Grid[x,y].Object.GetComponent<Switchable>()});
             }
             else if(code[counter] == 'S'){
                 counter++;
@@ -96,6 +102,12 @@ namespace Sokoban.Grid
                     _switches[code[counter]].Add(Grid[x,y].Cover.GetComponent<Switch>());
                 else
                     _switches.Add(code[counter], new List<Switch>{Grid[x,y].Cover.GetComponent<Switch>()});
+                if(counter < code.Length && code[counter + 1] == '('){
+                    counter+=2;
+                    while(code[counter] != ')'){
+                        counter = ParseInstantiateObject(counter, code, x, y);
+                    }
+                }
             }
             counter++;
             return counter;

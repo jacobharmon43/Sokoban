@@ -2,18 +2,18 @@ using UnityEngine;
 
 namespace Sokoban
 {
-    public class Gate : TileObject, ICheck
+    public class Gate : Switchable
     {
-        public Switch[] Switches;
-
-        public void Check()
+        public override void SwitchesDown()
         {
-            bool allDown = true;
-            foreach(Switch s in Switches){
-                allDown &= s.Active;
-            }
-            blocking = !allDown;
-            transform.GetComponent<SpriteRenderer>().color = allDown ? new Color(1,1,1,0.5f) : Color.white;
+            blocking = false;
+            GetComponent<SpriteRenderer>().color = new Color(1,1,1,0.5f);
+        }
+
+        public override void SwitchesUp()
+        {
+            blocking = false;
+            GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }
