@@ -4,6 +4,11 @@ namespace Sokoban.Dict
     public struct Dict<Q,T>{
         public Q rep;
         public T obj;
+
+        public Dict(Q rep, T obj){
+            this.rep = rep;
+            this.obj = obj;
+        }
     }    
 
     public class DictHelp{

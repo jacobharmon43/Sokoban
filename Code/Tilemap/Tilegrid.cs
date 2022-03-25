@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using Sokoban.Dict;
 using static Sokoban.Dict.DictHelp;
 
@@ -18,26 +19,26 @@ namespace Sokoban.Grid
         [SerializeField] private Dict<char, TileObject>[] allObjects;
         [SerializeField] private Dict<char, TileCover>[] allCovers;
 
-        [SerializeField, TextArea] private string testTileCode =    @"##########
-                                                                      ###...####
-                                                                      #.....####
-                                                                      ###...####
-                                                                      #.##..####
-                                                                      #.#...####
-                                                                      #......###
-                                                                      #......###
-                                                                      ##########
-                                                                      ##########";
-        [SerializeField, TextArea] private string testObjectCode =  @"..........
-                                                                      ..........
-                                                                      .HPB......
-                                                                      ....BH....
-                                                                      .H..B.....
-                                                                      ....H.....
-                                                                      .B.H(B)BBH...
-                                                                      ....H.....
-                                                                      ..........
-                                                                      ..........";
+        [SerializeField, TextArea] private string testTileCode =    @"# # # # # # # # ##
+                                                                      # # # . . . # # ##
+                                                                      # . . . . . # # ##
+                                                                      # # # . . . # # ##
+                                                                      # . # # . . # # ##
+                                                                      # . # . . . # # ##
+                                                                      # . . . . . . # ##
+                                                                      # . . . . . . # ##
+                                                                      # # # # # # # # ##
+                                                                      # # # # # # # # ##";
+        [SerializeField, TextArea] private string testObjectCode =  @". . . . . . . . ..
+                                                                      . . . . . . . . ..
+                                                                      . H P B . . . . ..
+                                                                      . . . . B H . . ..
+                                                                      . H . . B . . . ..
+                                                                      . . . . H . . . ..
+                                                                      . B . H ( B ) B BH...
+                                                                      . . . . H . . . ..
+                                                                      . . . . . . . . ..
+                                                                      . . . . . . . . ..";
 
 
         private void Awake(){
