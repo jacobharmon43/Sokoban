@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &578960510737998838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578960510737998839}
+  - component: {fileID: 578960510737998825}
+  m_Layer: 0
+  m_Name: Tilegrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &578960510737998839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578960510737998838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &578960510737998825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578960510737998838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba5706166923ea4b9f089288947b052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridHeight: 10
+  gridWidth: 10
+  allTiles:
+  - rep: 35
+    obj: {fileID: -2782349145820906067, guid: 2addf1434d0b86a478fb05f0e4c89f21, type: 3}
+  - rep: 46
+    obj: {fileID: 3745863636824739212, guid: 43723b95301d2ef43986f33423f0cbba, type: 3}
+  - rep: 73
+    obj: {fileID: 6591489799229442780, guid: b58f78376cd281b4685f6774c3ff645e, type: 3}
+  allObjects:
+  - rep: 71
+    obj: {fileID: -6360128054853382910, guid: f030ce0b71ef3db4f853f8c3f6799dba, type: 3}
+  - rep: 66
+    obj: {fileID: 6725078820358618391, guid: bd6503b079d024b4cb6a6e9c74d7c76e, type: 3}
+  - rep: 80
+    obj: {fileID: 8257096679653096155, guid: dcbdbd04b5c44024ea452ac9391b4b89, type: 3}
+  - rep: 76
+    obj: {fileID: 3804947688157546554, guid: 19bf6e19b16a20505a016210b2b8eb75, type: 3}
+  allCovers:
+  - rep: 72
+    obj: {fileID: 1177028435959852848, guid: 6bf960b94e4104047aaa96a8133cdeb0, type: 3}
+  - rep: 83
+    obj: {fileID: 5379072748646017453, guid: 8704cbedae1eeae42b89c1d01d260960, type: 3}
+  testTileCode: "##########\n                                                                   
+    ###...####\n                                                                   
+    #.....####\n                                                                   
+    ###...####\n                                                                   
+    #.##..####\n                                                                   
+    #.#...####\n                                                                   
+    #......###\n                                                                   
+    #......###\n                                                                   
+    ##########\n                                                                   
+    ##########"
+  testObjectCode: "..........\r\n                                                                    
+    ..........\r\n                                                                    
+    .HPB......\r\n                                                                    
+    ....BH....\r\n                                                                    
+    .H..B.....\r\n                                                                    
+    ....H.....\r\n                                                                    
+    .B.H(B)BBH...\r\n                                                                    
+    ....H.....\r\n                                                                    
+    ..........\r\n                                                                    
+    .........."

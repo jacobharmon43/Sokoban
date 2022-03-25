@@ -109,6 +109,10 @@ namespace Sokoban.Grid
                     }
                 }
             }
+            else if(code[counter] == 'L'){
+                counter++;
+                Grid[x,y].Object.GetComponent<Gun>().dirChar = code[counter];
+            }
             counter++;
             return counter;
         }
