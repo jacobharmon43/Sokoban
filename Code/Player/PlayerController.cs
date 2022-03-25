@@ -32,6 +32,7 @@ namespace Sokoban{
             Dynamic d = to ? to.GetComponent<Dynamic>() : null;
             if(t && t.ground && (!to || (d && d.Move(input)))){
                 SetToPos(input, t, _tiles);
+                GameManager.Instance.MoveCount++;
                 return true;
             }
             return false;

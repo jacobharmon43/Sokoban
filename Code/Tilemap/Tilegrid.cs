@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 using Sokoban.Dict;
 using static Sokoban.Dict.DictHelp;
 
@@ -19,34 +18,16 @@ namespace Sokoban.Grid
         [SerializeField] private Dict<char, TileObject>[] allObjects;
         [SerializeField] private Dict<char, TileCover>[] allCovers;
 
-        [SerializeField, TextArea] private string testTileCode =    @"# # # # # # # # ##
-                                                                      # # # . . . # # ##
-                                                                      # . . . . . # # ##
-                                                                      # # # . . . # # ##
-                                                                      # . # # . . # # ##
-                                                                      # . # . . . # # ##
-                                                                      # . . . . . . # ##
-                                                                      # . . . . . . # ##
-                                                                      # # # # # # # # ##
-                                                                      # # # # # # # # ##";
-        [SerializeField, TextArea] private string testObjectCode =  @". . . . . . . . ..
-                                                                      . . . . . . . . ..
-                                                                      . H P B . . . . ..
-                                                                      . . . . B H . . ..
-                                                                      . H . . B . . . ..
-                                                                      . . . . H . . . ..
-                                                                      . B . H ( B ) B BH...
-                                                                      . . . . H . . . ..
-                                                                      . . . . . . . . ..
-                                                                      . . . . . . . . ..";
+        public string testTileCode;
+        public string testObjectCode;
 
 
-        private void Awake(){
+        private void Start(){
             transform.localScale = new Vector2(gridWidth, gridHeight);
             Grid = new Tile[gridWidth, gridHeight];
             generationStartPos = new Vector3((cellSize.x-gridWidth)/2, (gridHeight - cellSize.y)/2);
-            GenerateGridFromCode(testTileCode);
-            GenerateObjectsFromCode(testObjectCode);
+            GenerateGridFromCode(GameManager.Instance.current.TileCode);
+            GenerateObjectsFromCode(GameManager.Instance.current.ObjectCode);
         }
 
         public void GenerateGridFromCode(string code){
