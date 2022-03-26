@@ -38,6 +38,7 @@ namespace Sokoban{
                 if(d && !d.Move(input)) return false;
                 SetToPos(input, t, _tiles);
                 GameManager.Instance.MoveCount++;
+                GameManager.Instance.Check();
                 return true;
             }
             return false;

@@ -8,7 +8,6 @@ namespace Sokoban.Grid
     public class Tilegrid : MonoBehaviour
     {
         public Tile[,] Grid;
-
         [SerializeField] private int gridHeight = 10;
         [SerializeField] private int gridWidth = 10;
 
@@ -42,15 +41,22 @@ namespace Sokoban.Grid
             code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' ', (char)13}));
             for(int y = 0; y < gridHeight; y++){
                 for(int x = 0; x < gridWidth; x++){
-                    char currentChar = code[counter];
-                    if(counter == code.Length-1)
-                        Grid[x,y] = Instantiate<Tile>(DictSearch<char,Tile>(allTiles, '#'), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
-                    Grid[x,y] = Instantiate<Tile>(DictSearch<char, Tile>(allTiles, currentChar), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
-                    if(counter < code.Length -1 && code[counter + 1] == '('){
-                        counter+=2;
-                        counter = ParseInstantiateObject(counter, code, x,y);
+                    try{
+                        if(counter >= code.Length-1)
+                            Grid[x,y] = Instantiate<Tile>(DictSearch<char,Tile>(allTiles, '#'), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
+                        if(counter <= code.Length -1){
+                            char currentChar = code[counter];
+                            Grid[x,y] = Instantiate<Tile>(DictSearch<char, Tile>(allTiles, currentChar), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
+                            if(counter < code.Length -1 && code[counter + 1] == '('){
+                                counter+=2;
+                                counter = ParseInstantiateObject(counter, code, x,y);
+                            }
+                            counter++;
+                        }
                     }
-                    counter++;
+                    catch{
+                        throw new System.Exception($"Failure at {x},{y}, {counter}");
+                    }
                 }
             }
         }
@@ -67,6 +73,7 @@ namespace Sokoban.Grid
         }
 
         private int ParseInstantiateObject(int counter, string code, int x, int y){
+            if(counter >= code.Length - 1) return counter;
             TileObject t = DictSearch<char, TileObject>(allObjects, code[counter]);
             TileCover c = DictSearch<char, TileCover>(allCovers, code[counter]);
             if(t)
@@ -99,9 +106,7 @@ namespace Sokoban.Grid
                     _switches.Add(code[counter], new List<Switch>{Grid[x,y].Cover.GetComponent<Switch>()});
                 if(counter < code.Length && code[counter + 1] == '('){
                     counter+=2;
-                    while(code[counter] != ')'){
-                        counter = ParseInstantiateObject(counter, code, x, y);
-                    }
+                    counter = ParseInstantiateObject(counter, code, x, y);
                 }
             }
             else if(code[counter] == 'L'){
