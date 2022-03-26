@@ -12,7 +12,7 @@ namespace Sokoban
         public Level current;
         public int MoveCount;
         private int index = 0;
-        private bool checkOnce = true;
+        [SerializeField] private int checkForFrames = 5;
 
         private void Awake(){
             if(Instance == null){
@@ -24,23 +24,27 @@ namespace Sokoban
         }
 
         private void Start(){
-            checkOnce = true;
+            checkForFrames = 5;
         }
 
         private void Update(){
-            if(checkOnce){
-                Check();
-                checkOnce = false;
-            }
             bool won = true;
             foreach(Highlight h in GameObject.FindObjectsOfType<Highlight>()){
                 won &= h.BoxOn;
             }
             if(won){
                 MoveCount = 0;
+                checkForFrames = 5;
                 if(index < levels.Length - 1)
                     current = levels[++index];
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+
+        private void LateUpdate(){
+            if(checkForFrames >= 0){
+                Check();
+                checkForFrames--;
             }
         }
 
@@ -57,6 +61,8 @@ namespace Sokoban
         }
 
         public void ReloadScene(){
+            MoveCount = 0;
+            checkForFrames = 5;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

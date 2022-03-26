@@ -106,7 +106,8 @@ namespace Sokoban.Grid
                     _switches.Add(code[counter], new List<Switch>{Grid[x,y].Cover.GetComponent<Switch>()});
                 if(counter < code.Length && code[counter + 1] == '('){
                     counter+=2;
-                    counter = ParseInstantiateObject(counter, code, x, y);
+                    while(code[counter] != ')')
+                        counter = ParseInstantiateObject(counter, code, x, y);
                 }
             }
             else if(code[counter] == 'L'){

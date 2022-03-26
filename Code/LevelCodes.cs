@@ -16,16 +16,7 @@ namespace Sokoban
 
     public static class Levels{
         public static readonly Level[] levels = new Level[]{
-          new Level(
-            "Laser tutorial",
-            @"######(L(va))#(L(va))###
-              #.(Sa)......(B).(H)#
-              #.(B)......(B).(H)#
-              #.(P)......(B).(H)#
-              #.......(B).(H)#
-              #.......(B).(H)#
-              ##########"
-          ),
+          
           new Level(
               "I stole this from the original Sokoban game!",
               @"##########
@@ -38,6 +29,16 @@ namespace Sokoban
                 #....(H)..###
                 ##########
                 ##########"
+          ),
+          new Level(
+            "Laser tutorial",
+            @"######(L(va))#(L(va))###
+              #.(Sa).......(H)#
+              #.(B)......(B).(H)#
+              #.(P)......(B).(H)#
+              #.(B)......(B).#
+              #.(Sa)......(B).(H)#
+              ##########"
           )
         };
     }
