@@ -16,7 +16,6 @@ namespace Sokoban
 
     public static class Levels{
         public static readonly Level[] levels = new Level[]{
-          
           new Level(
               "I stole this from the original Sokoban game!",
               @"##########
