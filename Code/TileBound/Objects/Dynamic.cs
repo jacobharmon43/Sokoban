@@ -9,6 +9,7 @@ namespace Sokoban
             if(t && !t.GetObject()){
                 _tileGrid.MoveTile(this, _gridPosition, _gridPosition + direction);
                 _gridPosition += direction;
+                transform.position = t.transform.position;
                 return true;
             }   
             return false;

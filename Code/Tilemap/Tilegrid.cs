@@ -7,8 +7,8 @@ namespace Sokoban.Grid
     {
         private Tile[,] _grid;
         private Vector2Int _gridSize = new Vector2Int(14,14);
-        private Vector2Int _cellSize;
-        private Vector2Int _generationStartPos;
+        private Vector2 _cellSize;
+        private Vector2 _generationStartPos;
 
         [SerializeField] private Dict<char, Tile> _tilePrefabs;
         [SerializeField] private Dict<char, TileCover> _coverPrefabs;
@@ -16,10 +16,10 @@ namespace Sokoban.Grid
 
         private void Start(){
             _grid = new Tile[_gridSize.x, _gridSize.y];
-            Vector2Int center = new Vector2Int((int)transform.position.x, (int)transform.position.y);
-            Vector2Int area = new Vector2Int((int)transform.localScale.x, (int)transform.localScale.y);
-            _cellSize = new Vector2Int(area.x / _gridSize.x, area.y / _gridSize.y);
-            _generationStartPos = center - area/2;
+            Vector2 center = new Vector2(transform.position.x, transform.position.y);
+            Vector2 area = new Vector2(transform.localScale.x, transform.localScale.y);
+            _cellSize = new Vector2(area.x / _gridSize.x, area.y / _gridSize.y);
+            _generationStartPos = center + Vector2.right * (-area.x/2 + _cellSize.x/2) + Vector2.up * (area.y/2 - _cellSize.y/2) ;
             InitializeGrid(Levels.All[GameManager.Instance.LevelIndex].LevelCode);
         }
 
@@ -35,7 +35,6 @@ namespace Sokoban.Grid
         }
 
         public void MoveTile(TileObject obj, Vector2Int from, Vector2Int to){
-            obj.transform.position = GetTile(to).transform.position;
             GetTile(from).SetObject(null);
             GetTile(to).SetObject(obj);
         } 
@@ -45,37 +44,54 @@ namespace Sokoban.Grid
             int counter = 0;
             for(int y = 0; y < _gridSize.y; y++){
                 for(int x = 0; x < _gridSize.x; x++){
-                    Vector2Int rPos =  _generationStartPos + _cellSize * new Vector2Int(x,y);
+                    Vector3 rPos =  (Vector2)_generationStartPos + (Vector2)_cellSize * new Vector2(x,-y);
                     if(counter < levelCode.Length - 1)
-                        counter = ParseTile(levelCode, counter, x, y, rPos, _cellSize);
-                    else
-                        _grid[x,y] = Instantiate<Wall>((Wall)_tilePrefabs['#']);
+                        counter = ParseTile(levelCode, counter, x, y, rPos);
+                    else{
+                        _grid[x,y] = Instantiate<Tile>(_tilePrefabs['#'], rPos, Quaternion.identity);
+                        _grid[x,y].transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
+                    }
+                        
                 }
             }
         }
 
-        private int ParseTile(string levelCode, int counter, int x, int y, Vector2Int renderPos, Vector2Int scale){
-            _grid[x,y] = Instantiate<Tile>(_tilePrefabs[levelCode[counter]]);
+        private int ParseTile(string levelCode, int counter, int x, int y, Vector3 renderPos){
+            _grid[x,y] = Instantiate<Tile>(_tilePrefabs[levelCode[counter]], renderPos, Quaternion.identity);
             counter++;
             if(levelCode[counter] == '('){
-                counter = ParseCover(levelCode, ++counter, x, y, renderPos, scale);
+                counter = ParseCover(levelCode, ++counter, x, y, renderPos);
                 counter++;
             }
             return counter;
         }
 
-        private int ParseCover(string levelCode, int counter, int x, int y, Vector2Int renderPos, Vector2Int scale){
-            _grid[x,y].SetCover(Instantiate<TileCover>(_coverPrefabs[levelCode[counter]]));
-            counter++;
-            if(levelCode[counter] == '('){
-                counter = ParseObject(levelCode, ++counter, x, y, renderPos, scale);
+        private int ParseCover(string levelCode, int counter, int x, int y, Vector3 renderPos){
+            if(_coverPrefabs[levelCode[counter]]){
+                TileCover tc = Instantiate<TileCover>(_coverPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
+                _grid[x,y].SetCover(tc);
+                tc.SetGrid(this);
+                tc.SetGridPos(new Vector2Int(x,y));
+                tc.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
                 counter++;
+                if(levelCode[counter] == '('){
+                    counter = ParseObject(levelCode, ++counter, x, y, renderPos);
+                    counter++;
+                }
             }
+            else{
+                counter = ParseObject(levelCode, counter, x, y, renderPos);
+            }
+            
             return counter;
         }
 
-        private int ParseObject(string levelCode, int counter, int x, int y, Vector2Int renderPos, Vector2Int scale){
-            _grid[x,y].SetObject(Instantiate<TileObject>(_objectPrefabs[levelCode[counter]]));
+        private int ParseObject(string levelCode, int counter, int x, int y, Vector3 renderPos){
+            TileObject to = Instantiate<TileObject>(_objectPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
+            _grid[x,y].SetObject(to);
+            to.SetGrid(this);
+            to.SetGridPos(new Vector2Int(x,y));
+            to.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
             return ++counter;
         }
   

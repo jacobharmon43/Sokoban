@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6842721281944708024}
   - component: {fileID: 6842721281944708027}
+  - component: {fileID: -7812205761273654339}
   m_Layer: 0
   m_Name: HighlightTile
   m_TagString: Untagged
@@ -82,3 +83,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-7812205761273654339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842721281944708025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464f8e34f6040b04794d93891e49e14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoxOn: 0

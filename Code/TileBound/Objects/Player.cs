@@ -41,9 +41,10 @@ namespace Sokoban
                     Dynamic d = (Dynamic) to;
                     if(!d || !d.Move(direction)) return;
                 }
+                _tileGrid.MoveTile(this, _gridPosition, nextPos);
+                _gridPosition += direction;
+                transform.position = t.transform.position;
             }
-            _tileGrid.MoveTile(this, _gridPosition, nextPos);
-            _gridPosition += direction;
         }
     }
 }

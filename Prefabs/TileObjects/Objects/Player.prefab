@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8257096679653096154}
   - component: {fileID: 8257096679653096153}
   - component: {fileID: 8257096679653096152}
-  - component: {fileID: 8257096679653096155}
+  - component: {fileID: 9156929076039162198}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: e70874702da58b2428d07c63f62ea767, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 7da37ac766fb1444a87b70728a534b53, type: 3}
   m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8257096679653096155
+--- !u!114 &9156929076039162198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,9 +123,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8257096679653096157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c74dc2444755d049b47dca3edb85733, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dc5b04dd7363ac409e56c2353a5a4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridPosition: {x: 1, y: 1}
-  blocking: 1
-  glass: 0

@@ -15,7 +15,7 @@ namespace Sokoban.Grid
                 else
                     Cover.StepOffEvent(to);
             }
-            Object = null;
+            Object = to;
         }
 
         public void SetCover(TileCover tc){
