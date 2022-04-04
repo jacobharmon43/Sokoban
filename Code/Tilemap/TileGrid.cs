@@ -27,6 +27,7 @@ namespace Sokoban.Grid
             return _grid[pos.x, pos.y];
         }
 
+        public Vector2 Scale => _cellSize;
         public Tile[,] GetTiles() => _grid;
 
         public Vector2Int WorldToGrid(Vector2 pos){

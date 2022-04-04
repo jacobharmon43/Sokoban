@@ -29,7 +29,7 @@ namespace Sokoban
             Grid.InitializeGrid(Levels.All[Levels.LevelIndex].LevelCode);
         }
 
-        private void Update(){
+        public void UpdateMethod(){
             if(CheckWin()){
                 CompleteLevel();
             }

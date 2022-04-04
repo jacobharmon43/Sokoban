@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6725078820358618390}
   - component: {fileID: 6725078820358618384}
-  - component: {fileID: 1194800070218021541}
+  - component: {fileID: 2425006882462015944}
   m_Layer: 0
-  m_Name: LaserGun
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 2710443080846324409, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
+  m_Sprite: {fileID: -4894898745955426128, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1194800070218021541
+--- !u!114 &2425006882462015944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6725078820358618389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706b32e830184b24f88ee3dcd1450097, type: 3}
+  m_Script: {fileID: 11500000, guid: 77c2bc594a4b76a4a9d448a94a3a62c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _laserPrefab: {fileID: 8257096679653096157, guid: cfdf0b88f769d3e0c9d5f8959f76fe4e, type: 3}
