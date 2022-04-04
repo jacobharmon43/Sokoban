@@ -45,7 +45,6 @@ namespace Sokoban
                 _tileGrid.MoveTile(this, _gridPosition, nextPos);
                 _gridPosition += direction;
                 transform.position = t.transform.position;
-                GameManager.Instance.UpdateMethod();
             }
         }
     }

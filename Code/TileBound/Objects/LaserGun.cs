@@ -12,7 +12,7 @@ namespace Sokoban
         private float zRot;
 
         private List<GameObject> lasers = new List<GameObject>();
-        private Dict<char, Vector2Int> store = new Dict<char, Vector2Int>(new char[]{'<','>','^','v'}, new Vector2Int[]{Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down});
+        private Dict<char, Vector2Int> store = new Dict<char, Vector2Int>(new char[]{'<','>','^','v'}, new Vector2Int[]{Vector2Int.left, Vector2Int.right, Vector2Int.down, Vector2Int.up});
 
         public void Init(char dir){
             fireDir = store[dir];
@@ -26,17 +26,17 @@ namespace Sokoban
         }
 
         private void Fire(){
+
             foreach(GameObject o in lasers){
                 Destroy(o);
             }
             lasers.Clear();
+
             Vector2Int nextDir = fireDir;
             Vector2Int nextPos = _gridPosition + nextDir;
             Tile t = _tileGrid.GetTile(nextPos);
             float currentRot = zRot;
-            int protCount = 0;
-            while(t && t.isGround && protCount < 20){
-                protCount++;
+            while(t && t.isGround){
                 TileObject to = t.GetObject();
                 if(to){
                     if(to.GetType() == typeof(Glass)){
@@ -54,7 +54,7 @@ namespace Sokoban
                         GameManager.Instance.ResetLevel();
                     }
                     else if(to.GetType() == typeof(Target)){
-                        Destroy(to);
+                        Destroy(to.gameObject);
                     }
                     else{
                         break;

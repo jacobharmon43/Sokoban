@@ -70,8 +70,8 @@ namespace Sokoban.Grid
         }
 
         private int ParseCover(string levelCode, int counter, int x, int y, Vector3 renderPos){
-            Debug.Log(levelCode[counter]);
             if(_coverPrefabs[levelCode[counter]]){
+                Debug.Log(levelCode[counter]);
                 TileCover tc = Instantiate<TileCover>(_coverPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
                 _grid[x,y].SetCover(tc);
                 tc.SetGrid(this);
@@ -96,7 +96,6 @@ namespace Sokoban.Grid
             }
             else if(to.GetType() == typeof(LaserGun)){
                 ((LaserGun)to).Init(levelCode[++counter]);
-                Debug.Log(levelCode[counter]);
             }
             else if(to.GetType() == typeof(Prism)){
                 ((Prism)to).Init(levelCode[++counter]);
