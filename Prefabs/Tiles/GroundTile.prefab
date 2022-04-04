@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3745863636824739215}
   - component: {fileID: 3745863636824739214}
-  - component: {fileID: 3745863636824739212}
+  - component: {fileID: -4170058324798976404}
   m_Layer: 0
   m_Name: GroundTile
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3745863636824739212
+--- !u!114 &-4170058324798976404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3745863636824739209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217ca5c95cff5334c90e03d35dd43c3f, type: 3}
+  m_Script: {fileID: 11500000, guid: aca70f17ad821864eb1d25c5dd5fe29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGround: 0

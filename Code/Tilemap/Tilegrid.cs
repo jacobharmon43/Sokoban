@@ -48,8 +48,9 @@ namespace Sokoban.Grid
                     if(counter < levelCode.Length - 1)
                         counter = ParseTile(levelCode, counter, x, y, rPos);
                     else{
-                        _grid[x,y] = Instantiate<Tile>(_tilePrefabs['#'], rPos, Quaternion.identity);
-                        _grid[x,y].transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
+                        Tile t = Instantiate<Tile>(_tilePrefabs['#'], rPos, Quaternion.identity);
+                        _grid[x,y] = t;
+                        t.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
                     }
                         
                 }
@@ -57,7 +58,9 @@ namespace Sokoban.Grid
         }
 
         private int ParseTile(string levelCode, int counter, int x, int y, Vector3 renderPos){
-            _grid[x,y] = Instantiate<Tile>(_tilePrefabs[levelCode[counter]], renderPos, Quaternion.identity);
+            Tile t = Instantiate<Tile>(_tilePrefabs[levelCode[counter]], renderPos, Quaternion.identity);
+            _grid[x,y] = t;
+            t.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
             counter++;
             if(levelCode[counter] == '('){
                 counter = ParseCover(levelCode, ++counter, x, y, renderPos);

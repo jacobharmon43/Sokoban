@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Sokoban.Grid
 {
-    public class Tile : MonoBehaviour
+    public abstract class Tile : MonoBehaviour
     {
         public bool isGround;
         private TileObject Object = null;
@@ -27,17 +27,5 @@ namespace Sokoban.Grid
 
         public TileObject GetObject() => Object;
         public TileCover GetCover() => Cover;
-    }
-
-    public class Wall : Tile{
-        private void Start(){
-            isGround = false;
-        }
-    }
-
-    public class Ground : Tile{
-        private void Start(){
-            isGround = true;
-        }
     }
 }
