@@ -1,133 +1,84 @@
 using UnityEngine;
-using System.Collections.Generic;
 using Sokoban.Dict;
-using static Sokoban.Dict.DictHelp;
 
 namespace Sokoban.Grid
 {
-    public class Tilegrid : MonoBehaviour
+    public class TileGrid : MonoBehaviour
     {
-        public Tile[,] Grid;
-        [SerializeField] private int gridHeight = 10;
-        [SerializeField] private int gridWidth = 10;
+        private Tile[,] _grid;
+        private Vector2Int _gridSize = new Vector2Int(14,14);
+        private Vector2Int _cellSize;
+        private Vector2Int _generationStartPos;
 
-        private Vector2 cellSize = Vector2.one;
-        private Vector2 generationStartPos;
-
-        [SerializeField] private Dict<char, Tile>[] allTiles;
-        [SerializeField] private Dict<char, TileObject>[] allObjects;
-        [SerializeField] private Dict<char, TileCover>[] allCovers;
-
-        public string testTileCode;
-
-        private Dictionary<char, List<Switch>> _switches = new Dictionary<char, List<Switch>>();
-        private Dictionary<char, List<Switchable>> _switchables = new Dictionary<char, List<Switchable>>();
-
+        [SerializeField] private Dict<char, Tile> _tilePrefabs;
+        [SerializeField] private Dict<char, TileCover> _coverPrefabs;
+        [SerializeField] private Dict<char, TileObject> _objectPrefabs;
 
         private void Start(){
-            transform.localScale = new Vector2(gridWidth, gridHeight);
-            Grid = new Tile[gridWidth, gridHeight];
-            generationStartPos = new Vector3((cellSize.x-gridWidth)/2, (gridHeight - cellSize.y)/2);
-            GenerateGridFromCode(GameManager.Instance.current.LevelCode);
-            foreach(var g in _switchables){
-                foreach(Switchable s in g.Value){
-                    s.Switches = _switches[g.Key].ToArray();
-                }
-            }
-        }
-
-        public void GenerateGridFromCode(string code){
-            int counter = 0;
-            code = string.Concat(code.Split(new char[]{'\n', 't', '\v', 'r',' ', (char)13}));
-            for(int y = 0; y < gridHeight; y++){
-                for(int x = 0; x < gridWidth; x++){
-                    try{
-                        if(counter >= code.Length-1)
-                            Grid[x,y] = Instantiate<Tile>(DictSearch<char,Tile>(allTiles, '#'), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
-                        if(counter <= code.Length -1){
-                            char currentChar = code[counter];
-                            Grid[x,y] = Instantiate<Tile>(DictSearch<char, Tile>(allTiles, currentChar), generationStartPos + new Vector2(cellSize.x * x, -cellSize.y * y), Quaternion.identity);
-                            if(counter < code.Length -1 && code[counter + 1] == '('){
-                                counter+=2;
-                                counter = ParseInstantiateObject(counter, code, x,y);
-                            }
-                            counter++;
-                        }
-                    }
-                    catch{
-                        throw new System.Exception($"Failure at {x},{y}, {counter}");
-                    }
-                }
-            }
+            _grid = new Tile[_gridSize.x, _gridSize.y];
+            Vector2Int center = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+            Vector2Int area = new Vector2Int((int)transform.localScale.x, (int)transform.localScale.y);
+            _cellSize = new Vector2Int(area.x / _gridSize.x, area.y / _gridSize.y);
+            _generationStartPos = center - area/2;
+            InitializeGrid(Levels.All[GameManager.Instance.LevelIndex].LevelCode);
         }
 
         public Tile GetTile(Vector2Int pos){
-            if(pos.x < 0 || pos.x >= gridWidth || pos.y < 0 || pos.y >= gridHeight) return null;
-            return Grid[pos.x, pos.y];
+            if(pos.x < 0 || pos.x >= _gridSize.x || pos.y < 0 || pos.y >= _gridSize.y) return null;
+            return _grid[pos.x, pos.y];
         }
 
         public Vector2Int WorldToGrid(Vector2 pos){
-            Vector2 topLeft = new Vector2(-gridWidth/2, gridHeight/2);
+            Vector2 topLeft = new Vector2(-_gridSize.x/2, _gridSize.y/2);
             Vector2 dist = new Vector2(Mathf.Abs(pos.x - topLeft.x), Mathf.Abs(pos.y - topLeft.y));
             return new Vector2Int(Mathf.FloorToInt(dist.x), Mathf.FloorToInt(dist.y));
         }
 
-        private int ParseInstantiateObject(int counter, string code, int x, int y){
-            if(counter >= code.Length - 1) return counter;
-            TileObject t = DictSearch<char, TileObject>(allObjects, code[counter]);
-            TileCover c = DictSearch<char, TileCover>(allCovers, code[counter]);
-            if(t)
-                Grid[x,y].AddTileObject(Instantiate<TileObject>(t, Grid[x,y].transform.position, Quaternion.identity));
-            else if(c)
-                Grid[x,y].AddCover(Instantiate<TileCover>(c, Grid[x,y].transform.position, Quaternion.identity));
+        public void MoveTile(TileObject obj, Vector2Int from, Vector2Int to){
+            obj.transform.position = GetTile(to).transform.position;
+            GetTile(from).SetObject(null);
+            GetTile(to).SetObject(obj);
+        } 
 
-            //Special cases:
-            //Highlight tile case, because you can spawn objects already on a highlight tile.
-            if(code[counter] == 'H'){
-                if(counter < code.Length && code[counter + 1] == '('){
-                    counter+=2;
-                    while(code[counter] != ')'){
-                        counter = ParseInstantiateObject(counter, code, x, y);
-                    }
+        public void InitializeGrid(string levelCode){
+            levelCode = string.Concat(levelCode.Split(new char[]{'\n', '\t', '\v', '\r', ' '}));
+            int counter = 0;
+            for(int y = 0; y < _gridSize.y; y++){
+                for(int x = 0; x < _gridSize.x; x++){
+                    Vector2Int rPos =  _generationStartPos + _cellSize * new Vector2Int(x,y);
+                    if(counter < levelCode.Length - 1)
+                        counter = ParseTile(levelCode, counter, x, y, rPos, _cellSize);
+                    else
+                        _grid[x,y] = Instantiate<Wall>((Wall)_tilePrefabs['#']);
                 }
             }
-            else if(code[counter] == 'G'){
-                counter++;
-                if(_switchables.ContainsKey(code[counter]))
-                    _switchables[code[counter]].Add(Grid[x,y].Cover.GetComponent<Switchable>());
-                else
-                    _switchables.Add(code[counter], new List<Switchable>{Grid[x,y].Object.GetComponent<Switchable>()});
-            }
-            else if(code[counter] == 'S'){
-                counter++;
-                if(_switches.ContainsKey(code[counter]))
-                    _switches[code[counter]].Add(Grid[x,y].Cover.GetComponent<Switch>());
-                else
-                    _switches.Add(code[counter], new List<Switch>{Grid[x,y].Cover.GetComponent<Switch>()});
-                if(counter < code.Length && code[counter + 1] == '('){
-                    counter+=2;
-                    while(code[counter] != ')')
-                        counter = ParseInstantiateObject(counter, code, x, y);
-                }
-            }
-            else if(code[counter] == 'L'){
-                if(counter < code.Length && code[counter + 1] == '('){
-                    counter+=2;
-                    Grid[x,y].Object.GetComponent<Gun>().dirChar = code[counter];
-                    if(code[counter+1] != ')'){
-                        counter++;
-                        if(_switchables.ContainsKey(code[counter]))
-                            _switchables[code[counter]].Add(Grid[x,y].Object.GetComponent<Switchable>());
-                        else
-                            _switchables.Add(code[counter], new List<Switchable>{Grid[x,y].Object.GetComponent<Switchable>()});
-                    }
-                    counter++;
-                }
-            }
+        }
+
+        private int ParseTile(string levelCode, int counter, int x, int y, Vector2Int renderPos, Vector2Int scale){
+            _grid[x,y] = Instantiate<Tile>(_tilePrefabs[levelCode[counter]]);
             counter++;
-            
+            if(levelCode[counter] == '('){
+                counter = ParseCover(levelCode, ++counter, x, y, renderPos, scale);
+                counter++;
+            }
             return counter;
         }
+
+        private int ParseCover(string levelCode, int counter, int x, int y, Vector2Int renderPos, Vector2Int scale){
+            _grid[x,y].SetCover(Instantiate<TileCover>(_coverPrefabs[levelCode[counter]]));
+            counter++;
+            if(levelCode[counter] == '('){
+                counter = ParseObject(levelCode, ++counter, x, y, renderPos, scale);
+                counter++;
+            }
+            return counter;
+        }
+
+        private int ParseObject(string levelCode, int counter, int x, int y, Vector2Int renderPos, Vector2Int scale){
+            _grid[x,y].SetObject(Instantiate<TileObject>(_objectPrefabs[levelCode[counter]]));
+            return ++counter;
+        }
+  
     }
 }
 

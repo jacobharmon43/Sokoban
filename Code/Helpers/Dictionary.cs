@@ -1,25 +1,25 @@
+using UnityEngine;
+using System.Collections.Generic;
+
 namespace Sokoban.Dict
 {
     [System.Serializable]
     public struct Dict<Q,T>{
-        public Q rep;
-        public T obj;
+        [SerializeField] private List<Q> _keys;
+        [SerializeField] private List<T> _values;
 
-        public Dict(Q rep, T obj){
-            this.rep = rep;
-            this.obj = obj;
+        public Dict(List<Q> keys, List<T> values){
+            _keys = keys;
+            _values = values;
         }
-    }    
 
-    public class DictHelp{
-        public static T DictSearch<Q,T>(Dict<Q,T>[] dict, Q key){
-            T ret = default(T);
-            foreach(Dict<Q,T> q in dict){
-                if(key.Equals(q.rep)){
-                    ret = q.obj;
+        public T this[Q key]{
+            get{
+                if(_keys.Contains(key)){
+                    return _values[_keys.IndexOf(key)];
                 }
+                return default(T);
             }
-            return ret;
         }
-    } 
+    }
 }

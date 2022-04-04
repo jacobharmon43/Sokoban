@@ -1,44 +1,77 @@
 namespace Sokoban
 {
-    public struct Level{
-        public string title;
-        public string LevelCode;
+     public readonly struct Level
+    {
+        public readonly string Title;
+        public readonly string LevelCode;
+        public readonly string Objective;
 
-        public Level(string title, string LevelCode){
-            this.title = title;
+        public Level(string Title, string LevelCode, string Objective){
+            this.Title = Title;
             this.LevelCode = LevelCode;
-        }
-
-        public static implicit operator string(Level l){
-            return $"{l.title}";
+            this.Objective = Objective;
         }
     }
-
+    
     public static class Levels{
-        public static readonly Level[] levels = new Level[]{
-          new Level(
-              "I stole this from the original Sokoban game!",
-              @"##########
-                ###...####
-                #.(H).(P).(B)..####
-                ## # . .(B) .(H) ####
-                #.(H)##.(B).####
-                #.#..(H).####
-                #.(B)..(H(B)).(B).(B).(H)###
-                #....(H)..###
-                ##########
-                ##########"
-          ),
-          new Level(
-            "Laser tutorial",
-            @"######(L(va))#(L(va))###
-              #.(Sa).......(H)#
-              #.(B)......(B).(H)#
-              #.(P)......(B).(H)#
-              #.(B)......(B).#
-              #.(Sa)......(B).(H)#
-              ##########"
-          )
+        public static Level[] All = new Level[]{
+            new Level(
+                "Tutorial",
+                @"##############
+                  ##############
+                  ##############
+                  ##############
+                  ##############
+                  ####.(H)..(B)..(H)#####
+                  ####..(B).(P).(B).#####
+                  ####.(H)..(B)..(H)#####",
+                "Sort every box onto a green highlighted tile"
+            ),
+            new Level(
+                "Laser tutorial",
+                @"##############
+                  ##############
+                  ####......####
+                  ####......####
+                  ####.....(B).####
+                  ####...(G)...#(L<)###
+                  ####..#...####
+                  ###...#...#(L<)###
+                  ###..(B).##..####
+                  ###.(P)..##..(F)####",
+                "Reach the flag!"
+            ),
+            new Level(
+                "Confusing?",
+                @"##############
+                  ##############
+                  ##############
+                  ##############
+                  ###....#######
+                  ###.(P).(H)..(B)..#####
+                  #####.(B).(B).(B).#####
+                  #####....#####",
+                "Sort a box!"
+            ),
+            new Level(
+                "I Promise this Level is Beatable",
+                @"##############
+                  #..(T)#......#.(T).#
+                  #..#..##..#..#
+                  #..#......#..#
+                  #.....(Q^).......#
+                  #.....(B).......#
+                  #.(G).(G)..#..#..(Q<).(G).(G)#
+                  #....#..#....#
+                  #....#..#....#
+                  #..(Q>)..#..#....#
+                  #....#..#....#
+                  #............#
+                  #.(P)...........#
+                  #######(L^)#(L^)######",
+                "Destroy the targets!"
+            ),
         };
+
     }
 }

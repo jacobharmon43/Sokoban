@@ -249,7 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109964f66fd62d1c2a882635ddc6420d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _desiredSquares: []
   MoveCount: 0
+  index: 0
   checkForFrames: 5
 --- !u!1001 &578960509438906264
 PrefabInstance:
@@ -270,6 +272,30 @@ PrefabInstance:
       propertyPath: allObjects.Array.data[4].rep
       value: 79
       objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _tilePrefabs._keys.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _tilePrefabs._values.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _tilePrefabs._keys.Array.data[0]
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _tilePrefabs._keys.Array.data[1]
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _tilePrefabs._values.Array.data[0]
+      value: 
+      objectReference: {fileID: -2782349145820906067, guid: 2addf1434d0b86a478fb05f0e4c89f21, type: 3}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _tilePrefabs._values.Array.data[1]
+      value: 
+      objectReference: {fileID: 3745863636824739212, guid: 43723b95301d2ef43986f33423f0cbba, type: 3}
     - target: {fileID: 578960510737998838, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: m_Name
       value: Tilegrid

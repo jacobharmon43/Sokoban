@@ -5,24 +5,26 @@ namespace Sokoban
 {
     public class TileBound : MonoBehaviour
     {
-        public Vector2Int GridPosition = Vector2Int.one;
-        protected Tilegrid _tiles;
+        protected Vector2Int _gridPosition;
+        protected TileGrid _tileGrid;
 
         protected virtual void Awake(){
-            _tiles = GameObject.FindObjectOfType<Tilegrid>();
+            _tileGrid = GameObject.FindObjectOfType<TileGrid>();
         }
 
         protected virtual void Start(){
             AlignTileToGrid();
         }
+
+        public Vector2Int GridPosition => _gridPosition;
         
         private void AlignTileToGrid(){
-            if(!_tiles)
+            if(!_tileGrid)
                 throw new System.Exception($"{transform.name} cannot find tilegrid");
-            GridPosition = _tiles.WorldToGrid(transform.position);
-            Tile t = _tiles.GetTile(GridPosition);
+            _gridPosition = _tileGrid.WorldToGrid(transform.position);
+            Tile t = _tileGrid.GetTile(_gridPosition);
             if(t) transform.position = t.transform.position;
-            else throw new System.Exception($"Tile not found on desired position {GridPosition}");
+            else throw new System.Exception($"Tile not found on desired position {_gridPosition}");
         }
     }
 }
