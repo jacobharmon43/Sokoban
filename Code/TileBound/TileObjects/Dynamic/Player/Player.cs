@@ -4,7 +4,7 @@ using Sokoban.Grid;
 
 namespace Sokoban{
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerController : Dynamic{
+    public class Player : Dynamic{
         private InputActionMap _map;
         private InputAction _up;
         private InputAction _left;

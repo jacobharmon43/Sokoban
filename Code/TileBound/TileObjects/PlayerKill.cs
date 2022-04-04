@@ -14,7 +14,7 @@ namespace Sokoban
             Tile t = _tiles.GetTile(GridPosition);
             if(!t) return;
             TileObject to = t.Object;
-            if(!to || to.GetType() != typeof(PlayerController)) return;
+            if(!to || to.GetType() != typeof(Player)) return;
             GameManager.Instance.ReloadScene();
         }
     }

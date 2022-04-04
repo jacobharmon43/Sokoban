@@ -44,7 +44,7 @@ namespace Sokoban
         private void Fire(){
             Vector2Int p = GridPosition + dir;
             Tile t = _tiles.GetTile(p);
-            if(t && t.Object && t.Object.GetType() == typeof(PlayerController))
+            if(t && t.Object && t.Object.GetType() == typeof(ParticleSystemOverlapAction))
                 GameManager.Instance.ReloadScene();
             int count = 0;
             while(t && t.ground && count < 10){
@@ -54,7 +54,7 @@ namespace Sokoban
                 _spawned.Add(Instantiate<TileObject>(_laserPrefab, t.transform.position, transform.rotation));
                 p += dir;
                 t = _tiles.GetTile(p);
-                if(t.Object && t.Object.GetType() == typeof(PlayerController))
+                if(t.Object && t.Object.GetType() == typeof(Player))
                     GameManager.Instance.ReloadScene();
             }
         }

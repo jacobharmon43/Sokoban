@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -4894898745955426128, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
+  m_Sprite: {fileID: 2710443080846324409, guid: 7ff2e236afae87f4797dd1009cd58346, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridPosition: {x: 1, y: 1}
   blocking: 1
+  glass: 0
   Switches: []
   dirChar: 60
   _laserPrefab: {fileID: 2252525051594372527, guid: 20c7aedc2671c0b45b9e23ece3fee1e3, type: 3}
+  _spawned: []
