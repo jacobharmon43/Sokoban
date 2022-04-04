@@ -14,19 +14,20 @@ namespace Sokoban.Grid
         [SerializeField] private Dict<char, TileCover> _coverPrefabs;
         [SerializeField] private Dict<char, TileObject> _objectPrefabs;
 
-        private void Start(){
+        private void Awake(){
             _grid = new Tile[_gridSize.x, _gridSize.y];
             Vector2 center = new Vector2(transform.position.x, transform.position.y);
             Vector2 area = new Vector2(transform.localScale.x, transform.localScale.y);
             _cellSize = new Vector2(area.x / _gridSize.x, area.y / _gridSize.y);
             _generationStartPos = center + Vector2.right * (-area.x/2 + _cellSize.x/2) + Vector2.up * (area.y/2 - _cellSize.y/2) ;
-            InitializeGrid(Levels.All[GameManager.Instance.LevelIndex].LevelCode);
         }
 
         public Tile GetTile(Vector2Int pos){
             if(pos.x < 0 || pos.x >= _gridSize.x || pos.y < 0 || pos.y >= _gridSize.y) return null;
             return _grid[pos.x, pos.y];
         }
+
+        public Tile[,] GetTiles() => _grid;
 
         public Vector2Int WorldToGrid(Vector2 pos){
             Vector2 topLeft = new Vector2(-_gridSize.x/2, _gridSize.y/2);
@@ -91,6 +92,12 @@ namespace Sokoban.Grid
 
         private int ParseObject(string levelCode, int counter, int x, int y, Vector3 renderPos){
             TileObject to = Instantiate<TileObject>(_objectPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
+            if(to.GetType() == typeof(Player)){
+                GameManager.Instance.Player = (Player)to;
+            }
+            else if(to.GetType() == typeof(LaserGun)){
+                ((LaserGun)to).Init(levelCode[++counter]);
+            }
             _grid[x,y].SetObject(to);
             to.SetGrid(this);
             to.SetGridPos(new Vector2Int(x,y));

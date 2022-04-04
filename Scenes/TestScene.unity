@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 332247114}
   - component: {fileID: 332247116}
   - component: {fileID: 332247115}
+  - component: {fileID: 332247117}
   m_Layer: 5
   m_Name: SidePanel
   m_TagString: Untagged
@@ -227,7 +228,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332247113}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -238,7 +239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175.9, y: -225.1}
+  m_AnchoredPosition: {x: 175, y: -225.2}
   m_SizeDelta: {x: 350, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &332247115
@@ -279,6 +280,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332247113}
   m_CullTransparentMesh: 1
+--- !u!114 &332247117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332247113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb43dec20a56b2043aa3769dfcd5020d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &419921208
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109964f66fd62d1c2a882635ddc6420d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelIndex: 0
+  Player: {fileID: 0}
+  Grid: {fileID: 578960509438906265}
+  pauseMenu: {fileID: 1283516045}
+  levelCompleteMenu: {fileID: 2091876195}
+  panel: {fileID: 332247117}
+  paused: 0
 --- !u!1 &463021753
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +436,7 @@ GameObject:
   - component: {fileID: 463021756}
   - component: {fileID: 463021755}
   m_Layer: 5
-  m_Name: TitleText
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -646,7 +664,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 532882723}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431285475}
+        m_TargetAssemblyTypeName: Sokoban.GameManager, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &532882723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +797,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 673814449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431285475}
+        m_TargetAssemblyTypeName: Sokoban.GameManager, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &673814449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,7 +939,7 @@ GameObject:
   - component: {fileID: 880649913}
   - component: {fileID: 880649912}
   m_Layer: 5
-  m_Name: ObjectivesText
+  m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,7 +1084,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &889351589
 RectTransform:
@@ -1516,7 +1558,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1988337356}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431285475}
+        m_TargetAssemblyTypeName: Sokoban.GameManager, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1988337356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,11 +1712,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _coverPrefabs._keys.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _objectPrefabs._keys.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _tilePrefabs._values.Array.size
@@ -1670,7 +1724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _coverPrefabs._values.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _tilePrefabs._keys.Array.data[0]
@@ -1685,8 +1739,12 @@ PrefabInstance:
       value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _coverPrefabs._keys.Array.data[1]
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _objectPrefabs._values.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _objectPrefabs._keys.Array.data[0]
@@ -1695,6 +1753,14 @@ PrefabInstance:
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _objectPrefabs._keys.Array.data[1]
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _objectPrefabs._keys.Array.data[2]
+      value: 76
+      objectReference: {fileID: 0}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _objectPrefabs._keys.Array.data[3]
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _tilePrefabs._values.Array.data[0]
@@ -1709,13 +1775,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -7812205761273654339, guid: 6bf960b94e4104047aaa96a8133cdeb0, type: 3}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _coverPrefabs._values.Array.data[1]
+      value: 
+      objectReference: {fileID: 3983791864303746637, guid: 74502cf3faff29942b7096216c4dade7, type: 3}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _objectPrefabs._values.Array.data[0]
       value: 
-      objectReference: {fileID: 7558595458113753544, guid: bd6503b079d024b4cb6a6e9c74d7c76e, type: 3}
+      objectReference: {fileID: 6647324139396877662, guid: bd6503b079d024b4cb6a6e9c74d7c76e, type: 3}
     - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: _objectPrefabs._values.Array.data[1]
       value: 
       objectReference: {fileID: 9156929076039162198, guid: dcbdbd04b5c44024ea452ac9391b4b89, type: 3}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _objectPrefabs._values.Array.data[2]
+      value: 
+      objectReference: {fileID: 1194800070218021541, guid: 3bb4b5f3e3eacf146877a0bdbd6e3290, type: 3}
+    - target: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+      propertyPath: _objectPrefabs._values.Array.data[3]
+      value: 
+      objectReference: {fileID: 7302697156975618248, guid: a90d4f51c0c88514ea529e5a65cf8865, type: 3}
     - target: {fileID: 578960510737998838, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
       propertyPath: m_Name
       value: Tilegrid
@@ -1774,3 +1852,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+--- !u!114 &578960509438906265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 578960510737998825, guid: 303df349d96a4ef2bb86e8832be57fd6, type: 3}
+  m_PrefabInstance: {fileID: 578960509438906264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909534117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba5706166923ea4b9f089288947b052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

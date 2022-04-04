@@ -8,9 +8,9 @@ namespace Sokoban.Dict
         [SerializeField] private List<Q> _keys;
         [SerializeField] private List<T> _values;
 
-        public Dict(List<Q> keys, List<T> values){
-            _keys = keys;
-            _values = values;
+        public Dict(Q[] keys, T[] values){
+            _keys = new List<Q>(keys);
+            _values = new List<T>(values);
         }
 
         public T this[Q key]{

@@ -14,6 +14,9 @@ namespace Sokoban
     }
     
     public static class Levels{
+
+        public static int LevelIndex = 0;
+
         public static Level[] All = new Level[]{
             new Level(
                 "Tutorial",

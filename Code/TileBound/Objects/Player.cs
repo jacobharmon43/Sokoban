@@ -28,11 +28,12 @@ namespace Sokoban
             _left.started += ctx => Move(Vector2Int.left);
             _up.started += ctx => Move(Vector2Int.down);
             _down.started += ctx => Move(Vector2Int.up);
-            //_reset.started += ctx => GameManager.Instance.ReloadScene();
-            //_pause.started += ctx => GameManager.Instance.ReloadScene();
+            _reset.started += ctx => GameManager.Instance.ResetLevel();
+            _pause.started += ctx => GameManager.Instance.FlipPause();
         }
 
         public void Move(Vector2Int direction){
+            if(GameManager.Instance.paused) return;
             Vector2Int nextPos = _gridPosition + direction;
             Tile t = _tileGrid.GetTile(nextPos);
             if(t && t.isGround){
