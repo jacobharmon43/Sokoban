@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Sokoban
 {
     public class Highlight : TileCover
@@ -8,6 +10,7 @@ namespace Sokoban
         {
             if(to && to.GetType() == typeof(Box)){
                 BoxOn = true;
+                to.GetComponent<SpriteRenderer>().color = Color.green;
             }
         }
 
@@ -15,6 +18,7 @@ namespace Sokoban
         {
             if(to && to.GetType() == typeof(Box)){
                 BoxOn = false;
+                to.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
     }

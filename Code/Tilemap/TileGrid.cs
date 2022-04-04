@@ -54,24 +54,23 @@ namespace Sokoban.Grid
                         _grid[x,y] = t;
                         t.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
                     }
-                        
                 }
             }
         }
 
         private int ParseTile(string levelCode, int counter, int x, int y, Vector3 renderPos){
+            Debug.Log(levelCode[counter]);
             Tile t = Instantiate<Tile>(_tilePrefabs[levelCode[counter]], renderPos, Quaternion.identity);
             _grid[x,y] = t;
             t.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
-            counter++;
-            if(levelCode[counter] == '('){
+            if(levelCode[++counter] == '('){
                 counter = ParseCover(levelCode, ++counter, x, y, renderPos);
-                counter++;
             }
             return counter;
         }
 
         private int ParseCover(string levelCode, int counter, int x, int y, Vector3 renderPos){
+            Debug.Log(levelCode[counter]);
             if(_coverPrefabs[levelCode[counter]]){
                 TileCover tc = Instantiate<TileCover>(_coverPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
                 _grid[x,y].SetCover(tc);
@@ -81,28 +80,31 @@ namespace Sokoban.Grid
                 counter++;
                 if(levelCode[counter] == '('){
                     counter = ParseObject(levelCode, ++counter, x, y, renderPos);
-                    counter++;
                 }
             }
             else{
                 counter = ParseObject(levelCode, counter, x, y, renderPos);
             }
-            
-            return counter;
+            return ++counter;
         }
 
         private int ParseObject(string levelCode, int counter, int x, int y, Vector3 renderPos){
+            Debug.Log(levelCode[counter]);
             TileObject to = Instantiate<TileObject>(_objectPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
             if(to.GetType() == typeof(Player)){
                 GameManager.Instance.Player = (Player)to;
             }
             else if(to.GetType() == typeof(LaserGun)){
                 ((LaserGun)to).Init(levelCode[++counter]);
+                Debug.Log(levelCode[counter]);
+            }
+            else if(to.GetType() == typeof(Prism)){
+                ((Prism)to).Init(levelCode[++counter]);
             }
             _grid[x,y].SetObject(to);
             to.SetGrid(this);
             to.SetGridPos(new Vector2Int(x,y));
-            to.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
+            to.transform.localScale = Scale;
             return ++counter;
         }
   

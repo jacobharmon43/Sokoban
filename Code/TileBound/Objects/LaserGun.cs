@@ -30,7 +30,8 @@ namespace Sokoban
                 Destroy(o);
             }
             lasers.Clear();
-            Vector2Int nextPos = _gridPosition + fireDir;
+            Vector2Int nextDir = fireDir;
+            Vector2Int nextPos = _gridPosition + nextDir;
             Tile t = _tileGrid.GetTile(nextPos);
             float currentRot = zRot;
             int protCount = 0;
@@ -42,7 +43,12 @@ namespace Sokoban
                         //ignore
                     }
                     else if(to.GetType() == typeof(Prism)){
-                        //Do turn
+                        Prism prism = ((Prism)to);
+                        nextDir = prism.RedirectDir;
+                        currentRot = prism.zRot;
+                        nextPos += nextDir;
+                        t = _tileGrid.GetTile(nextPos);
+                        continue;
                     }
                     else if(to.GetType() == typeof(Player)){
                         GameManager.Instance.ResetLevel();
@@ -58,7 +64,7 @@ namespace Sokoban
                 l.transform.localScale = _tileGrid.Scale;
                 lasers.Add(l);
 
-                nextPos += fireDir;
+                nextPos += nextDir;
                 t = _tileGrid.GetTile(nextPos);
             }
         }
