@@ -2,33 +2,29 @@
 
 Dynamic::Dynamic(){}
 
-Dynamic::Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity){
+Dynamic::Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation = 0){
     m_renderPosition = renderPosition;
     m_renderColor = renderColor;
     m_renderOrder = renderOrder;
     m_velocity = velocity;
+    m_rotation = rotation;
 }
 
 Dynamic::~Dynamic(){}
-
-void Dynamic::ChangeVelocity(Vector2 change)
-{
-    m_velocity += change;
-}
 
 void Dynamic::SetVelocity(Vector2 set)
 {
     m_velocity = set;
 }
 
-void Dynamic::Update()
+Vector2 Dynamic::GetVelocity()
 {
-    Object::Move(m_velocity);
+    return m_velocity;
 }
 
-void Dynamic::Render(SDL_Renderer* r)
+void Dynamic::Update(float deltaTime)
 {
-    Object::Render(r);
+    Object::Move(m_velocity);
 }
 
 bool Dynamic::CheckCollision(Object collidable)
@@ -36,8 +32,8 @@ bool Dynamic::CheckCollision(Object collidable)
     return m_renderPosition.Intersects(collidable.GetRect());
 }
 
-Vector2 Dynamic::GetVelocity()
+void Dynamic::Render(SDL_Renderer* r)
 {
-    return m_velocity;
+    Object::Render(r);
 }
 

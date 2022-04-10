@@ -9,13 +9,12 @@
 class Dynamic : public Object{
     public:
         Dynamic();
-        Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity);
+        Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation = 0);
         ~Dynamic();
         void Render(SDL_Renderer* r);
-        void ChangeVelocity(Vector2 change);
         void SetVelocity(Vector2 set);
         Vector2 GetVelocity();
-        void Update();
+        void Update(float deltaTime);
         bool CheckCollision(Object collidable);
     protected:
         Vector2 m_velocity;

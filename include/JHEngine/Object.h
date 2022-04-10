@@ -9,7 +9,7 @@
 class Object{
     public:
         Object();
-        Object(Rectangle renderPosition, SDL_Color renderColor, int renderOrder);
+        Object(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, float rotation = 0);
         ~Object();
         virtual void Render(SDL_Renderer* r);
         void Move(Vector2 move);
@@ -21,6 +21,7 @@ class Object{
         Rectangle m_renderPosition;
         SDL_Color m_renderColor;
         int m_renderOrder;
+        float m_rotation;
         
 };
 

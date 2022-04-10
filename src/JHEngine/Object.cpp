@@ -3,11 +3,12 @@
 Object::Object(){}
 Object::~Object() {}
 
-Object::Object(Rectangle renderPosition, SDL_Color renderColor, int renderOrder)
+Object::Object(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, float rotation)
 {
     m_renderPosition = renderPosition;
     m_renderColor = renderColor;
     m_renderOrder = renderOrder;
+    m_rotation = 0;
 }
 
 void Object::Move(Vector2 move)
@@ -40,5 +41,5 @@ void Object::Render(SDL_Renderer* r)
 {
     SDL_SetRenderDrawColor(r, m_renderColor.r, m_renderColor.g, m_renderColor.b, m_renderColor.a);
     SDL_Rect rect = m_renderPosition;
-    SDL_RenderFillRect(r, &rect);
+    SDL_RenderCopyExF(r, nullptr, &rect, nullptr, m_rotation, nullptr, SDL_FLIP_NONE);
 }

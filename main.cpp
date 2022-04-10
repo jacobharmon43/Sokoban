@@ -2,14 +2,14 @@
 #include <iostream>
 
 #include <iostream>
-#include "Pong.h"
+#include "RigidbodyTest.h"
 
 bool PollQuit(SDL_Event event);
 
 int main(int argc, char *argv[])
 {
-  Pong game = Pong(900,600);
-  game.Init("Pong");
+  RigidbodyTest game = RigidbodyTest(900,600);
+  game.Init("RigidbodyTest");
   SDL_Event event;
   bool quitFlag = false;
   while(!quitFlag){
