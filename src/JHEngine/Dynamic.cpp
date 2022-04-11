@@ -33,7 +33,6 @@ Vector2 Dynamic::GetVelocity()
 
 void Dynamic::Update(float deltaTime)
 {
-    std::cout << m_velocity.x * deltaTime << ", " << m_velocity.y * deltaTime << std::endl;
     Object::SetPos(Object::GetPos() + m_velocity * deltaTime);
 }
 

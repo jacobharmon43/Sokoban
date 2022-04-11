@@ -25,7 +25,7 @@ void RigidbodyTest::Init(const char* name)
     Game::Init(name);
     SDL_Surface* im = SDL_LoadBMP("res/Square.bmp");
     SDL_Texture* t = SDL_CreateTextureFromSurface(gRenderer, im);
-    m_box = Object(t, Rectangle(m_width/2 - 64, m_height/2 - 64, 64, 64), SDL_Color {139,172,15,255}, 10);
+    m_box = Object(t, Rectangle(m_width/2 - 64, m_height/2 - 64, 128, 128), SDL_Color {139,172,15,255}, 10);
     m_bouncer = Dynamic(m_box, Vector2(RandBetween(-1,1), RandBetween(-1,1)).Normalize());
     m_bouncer.SetVelocity(m_bouncer.GetVelocity() * 0.25f);
     SDL_FreeSurface(im);
@@ -41,7 +41,7 @@ bool RigidbodyTest::Update()
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(1,0)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.x >= m_width - 64 && m_bouncer.GetVelocity().x >=0){
+    if(pos.x >= m_width - 128 && m_bouncer.GetVelocity().x >=0){
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(-1,0)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
@@ -49,11 +49,10 @@ bool RigidbodyTest::Update()
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(0,1)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.y >= m_height - 64 && m_bouncer.GetVelocity().y >= 0){
+    if(pos.y >= m_height - 128 && m_bouncer.GetVelocity().y >= 0){
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(0,-1)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    std::cout << pos.x << ", " << pos.y << std::endl;
     return Game::Update();
 }
 
