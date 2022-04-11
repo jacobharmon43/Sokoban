@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
     if(quitFlag) break;
     Uint64 start = SDL_GetPerformanceCounter();
     quitFlag = game.Update();
-    game.Draw();
     SDL_Delay(10.0f - (SDL_GetPerformanceCounter() - start)/(float)SDL_GetPerformanceFrequency() * 1000.0f);
   }
   game.Close();

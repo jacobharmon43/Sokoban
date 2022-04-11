@@ -39,8 +39,8 @@ float Object::GetRotation(){
 
 void Object::SetPos(Vector2 move)
 {
-    m_renderPosition.x += move.x;
-    m_renderPosition.y += move.y;
+    m_renderPosition.x = move.x;
+    m_renderPosition.y = move.y;
 }
 
 void Object::SetScale(Vector2Int set){
@@ -55,7 +55,9 @@ void Object::SetRotation(float rotation){
 //* Object capabilities *//
 void Object::Render(SDL_Renderer* r)
 {
-    SDL_SetRenderDrawColor(r, m_renderColor.r, m_renderColor.g, m_renderColor.b, m_renderColor.a);
+    std::cout << m_renderPosition.x << ", " << m_renderPosition.y << ", " << m_renderPosition.w << ", " << m_renderPosition.h << ", " << m_rotation <<  std::endl;
+    SDL_SetTextureColorMod(m_texture, m_renderColor.r, m_renderColor.g, m_renderColor.b);
+    SDL_SetTextureAlphaMod(m_texture, m_renderColor.a);
     SDL_FRect rect = m_renderPosition;
     SDL_RenderCopyExF(r, m_texture, NULL, &rect, m_rotation, NULL, SDL_FLIP_NONE);
 }

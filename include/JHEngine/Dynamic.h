@@ -1,3 +1,6 @@
+// Jacob Harmon
+// Class derived from Object that adds velocity capabilities for easier movement
+
 #ifndef DYNAMIC_H
 #define DYNAMIC_H
 
@@ -8,12 +11,18 @@
 
 class Dynamic : public Object{
     public:
+        //* Constructors *//
         Dynamic();
-        Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation = 0);
+        Dynamic(SDL_Texture* t, Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation = 0);
         ~Dynamic();
-        void Render(SDL_Renderer* r);
-        void SetVelocity(Vector2 set);
+
+        //* Getters *//
         Vector2 GetVelocity();
+        
+        //* Setters *//
+        void SetVelocity(Vector2 set);
+        
+        //* Miscellaneous Implementations for use *//
         void Update(float deltaTime);
         bool CheckCollision(Object collidable);
     protected:

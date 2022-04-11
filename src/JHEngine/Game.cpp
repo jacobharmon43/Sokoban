@@ -21,7 +21,7 @@ void Game::Init(const char* name)
 bool Game::Update()
 {
     Draw();
-    return true;
+    return false;
 }
 
 void Game::Draw()
