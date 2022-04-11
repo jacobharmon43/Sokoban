@@ -16,7 +16,6 @@ class RigidbodyTest : public Game{
         void Close();
     private:
         Object m_floor;
-        Rigidbody* m_box;
         int m_gravity;
         bool PollKeyboard(const Uint8* input);
 };

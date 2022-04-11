@@ -2,7 +2,7 @@
 
 Dynamic::Dynamic(){}
 
-Dynamic::Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation = 0){
+Dynamic::Dynamic(Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation){
     m_renderPosition = renderPosition;
     m_renderColor = renderColor;
     m_renderOrder = renderOrder;
@@ -24,7 +24,7 @@ Vector2 Dynamic::GetVelocity()
 
 void Dynamic::Update(float deltaTime)
 {
-    Object::Move(m_velocity);
+    //Object::Move(m_velocity);
 }
 
 bool Dynamic::CheckCollision(Object collidable)

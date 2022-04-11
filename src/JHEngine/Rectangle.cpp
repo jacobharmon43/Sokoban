@@ -34,6 +34,11 @@ Rectangle::operator SDL_Rect() const
     return SDL_Rect {x,y,w,h};
 }
 
+Rectangle::operator SDL_FRect() const
+{
+    return SDL_FRect {(float)x,(float)y,(float)w,(float)h};
+}
+
 bool Rectangle::Contains(Vector2 point){
     return point.x >= x && point.x <= x+w && point.y >= y && point.y <= y+h;
 }

@@ -21,6 +21,7 @@ class Rectangle{
         bool Intersects(Rectangle b);
 
         operator SDL_Rect() const;
+        operator SDL_FRect() const;
 
 };
 
