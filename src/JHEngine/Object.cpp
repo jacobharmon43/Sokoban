@@ -21,9 +21,9 @@ Vector2 Object::GetPos()
     return Vector2(m_renderPosition.x, m_renderPosition.y);
 }
 
-Vector2Int Object::GetScale()
+Vector2 Object::GetScale()
 {
-    return Vector2Int(m_renderPosition.w, m_renderPosition.h);
+    return Vector2(m_renderPosition.w, m_renderPosition.h);
 }
 
 Rectangle Object::GetRect()

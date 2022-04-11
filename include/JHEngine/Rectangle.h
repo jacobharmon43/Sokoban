@@ -7,13 +7,13 @@
 
 class Rectangle{
     public:
-        int x;
-        int y;
-        int w;
-        int h;
+        double x;
+        double y;
+        double w;
+        double h;
 
         Rectangle();
-        Rectangle(int X, int Y, int width, int height);
+        Rectangle(double X, double Y, double width, double height);
         Rectangle(Vector2Int point, Vector2Int scale);
         Rectangle(const Rectangle& r);
 

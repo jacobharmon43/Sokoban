@@ -37,22 +37,23 @@ bool RigidbodyTest::Update()
     globalTicks = SDL_GetTicks();
     m_bouncer.Update(dt);
     Vector2 pos = m_bouncer.GetPos();
-    if(pos.x <= 0 && m_bouncer.GetVelocity().x < 0){
+    if(pos.x <= 0 && m_bouncer.GetVelocity().x <= 0){
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(1,0)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.x >= m_width - 64 && m_bouncer.GetVelocity().x > 0){
+    if(pos.x >= m_width - 64 && m_bouncer.GetVelocity().x >=0){
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(-1,0)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.y <= 0 && m_bouncer.GetVelocity().y < 0){
+    if(pos.y <= 0 && m_bouncer.GetVelocity().y <= 0){
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(0,1)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.y >= m_height - 64 && m_bouncer.GetVelocity().y > 0){
+    if(pos.y >= m_height - 64 && m_bouncer.GetVelocity().y >= 0){
         m_bouncer.SetVelocity(m_bouncer.GetVelocity().Reflect(Vector2(0,-1)));
         m_bouncer.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
+    std::cout << pos.x << ", " << pos.y << std::endl;
     return Game::Update();
 }
 
@@ -70,5 +71,5 @@ void RigidbodyTest::Close()
 }
 
 float RandBetween(float low, float high){
-    return low + (float)rand() / ((float)RAND_MAX/(high-low));
+    return low + rand() / ((float)RAND_MAX/(high-low));
 }

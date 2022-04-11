@@ -6,7 +6,7 @@
 
 Vector2::Vector2() : x(0), y(0) {}
 
-Vector2::Vector2(float X, float Y) : x(X), y(Y){}
+Vector2::Vector2(double X, double Y) : x(X), y(Y){}
 
 Vector2::Vector2(const Vector2 &b) : x(b.x), y(b.y){}
 
@@ -75,42 +75,42 @@ Vector2 Vector2::operator /=(Vector2 b)
 /////////////////////////////////////////////////////
 //////////////* Scalar operations */////////////////
 ////////////////////////////////////////////////////
-Vector2 Vector2::operator +(float b){
+Vector2 Vector2::operator +(double b){
     return Vector2(x + b, y + b);
 }
 
-Vector2 Vector2::operator -(float b){
+Vector2 Vector2::operator -(double b){
     return Vector2(x - b, y - b);
 }
 
-Vector2 Vector2::operator *(float b){
+Vector2 Vector2::operator *(double b){
     return Vector2(x * b, y * b);
 }
 
-Vector2 Vector2::operator /(float b)
+Vector2 Vector2::operator /(double b)
 {
     return Vector2(x / b, y / b);
 }
 
-Vector2& Vector2::operator +=(float b){
+Vector2& Vector2::operator +=(double b){
     x += b;
     y += b;
     return *this;
 }
 
-Vector2& Vector2::operator -=(float b){
+Vector2& Vector2::operator -=(double b){
     x -= b;
     y -= b;
     return *this;
 }
 
-Vector2& Vector2::operator *=(float b){
+Vector2& Vector2::operator *=(double b){
     x *= b;
     y *= b;
     return *this;
 }
 
-Vector2& Vector2::operator /=(float b)
+Vector2& Vector2::operator /=(double b)
 {
     x /= b;
     y /= b; 
@@ -121,9 +121,9 @@ Vector2& Vector2::operator /=(float b)
 ///////////* Miscellaneous functions *//////////////
 ////////////////////////////////////////////////////
 
-float Vector2::SqrDistance(const Vector2& a, const Vector2& b){
-    float xDist = a.x - b.x;
-    float yDist = a.y - b.y;
+double Vector2::SqrDistance(const Vector2& a, const Vector2& b){
+    double xDist = a.x - b.x;
+    double yDist = a.y - b.y;
     return xDist*xDist + yDist*yDist;
 }
 
@@ -145,7 +145,7 @@ Vector2 Vector2::Normalize()
     return dir/sqrt(x*x + y*y);
 }
 
-float Vector2::Dot(Vector2 vector)
+double Vector2::Dot(Vector2 vector)
 {
     return x * vector.x + y * vector.y;
 }

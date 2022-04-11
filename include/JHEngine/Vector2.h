@@ -6,19 +6,19 @@
 
 class Vector2{
     public:
-        float x;
-        float y;
+        double x;
+        double y;
         Vector2();
-        Vector2(float X, float Y);
+        Vector2(double X, double Y);
         Vector2(const Vector2 &b);
         ~Vector2();
-        float SqrDistance(const Vector2& a, const Vector2& b);
+        double SqrDistance(const Vector2& a, const Vector2& b);
         bool operator ==(Vector2 b);
         bool operator !=(Vector2 b);
         Vector2 Reflect(Vector2 line);
         Vector2 Perpendicular();
         Vector2 Normalize();
-        float Dot(Vector2 vector);
+        double Dot(Vector2 vector);
 
         //Vector2 operations
         Vector2& operator =(Vector2 b);
@@ -32,15 +32,15 @@ class Vector2{
         Vector2 operator /=(Vector2 b);
 
         //Scalar operations
-        Vector2& operator =(float b);
-        Vector2 operator +(float b);
-        Vector2 operator -(float b);
-        Vector2 operator *(float b);
-        Vector2 operator /(float b);
-        Vector2& operator +=(float b);
-        Vector2& operator -=(float b);
-        Vector2& operator *=(float b);
-        Vector2& operator /=(float b);
+        Vector2& operator =(double b);
+        Vector2 operator +(double b);
+        Vector2 operator -(double b);
+        Vector2 operator *(double b);
+        Vector2 operator /(double b);
+        Vector2& operator +=(double b);
+        Vector2& operator -=(double b);
+        Vector2& operator *=(double b);
+        Vector2& operator /=(double b);
 };
 
 #endif

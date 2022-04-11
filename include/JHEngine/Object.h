@@ -22,7 +22,7 @@ class Object{
         //* Getters *//
         Rectangle GetRect();
         Vector2 GetPos();
-        Vector2Int GetScale();
+        Vector2 GetScale();
         float GetRotation();
 
         //* Setters *//

@@ -5,7 +5,7 @@ Rectangle::Rectangle()
     x,y,w,h = 0;
 }
 
-Rectangle::Rectangle(int X, int Y, int width, int height)
+Rectangle::Rectangle(double X, double Y, double width, double height)
 {
     x = X;
     y = Y;
@@ -31,7 +31,7 @@ Rectangle::Rectangle(const Rectangle& r)
 
 Rectangle::operator SDL_Rect() const
 {
-    return SDL_Rect {x,y,w,h};
+    return SDL_Rect {(int)x,(int)y,(int)w,(int)h};
 }
 
 Rectangle::operator SDL_FRect() const
