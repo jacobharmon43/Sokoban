@@ -75,42 +75,42 @@ Vector2 Vector2::operator /=(Vector2 b)
 /////////////////////////////////////////////////////
 //////////////* Scalar operations */////////////////
 ////////////////////////////////////////////////////
-Vector2 Vector2::operator +(int b){
+Vector2 Vector2::operator +(float b){
     return Vector2(x + b, y + b);
 }
 
-Vector2 Vector2::operator -(int b){
+Vector2 Vector2::operator -(float b){
     return Vector2(x - b, y - b);
 }
 
-Vector2 Vector2::operator *(int b){
+Vector2 Vector2::operator *(float b){
     return Vector2(x * b, y * b);
 }
 
-Vector2 Vector2::operator /(int b)
+Vector2 Vector2::operator /(float b)
 {
     return Vector2(x / b, y / b);
 }
 
-Vector2& Vector2::operator +=(int b){
+Vector2& Vector2::operator +=(float b){
     x += b;
     y += b;
     return *this;
 }
 
-Vector2& Vector2::operator -=(int b){
+Vector2& Vector2::operator -=(float b){
     x -= b;
     y -= b;
     return *this;
 }
 
-Vector2& Vector2::operator *=(int b){
+Vector2& Vector2::operator *=(float b){
     x *= b;
     y *= b;
     return *this;
 }
 
-Vector2& Vector2::operator /=(int b)
+Vector2& Vector2::operator /=(float b)
 {
     x /= b;
     y /= b; 
@@ -121,16 +121,17 @@ Vector2& Vector2::operator /=(int b)
 ///////////* Miscellaneous functions *//////////////
 ////////////////////////////////////////////////////
 
-int Vector2::SqrDistance(const Vector2& a, const Vector2& b){
-    int xDist = a.x - b.x;
-    int yDist = a.y - b.y;
+float Vector2::SqrDistance(const Vector2& a, const Vector2& b){
+    float xDist = a.x - b.x;
+    float yDist = a.y - b.y;
     return xDist*xDist + yDist*yDist;
 }
 
 Vector2 Vector2::Reflect(Vector2 line){
     Vector2 dir = Vector2(x,y);
-    line = line.Perpendicular().Normalize();
-    return dir - line * 2 * (dir.Dot(line))/(line.Dot(line));
+    line = line.Normalize();
+    Vector2 nw = line*(2*(line.Dot(dir)));
+    return dir - nw;
 }
 
 Vector2 Vector2::Perpendicular()
@@ -141,11 +142,10 @@ Vector2 Vector2::Perpendicular()
 Vector2 Vector2::Normalize()
 {
     Vector2 dir = Vector2(x,y);
-    float root = sqrt(x*x + y*y);
-    return Vector2(dir.x / root, dir.y/root);
+    return dir/sqrt(x*x + y*y);
 }
 
-int Vector2::Dot(Vector2 vector)
+float Vector2::Dot(Vector2 vector)
 {
     return x * vector.x + y * vector.y;
 }

@@ -12,13 +12,13 @@ class Vector2{
         Vector2(float X, float Y);
         Vector2(const Vector2 &b);
         ~Vector2();
-        int SqrDistance(const Vector2& a, const Vector2& b);
+        float SqrDistance(const Vector2& a, const Vector2& b);
         bool operator ==(Vector2 b);
         bool operator !=(Vector2 b);
         Vector2 Reflect(Vector2 line);
         Vector2 Perpendicular();
         Vector2 Normalize();
-        int Dot(Vector2 vector);
+        float Dot(Vector2 vector);
 
         //Vector2 operations
         Vector2& operator =(Vector2 b);
@@ -32,15 +32,15 @@ class Vector2{
         Vector2 operator /=(Vector2 b);
 
         //Scalar operations
-        Vector2& operator =(int b);
-        Vector2 operator +(int b);
-        Vector2 operator -(int b);
-        Vector2 operator *(int b);
-        Vector2 operator /(int b);
-        Vector2& operator +=(int b);
-        Vector2& operator -=(int b);
-        Vector2& operator *=(int b);
-        Vector2& operator /=(int b);
+        Vector2& operator =(float b);
+        Vector2 operator +(float b);
+        Vector2 operator -(float b);
+        Vector2 operator *(float b);
+        Vector2 operator /(float b);
+        Vector2& operator +=(float b);
+        Vector2& operator -=(float b);
+        Vector2& operator *=(float b);
+        Vector2& operator /=(float b);
 };
 
 #endif

@@ -13,6 +13,7 @@ class Dynamic : public Object{
     public:
         //* Constructors *//
         Dynamic();
+        Dynamic(Object obj, Vector2 velocity);
         Dynamic(SDL_Texture* t, Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation = 0);
         ~Dynamic();
 

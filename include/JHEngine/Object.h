@@ -11,6 +11,9 @@
 
 class Object{
     public:
+        int m_renderOrder;
+        SDL_Color m_renderColor;
+        SDL_Texture* m_texture;
         //* Constructors *//
         Object();
         Object(SDL_Texture* t, Rectangle renderPosition, SDL_Color renderColor, int renderOrder, float rotation = 0);
@@ -31,10 +34,8 @@ class Object{
         virtual void Render(SDL_Renderer* r);
     protected:
         Rectangle m_renderPosition;
-        SDL_Color m_renderColor;
-        int m_renderOrder;
         float m_rotation;
-        SDL_Texture* m_texture;  
+          
 };
 
 #endif

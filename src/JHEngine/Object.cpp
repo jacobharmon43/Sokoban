@@ -55,7 +55,6 @@ void Object::SetRotation(float rotation){
 //* Object capabilities *//
 void Object::Render(SDL_Renderer* r)
 {
-    std::cout << m_renderPosition.x << ", " << m_renderPosition.y << ", " << m_renderPosition.w << ", " << m_renderPosition.h << ", " << m_rotation <<  std::endl;
     SDL_SetTextureColorMod(m_texture, m_renderColor.r, m_renderColor.g, m_renderColor.b);
     SDL_SetTextureAlphaMod(m_texture, m_renderColor.a);
     SDL_FRect rect = m_renderPosition;
