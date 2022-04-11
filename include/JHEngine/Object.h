@@ -34,8 +34,7 @@ class Object{
         virtual void Render(SDL_Renderer* r);
     protected:
         Rectangle m_renderPosition;
-        float m_rotation;
-          
+        float m_rotation;    
 };
 
 #endif

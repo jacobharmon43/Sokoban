@@ -2,14 +2,7 @@
 
 Dynamic::Dynamic(){}
 
-Dynamic::Dynamic(Object obj, Vector2 velocity){
-    m_renderColor = obj.m_renderColor;
-    m_renderOrder = obj.m_renderOrder;
-    m_texture = obj.m_texture;
-    m_renderPosition = obj.GetRect();
-    m_rotation = obj.GetRotation();
-    m_velocity = velocity;
-}
+Dynamic::Dynamic(Object obj, Vector2 velocity) : Object(obj), m_velocity(velocity){}
 
 Dynamic::Dynamic(SDL_Texture* t, Rectangle renderPosition, SDL_Color renderColor, int renderOrder, Vector2 velocity, float rotation){
     m_renderPosition = renderPosition;
@@ -17,6 +10,7 @@ Dynamic::Dynamic(SDL_Texture* t, Rectangle renderPosition, SDL_Color renderColor
     m_renderOrder = renderOrder;
     m_velocity = velocity;
     m_rotation = rotation;
+    m_texture = t;
 }
 
 Dynamic::~Dynamic(){}
