@@ -133,6 +133,10 @@ Vector2 Vector2::Perpendicular()
     return Vector2(-y, x);
 }
 
+double Vector2::Magnitude(){
+    return sqrt(x*x+y*y);
+}
+
 Vector2 Vector2::Normalize()
 {
     Vector2 dir = Vector2(x,y);

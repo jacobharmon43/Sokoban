@@ -22,6 +22,7 @@ class Vector2{
         Vector2 Reflect(Vector2 line);
         Vector2 Perpendicular();
         Vector2 Normalize();
+        double Magnitude();
         double Dot(Vector2 vector);
 
         //Vector2 operations
