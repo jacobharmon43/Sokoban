@@ -8,5 +8,7 @@
 #include "Vector2.h"
 #include "Vector2Int.h"
 #include "PhysicsBody.h"
+#include <list>
+using std::list;
 
 #endif 

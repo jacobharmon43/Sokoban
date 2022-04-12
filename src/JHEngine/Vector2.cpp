@@ -121,12 +121,6 @@ Vector2& Vector2::operator /=(double b)
 ///////////* Miscellaneous functions *//////////////
 ////////////////////////////////////////////////////
 
-double Vector2::SqrDistance(const Vector2& a, const Vector2& b){
-    double xDist = a.x - b.x;
-    double yDist = a.y - b.y;
-    return xDist*xDist + yDist*yDist;
-}
-
 Vector2 Vector2::Reflect(Vector2 line){
     Vector2 dir = Vector2(x,y);
     line = line.Normalize();

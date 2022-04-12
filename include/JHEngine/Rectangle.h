@@ -14,7 +14,7 @@ class Rectangle{
 
         Rectangle();
         Rectangle(double X, double Y, double width, double height);
-        Rectangle(Vector2Int point, Vector2Int scale);
+        Rectangle(Vector2 point, Vector2 scale);
         Rectangle(const Rectangle& r);
 
         bool Contains(Vector2 point);

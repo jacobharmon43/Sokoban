@@ -6,13 +6,17 @@
 
 class Vector2{
     public:
+        static double SqrDistance(const Vector2& a, const Vector2& b){
+            double xDist = a.x - b.x;
+            double yDist = a.y - b.y;
+            return xDist*xDist + yDist*yDist;
+        }
         double x;
         double y;
         Vector2();
         Vector2(double X, double Y);
         Vector2(const Vector2 &b);
         ~Vector2();
-        double SqrDistance(const Vector2& a, const Vector2& b);
         bool operator ==(Vector2 b);
         bool operator !=(Vector2 b);
         Vector2 Reflect(Vector2 line);

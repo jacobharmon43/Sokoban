@@ -13,7 +13,7 @@ Rectangle::Rectangle(double X, double Y, double width, double height)
     h = height;
 }
 
-Rectangle::Rectangle(Vector2Int point, Vector2Int scale)
+Rectangle::Rectangle(Vector2 point, Vector2 scale)
 {
     x = point.x;
     y = point.y;

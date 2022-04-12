@@ -3,10 +3,7 @@
 float globalTicks;
 int width;
 int height;
-PhysicsBody m_bouncer1;
-PhysicsBody m_bouncer2;
-PhysicsBody m_bouncer3;
-PhysicsBody m_bouncer4;
+list<PhysicsBody> allObjects;
 
 float RandBetween(float low, float high);
 void CheckCollision(PhysicsBody &a);
@@ -33,14 +30,12 @@ void RigidbodyTest::Init(const char* name)
     height = m_height;
     SDL_Surface* im = SDL_LoadBMP("res/Square.bmp");
     SDL_Texture* t = SDL_CreateTextureFromSurface(gRenderer, im);
-    Dynamic m_1 = Dynamic(t, Rectangle(m_width/2 - 32, m_height/2 - 32, 64, 64), SDL_Color {139,172,15,255}, 10, Vector2(RandBetween(-100,100), RandBetween(-100,100)).Normalize() * 0.25);
-    Dynamic m_2 = Dynamic(t, Rectangle(m_width/4 - 32, m_height/4 - 32, 64, 64), SDL_Color {139,172,15,255}, 10, Vector2(RandBetween(-100,100), RandBetween(-100,100)).Normalize() * 0.25);
-    Dynamic m_3 = Dynamic(t, Rectangle(m_width/5 - 32, m_height/5 - 32, 64, 64), SDL_Color {139,172,15,255}, 10, Vector2(RandBetween(-100,100), RandBetween(-100,100)).Normalize() * 0.25);
-    Dynamic m_4 = Dynamic(t, Rectangle(m_width/3 - 32, m_height/3 - 32, 64, 64), SDL_Color {139,172,15,255}, 10, Vector2(RandBetween(-100,100), RandBetween(-100,100)).Normalize() * 0.25);
-    m_bouncer1 = PhysicsBody(m_1);
-    m_bouncer2 = PhysicsBody(m_2);
-    m_bouncer3 = PhysicsBody(m_3);
-    m_bouncer4 = PhysicsBody(m_4);
+    Vector2 size = Vector2(5,5);
+    Vector2 initPos = Vector2(48,48);
+    SDL_Color c = SDL_Color {255,255,255,255};
+    for(int i = 0; i < 500; ++i){
+        allObjects.push_back(PhysicsBody(t,Rectangle(initPos + Vector2(size.x * (i % 50), size.y * (i/10) ) * 2, size), c, 10, Vector2(RandBetween(-1,1), RandBetween(-1,1)).Normalize()*0.25));
+    }
     SDL_FreeSurface(im);
     globalTicks = SDL_GetTicks();
 }
@@ -49,31 +44,26 @@ bool RigidbodyTest::Update()
 {
     float dt = (SDL_GetTicks() - globalTicks);
     globalTicks = SDL_GetTicks();
-    m_bouncer1.Update(dt);
-    m_bouncer2.Update(dt);
-    m_bouncer3.Update(dt);
-    m_bouncer4.Update(dt);
-    CheckCollision(m_bouncer1);
-    CheckCollision(m_bouncer2);
-    CheckCollision(m_bouncer3);
-    CheckCollision(m_bouncer4);
-    BoxCollision(m_bouncer1, m_bouncer2);
-    BoxCollision(m_bouncer1, m_bouncer3);
-    BoxCollision(m_bouncer1, m_bouncer4);
-    BoxCollision(m_bouncer2, m_bouncer3);
-    BoxCollision(m_bouncer2, m_bouncer4);
-    BoxCollision(m_bouncer3, m_bouncer4);
+    for(auto it = allObjects.begin(); it != allObjects.end(); ++it){
+        double timer = SDL_GetTicks();
+        it -> Update(dt);
+        CheckCollision(*it);
+        auto next = ++it;
+        --it;
+        for(auto it2 = next; it2 != allObjects.end(); ++it2){
+            BoxCollision(*it, *it2);
+        }
+    }
     return Game::Update();
 }
 
 void RigidbodyTest::Draw()
 {
     Game::Draw();
-    m_bouncer1.Render(gRenderer);
-    m_bouncer2.Render(gRenderer);
-    m_bouncer3.Render(gRenderer);
-    m_bouncer4.Render(gRenderer);
-    SDL_SetRenderDrawColor(gRenderer,15,56,15,255);
+    for(auto it = allObjects.begin(); it != allObjects.end(); ++it){
+        it -> Render(gRenderer);
+    }
+    SDL_SetRenderDrawColor(gRenderer,0,0,0,255);
     SDL_RenderPresent(gRenderer);
 }
 
@@ -88,27 +78,26 @@ float RandBetween(float low, float high){
 
 void CheckCollision(PhysicsBody &a){
     Vector2 pos = a.GetPos();
+    double maxX = width - a.GetScale().x;
+    double maxY = height - a.GetScale().y;
+    if(pos.x > 0 && pos.x < maxX && pos.y > 0 && pos.y < maxY) return;
     if(pos.x <= 0 && a.GetVelocity().x <= 0){
         a.SetVelocity(a.GetVelocity().Reflect(Vector2(1,0)));
-        a.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.x >= width - a.GetScale().x && a.GetVelocity().x >=0){
+    if(pos.x >= maxX && a.GetVelocity().x >=0){
         a.SetVelocity(a.GetVelocity().Reflect(Vector2(-1,0)));
-        a.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
     if(pos.y <= 0 && a.GetVelocity().y <= 0){
         a.SetVelocity(a.GetVelocity().Reflect(Vector2(0,1)));
-        a.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
-    if(pos.y >= height - a.GetScale().y && a.GetVelocity().y >= 0){
+    if(pos.y >= maxY && a.GetVelocity().y >= 0){
         a.SetVelocity(a.GetVelocity().Reflect(Vector2(0,-1)));
-        a.m_renderColor = SDL_Color {(Uint8)(rand()%255), (Uint8)(rand()%255), (Uint8)(rand()%255), 255};
     }
 }
 
 void BoxCollision(PhysicsBody &a, PhysicsBody &b){
     if(a.GetRect().Intersects(b.GetRect())){
-        Vector2 dir = (b.GetPos() - a.GetPos());
+        Vector2 dir = ((b.GetPos() - b.GetScale()/2) - (a.GetPos() - a.GetScale()/2));
         dir = dir.Normalize();
         a.SetVelocity(dir * -0.25);
         b.SetVelocity(dir * 0.25);
