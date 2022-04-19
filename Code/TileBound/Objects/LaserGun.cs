@@ -31,7 +31,7 @@ namespace Sokoban
                 Destroy(o);
             }
             lasers.Clear();
-
+            List<Prism> hit = new List<Prism>();
             Vector2Int nextDir = fireDir;
             Vector2Int nextPos = _gridPosition + nextDir;
             Tile t = _tileGrid.GetTile(nextPos);
@@ -44,6 +44,8 @@ namespace Sokoban
                     }
                     else if(to.GetType() == typeof(Prism)){
                         Prism prism = ((Prism)to);
+                        if(hit.Contains(prism)) return;
+                        hit.Add(prism);
                         nextDir = prism.RedirectDir;
                         currentRot = prism.zRot;
                         nextPos += nextDir;

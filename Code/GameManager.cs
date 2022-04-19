@@ -41,10 +41,12 @@ namespace Sokoban
         }
 
         public void NextLevel(){
-            if(++Levels.LevelIndex >= Levels.All.Length){
-                MainMenu();
+            if(Levels.LevelIndex + 1 >= Levels.All.Length){
+                SceneManager.LoadScene("Credits");
+                Levels.LevelIndex = 0;
             }
             else{
+                Levels.LevelIndex++;
                 ResetLevel();
             }
         }
@@ -60,7 +62,7 @@ namespace Sokoban
         }
 
         public void MainMenu(){
-            SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene("MainMenu");
         }
 
         private bool CheckWin(){

@@ -9,13 +9,19 @@ namespace Sokoban.Grid
         private TileCover Cover = null;
 
         public void SetObject(TileObject to){
+            if(!to) return;
             if(Cover){
-                if(to)
-                    Cover.StepOnEvent(to);
-                else
-                    Cover.StepOffEvent(to);
+                Cover.StepOnEvent(to);
             }
             Object = to;
+        }
+
+        public void RemoveObject(TileObject to){
+            if(!to) return;
+            if(Cover){
+                Cover.StepOffEvent(to);
+            }
+            Object = null;
         }
 
         public void SetCover(TileCover tc){

@@ -37,7 +37,7 @@ namespace Sokoban.Grid
         }
 
         public void MoveTile(TileObject obj, Vector2Int from, Vector2Int to){
-            GetTile(from).SetObject(null);
+            GetTile(from).RemoveObject(obj);
             GetTile(to).SetObject(obj);
         } 
 
@@ -59,7 +59,6 @@ namespace Sokoban.Grid
         }
 
         private int ParseTile(string levelCode, int counter, int x, int y, Vector3 renderPos){
-            Debug.Log(levelCode[counter]);
             Tile t = Instantiate<Tile>(_tilePrefabs[levelCode[counter]], renderPos, Quaternion.identity);
             _grid[x,y] = t;
             t.transform.localScale = new Vector2(_cellSize.x, _cellSize.y);
@@ -71,7 +70,6 @@ namespace Sokoban.Grid
 
         private int ParseCover(string levelCode, int counter, int x, int y, Vector3 renderPos){
             if(_coverPrefabs[levelCode[counter]]){
-                Debug.Log(levelCode[counter]);
                 TileCover tc = Instantiate<TileCover>(_coverPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
                 _grid[x,y].SetCover(tc);
                 tc.SetGrid(this);
@@ -89,7 +87,6 @@ namespace Sokoban.Grid
         }
 
         private int ParseObject(string levelCode, int counter, int x, int y, Vector3 renderPos){
-            Debug.Log(levelCode[counter]);
             TileObject to = Instantiate<TileObject>(_objectPrefabs[levelCode[counter]], renderPos, Quaternion.identity);
             if(to.GetType() == typeof(Player)){
                 GameManager.Instance.Player = (Player)to;

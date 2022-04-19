@@ -16,10 +16,8 @@ namespace Sokoban
 
         public override void StepOffEvent(TileObject to)
         {
-            if(to && to.GetType() == typeof(Box)){
-                BoxOn = false;
-                to.GetComponent<SpriteRenderer>().color = Color.white;
-            }
+            BoxOn = false;
+            to.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }

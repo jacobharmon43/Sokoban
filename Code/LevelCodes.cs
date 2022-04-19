@@ -19,7 +19,20 @@ namespace Sokoban
 
         public static Level[] All = new Level[]{
             new Level(
-                "Tutorial",
+                "Backwards L",
+                @"##############
+                  #######..#####
+                  #######..#####
+                  #######.(B).(H)#####
+                  #######..#####
+                  #######..#####
+                  ####.....#####
+                  ####.(P).(B).(H)..#####
+                  ##############",
+                "Sort every box onto a green highlighted tile"
+            ),
+            new Level(
+                "Surrounded",
                 @"##############
                   ##############
                   ##############
@@ -31,7 +44,7 @@ namespace Sokoban
                 "Sort every box onto a green highlighted tile"
             ),
             new Level(
-                "Laser tutorial",
+                "Lasers?!?!",
                 @"##############
                   ##############
                   ####......####
@@ -41,11 +54,11 @@ namespace Sokoban
                   ####..#...####
                   ###...#...#(L<)###
                   ###..(B).##..####
-                  ###.(P)..##..(F)####",
+                  ###..(P).##..(F)####",
                 "Reach the flag!"
             ),
             new Level(
-                "Confusing?",
+                "What the!",
                 @"##############
                   ##############
                   ##############
@@ -57,7 +70,7 @@ namespace Sokoban
                 "Sort a box!"
             ),
             new Level(
-                "I Promise this Level is Beatable",
+                "Me oh my, beat this level must I",
                 @"##############
                   #..(T)#......#.(T).#
                   #..#..##..#..#
