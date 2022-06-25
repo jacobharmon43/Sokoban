@@ -1,17 +1,17 @@
-#ifndef RIGIDBODYTEST_H
-#define RIGIDBODYTEST_H
+#ifndef PARKSIM_H
+#define PARKSIM_H
 
 #include <iostream>
 #include "JHEngine.h"
 
-class RigidbodyTest : public Game{
+class ParkSimulator : public Game{
     public:
-        RigidbodyTest();
-        RigidbodyTest(int width, int height);
-        ~RigidbodyTest();
+        ParkSimulator();
+        ParkSimulator(int width, int height);
+        ~ParkSimulator();
 
         void Init(const char* name);
-        bool Update();
+        bool Update(double deltaTime);
         void Draw();
         void Close();
     private:

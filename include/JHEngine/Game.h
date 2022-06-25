@@ -16,7 +16,7 @@ class Game{
         Game(int width,int height);
         ~Game();
         virtual void Init(const char* name);
-        virtual bool Update();
+        virtual bool Update(double deltaTime);
         virtual void Draw();
         virtual void Close();
     protected:

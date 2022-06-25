@@ -1,25 +1,26 @@
-#include "RigidbodyTest.h"
+#include "ParkSim.h"
 
 float globalTicks;
 int width;
 int height;
+
 list<Object> allObjects;
 
-RigidbodyTest::RigidbodyTest()
+ParkSimulator::ParkSimulator()
 {
     m_height = 0;
     m_width = 0;
 }
 
-RigidbodyTest::RigidbodyTest(int width, int height)
+ParkSimulator::ParkSimulator(int width, int height)
 {
     m_height = height;
     m_width = width;
 }
 
-RigidbodyTest::~RigidbodyTest(){}
+ParkSimulator::~ParkSimulator(){}
 
-void RigidbodyTest::Init(const char* name)
+void ParkSimulator::Init(const char* name)
 {
     Game::Init(name);
     width = m_width;
@@ -32,12 +33,12 @@ void RigidbodyTest::Init(const char* name)
     globalTicks = SDL_GetTicks();
 }
 
-bool RigidbodyTest::Update()
+bool ParkSimulator::Update(double deltaTime)
 {
-    return Game::Update();
+    return Game::Update(deltaTime);
 }
 
-void RigidbodyTest::Draw()
+void ParkSimulator::Draw()
 {
     Game::Draw();
     for(auto it = allObjects.begin(); it != allObjects.end(); ++it){
@@ -47,12 +48,12 @@ void RigidbodyTest::Draw()
     SDL_RenderPresent(gRenderer);
 }
 
-void RigidbodyTest::Close()
+void ParkSimulator::Close()
 {
     Game::Close();
 }
 
-bool RigidbodyTest::PollKeyboard(const Uint8* input)
+bool ParkSimulator::PollKeyboard(const Uint8* input)
 {
     
 }
