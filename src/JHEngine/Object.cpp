@@ -52,6 +52,12 @@ void Object::SetRotation(float rotation){
     m_rotation = rotation;
 }
 
+void Object::MoveBy(Vector2 move)
+{
+    m_renderPosition.x += move.x;
+    m_renderPosition.y += move.y;
+}
+
 //* Object capabilities *//
 void Object::Render(SDL_Renderer* r)
 {

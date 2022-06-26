@@ -18,7 +18,7 @@ void Game::Init(const char* name)
     input = SDL_GetKeyboardState(NULL);
 }
 
-bool Game::Update()
+bool Game::Update(double deltaTime)
 {
     Draw();
     return false;

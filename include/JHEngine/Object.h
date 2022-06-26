@@ -29,6 +29,7 @@ class Object{
         void SetPos(Vector2 move);
         void SetScale(Vector2Int set);
         void SetRotation(float rotation);
+        void MoveBy(Vector2 move);
 
         //* Miscellaneous Implementations for use *//
         virtual void Render(SDL_Renderer* r);

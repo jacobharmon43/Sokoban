@@ -16,6 +16,7 @@ class ParkSimulator : public Game{
         void Close();
     private:
         bool PollKeyboard(const Uint8* input);
+        Object player;
 };
 
 #endif 
