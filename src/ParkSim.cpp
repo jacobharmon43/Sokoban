@@ -18,7 +18,12 @@ ParkSimulator::ParkSimulator(int width, int height)
     m_width = width;
 }
 
-ParkSimulator::~ParkSimulator(){}
+ParkSimulator::~ParkSimulator(){
+   for(auto it = allObjects.begin(); it != allObjects.end(); ++it){
+       delete *it;
+       *it = NULL;
+    }
+}
 
 void ParkSimulator::Init(const char* name)
 {
