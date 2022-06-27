@@ -66,4 +66,4 @@ bool ParkSimulator::PollKeyboard(const Uint8* input)
     Vector2 movementVector = Vector2(0,-speed) * input[SDL_SCANCODE_W] + Vector2(-speed,0) * input[SDL_SCANCODE_A] + Vector2(0,speed) * input[SDL_SCANCODE_S] + Vector2(speed,0) * input[SDL_SCANCODE_D];
     player.MoveBy(movementVector);
     Vector2 newPos = player.GetPos();
-}
+}   
